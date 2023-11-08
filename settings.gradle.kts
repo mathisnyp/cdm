@@ -13,4 +13,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CityDisasterManagement"
-include("Frontend")
+include("frontend")

@@ -5,53 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae8afb47-ff3d-4994-bd8a-77b9ab43e85c" name="Changes" comment="chore: add react native template">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/8/3813ee6086891e3f1db61e95ece44f92940843e9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/7/47ebdb597aa90d3d64d9d6a81aab5b0df29ed36c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/1/6114e5d58e7ac41c658986a3f46d4c81d4a4ee7d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/4/749edfcc96398253e5b3416184e95c46621da850" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/a/aadf75b3fbe0a40aff1d1433ff713bf465b407b1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/8/3813ee6086891e3f1db61e95ece44f92940843e9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/7/47ebdb597aa90d3d64d9d6a81aab5b0df29ed36c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/1/6114e5d58e7ac41c658986a3f46d4c81d4a4ee7d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/4/749edfcc96398253e5b3416184e95c46621da850" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/a/aadf75b3fbe0a40aff1d1433ff713bf465b407b1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/(tabs)/_layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/(tabs)/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/(tabs)/two.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/+html.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/[...missing].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/_layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/app/modal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/assets/fonts/SpaceMono-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/assets/images/adaptive-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/assets/images/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/assets/images/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/assets/images/splash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/components/EditScreenInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/components/ExternalLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/components/StyledText.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/components/Themed.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/components/__tests__/StyledText-test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/constants/Colors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/metro.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/7/47ebdb597aa90d3d64d9d6a81aab5b0df29ed36c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/a/aadf75b3fbe0a40aff1d1433ff713bf465b407b1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/7/47ebdb597aa90d3d64d9d6a81aab5b0df29ed36c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/a/aadf75b3fbe0a40aff1d1433ff713bf465b407b1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/(tabs)/two.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/(tabs)/two.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/+html.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/+html.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/[...missing].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/[...missing].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/app/modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/assets/fonts/SpaceMono-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/assets/fonts/SpaceMono-Regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/assets/images/adaptive-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/assets/images/adaptive-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/assets/images/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/assets/images/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/assets/images/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/assets/images/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/assets/images/splash.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/components/EditScreenInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/EditScreenInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/components/ExternalLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/ExternalLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/components/StyledText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/StyledText.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/components/Themed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Themed.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/components/__tests__/StyledText-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/__tests__/StyledText-test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/constants/Colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/constants/Colors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/metro.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/metro.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,6 +54,21 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,7 +114,14 @@
       <recent name="$PROJECT_DIR$/Frontend" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$/frontend" />
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.city-disaster-management [publishFrontend]">
     <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
       <setting name="displayName" value="" />
       <setting name="bbPath" value="" />
@@ -124,6 +134,9 @@
       </method>
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <option name="configVersion" value="1" />
+      <option name="options" />
+      <option name="profiles" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
@@ -138,6 +151,147 @@
       <setting name="focusEditor" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="city-disaster-management [cleanFrontend]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanFrontend" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="city-disaster-management [installNode]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="installNode" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="city-disaster-management [installPackageManager]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="installPackageManager" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="city-disaster-management [publishFrontend]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishFrontend" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="city-disaster-management [resolvePackageManager]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="resolvePackageManager" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="aws.lambda" factoryName="Local">
+      <option name="credentialProviderId" />
+      <option name="regionId" />
+      <option name="debugHost" value="localhost" />
+      <option name="architecture" />
+      <option name="environmentVariables">
+        <map />
+      </option>
+      <option name="handler" />
+      <option name="image" value="false" />
+      <option name="logicalFunctionName" />
+      <option name="memorySize" value="128" />
+      <option name="pathMappings">
+        <list />
+      </option>
+      <option name="platform" />
+      <option name="runtime" />
+      <option name="templateFile" />
+      <option name="timeout" value="300" />
+      <option name="useTemplate" value="false" />
+      <option name="input" />
+      <option name="inputIsFile" value="false" />
+      <sam>
+        <option name="additionalBuildArgs" />
+        <option name="additionalLocalArgs" />
+        <option name="buildInContainer" value="false" />
+        <option name="dockerNetwork" />
+        <option name="skipImagePull" value="false" />
+      </sam>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="aws.lambda" factoryName="Remote">
       <option name="credentialProviderId" />
       <option name="regionId" />
@@ -146,19 +300,13 @@
       <option name="inputIsFile" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="web" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/Frontend/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="web" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.web" />
+        <item itemvalue="Gradle.city-disaster-management [publishFrontend]" />
+        <item itemvalue="Gradle.city-disaster-management [installPackageManager]" />
+        <item itemvalue="Gradle.city-disaster-management [installNode]" />
+        <item itemvalue="Gradle.city-disaster-management [cleanFrontend]" />
+        <item itemvalue="Gradle.city-disaster-management [resolvePackageManager]" />
       </list>
     </recent_temporary>
   </component>
@@ -171,7 +319,8 @@
       <option name="presentableId" value="Default" />
       <updated>1699271092044</updated>
       <workItem from="1699271092048" duration="89000" />
-      <workItem from="1699271934400" duration="2040000" />
+      <workItem from="1699271934400" duration="3669000" />
+      <workItem from="1699438344861" duration="3330000" />
     </task>
     <servers />
   </component>
