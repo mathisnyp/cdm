@@ -7,3 +7,5 @@ that we can quickly make changes even on the Docker image level without making a
 It also ensures that we are automatically using the same images for both local testing and production.
 
 Kafka Documentation - https://docs.google.com/document/d/1ZaUYdu6gbfkVoOL59eJBxAG18nXXxnxiAob-oD3YlGQ/edit?usp=sharing
+
+Kafka Video 2h to learn about - https://www.youtube.com/watch?v=F6PUQ3k6zmg
