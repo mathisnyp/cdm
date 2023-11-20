@@ -12,5 +12,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CityDisasterManagement"
+rootProject.name = "city-disaster-management"
 include("frontend")
+include("services")
+include("services:sample-node-service")

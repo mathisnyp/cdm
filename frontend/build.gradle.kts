@@ -9,6 +9,4 @@ frontend {
     nodeDistributionProvided.set(false)
     nodeVersion.set("20.9.0")
     nodeInstallDirectory.set(project.layout.projectDirectory.dir("node"))
-
-
 }
