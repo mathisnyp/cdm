@@ -9,3 +9,5 @@ It also ensures that we are automatically using the same images for both local t
 Kafka Documentation - https://docs.google.com/document/d/1ZaUYdu6gbfkVoOL59eJBxAG18nXXxnxiAob-oD3YlGQ/edit?usp=sharing
 
 Kafka Video 2h to learn about - https://www.youtube.com/watch?v=F6PUQ3k6zmg
+
+kafka video 40 mins - https://www.youtube.com/watch?v=hyJZP-rgooc
