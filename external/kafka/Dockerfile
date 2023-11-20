@@ -1,1 +1,1 @@
-FROM bitnami/kafka:3.2.3
+FROM confluentinc/cp-kafka:7.4.3
