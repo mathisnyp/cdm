@@ -12,7 +12,12 @@ dependencyResolutionManagement {
     }
 }
 
+//Dependency Versions:
+
+
+//Project structure:
 rootProject.name = "city-disaster-management"
 include("frontend")
 include("services")
 include("services:sample-node-service")
+include("backend-for-frontend")
