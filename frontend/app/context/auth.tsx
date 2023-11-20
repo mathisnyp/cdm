@@ -1,11 +1,10 @@
 import {useRootNavigation, useRouter, useSegments} from "expo-router";
 import React, {useContext, useEffect, useState} from "react";
-import {appwrite} from "../lib/appwrite-service";
-import {Models} from "appwrite";
+import {cdmMockAuth, MockUser} from "@/mocks/authMock";
 
 // Define the AuthContextValue interface
 interface SignInResponse {
-    data: Models.User<Models.Preferences> | undefined;
+    data: MockUser | undefined;
     error: Error | undefined;
 }
 
@@ -18,7 +17,7 @@ interface AuthContextValue {
     signIn: (e: string, p: string) => Promise<SignInResponse>;
     signUp: (e: string, p: string, n: string) => Promise<SignInResponse>;
     signOut: () => Promise<SignOutResponse>;
-    user: Models.User<Models.Preferences> | null;
+    user: MockUser | null;
     authInitialized: boolean;
 }
 
@@ -34,11 +33,11 @@ const AuthContext = React.createContext<AuthContextValue | undefined>(
 
 export function Provider(props: ProviderProps) {
     const [user, setAuth] =
-        React.useState<Models.User<Models.Preferences> | null>(null);
+        React.useState<MockUser | null>(null);
     const [authInitialized, setAuthInitialized] = React.useState<boolean>(false);
 
     // This hook will protect the route access based on user authentication.
-    const useProtectedRoute = (user: Models.User<Models.Preferences> | null) => {
+    const useProtectedRoute = (user: MockUser | null) => {
         const segments = useSegments();
         const router = useRouter();
 
@@ -83,7 +82,7 @@ export function Provider(props: ProviderProps) {
     useEffect(() => {
         (async () => {
             try {
-                const user = await appwrite.account.get();
+                const user = await cdmMockAuth.account.get();
                 console.log(user);
                 setAuth(user);
             } catch (error) {
@@ -102,7 +101,7 @@ export function Provider(props: ProviderProps) {
      */
     const logout = async (): Promise<SignOutResponse> => {
         try {
-            const response = await appwrite.account.deleteSession("current");
+            const response = await cdmMockAuth.account.deleteSession("current");
             return {error: undefined, data: response};
         } catch (error) {
             return {error, data: undefined};
@@ -122,12 +121,12 @@ export function Provider(props: ProviderProps) {
     ): Promise<SignInResponse> => {
         try {
             console.log(email, password);
-            const response = await appwrite.account.createEmailSession(
+            const response = await cdmMockAuth.account.createEmailSession(
                 email,
                 password
             );
 
-            const user = await appwrite.account.get();
+            const user = await cdmMockAuth.account.get();
             setAuth(user);
             return {data: user, error: undefined};
         } catch (error) {
@@ -152,18 +151,18 @@ export function Provider(props: ProviderProps) {
             console.log(email, password, username);
 
             // create the user
-            await appwrite.account.create(
-                appwrite.ID.unique(),
+            await cdmMockAuth.account.create(
+                cdmMockAuth.ID.unique(),
                 email,
                 password,
                 username
             );
 
             // create the session by logging in
-            await appwrite.account.createEmailSession(email, password);
+            await cdmMockAuth.account.createEmailSession(email, password);
 
             // get Account information for the user
-            const user = await appwrite.account.get();
+            const user = await cdmMockAuth.account.get();
             setAuth(user);
             return {data: user, error: undefined};
         } catch (error) {
