@@ -12,7 +12,7 @@ debugging instead.<br/>
 infrastructure contains terraform to set up the cloud infrastructure and helm charts for all microservices, as
 well as external services. It makes sense to have all Helm charts in this location, as infrastructure and 
 application logic should be separated from each other. Changes that affect the ports of an application/database, 
-for example, and therefore affect the infrastructure, should therefore be made centrally in one place.  <br/>
+for example, and therefore affect the infrastructure, should therefore be made centrally.  <br/>
 <br/>
 frontend contains our react native frontend application<br/>
 <br/>
