@@ -27,3 +27,10 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+@app.post("/login")
+def login(username: str, password: str, db: Session = Depends(get_db)):
+    user = crud.get_user_by_username(db, username)
+    if user is None or not crud.verify_password(password, user.password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    return {"success": True, "message": "Login successful"}
+
