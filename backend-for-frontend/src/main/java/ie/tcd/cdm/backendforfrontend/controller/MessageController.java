@@ -1,5 +1,9 @@
 package ie.tcd.cdm.backendforfrontend.controller;
 
+import ie.tcd.cdm.backendforfrontend.dto.demo.MessageRequest;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,9 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/messages")
 public class MessageController {
 
+    private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void publish() {
+    public MessageController(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
+    @PostMapping
+    public void publish(@RequestBody MessageRequest request) {
+        kafkaTemplate.send("testTopic", request.message());
     }
 
 }
