@@ -1,2 +1,8 @@
 server:
   port: ${application-port}
+  servlet:
+    context-path: "/bff/api"
+
+spring:
+  kafka:
+    bootstrap-servers: ${kafka-bootstrap-servers}
