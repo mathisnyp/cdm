@@ -34,7 +34,7 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/password
     volumes:
-      - ./db/data:/data
-      - ./db/conf:/conf
-      - ./db/logs:/logs
-      - ./db/plugins:/plugins
+      - ./external/databases/neo4j/db/data:/data
+      - ./external/databases/neo4j/db/conf:/conf
+      - ./external/databases/neo4j/db/logs:/logs
+      - ./external/databases/neo4j/db/plugins:/plugins

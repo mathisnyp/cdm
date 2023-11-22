@@ -45,3 +45,6 @@ bin/
 
 ### Node ###
 /node/node_modules
+
+### Neo4j ###
+/external/databases/neo4j/db/
