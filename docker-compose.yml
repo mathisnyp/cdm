@@ -38,3 +38,22 @@ services:
       - ./external/databases/neo4j/db/conf:/conf
       - ./external/databases/neo4j/db/logs:/logs
       - ./external/databases/neo4j/db/plugins:/plugins
+  auth-service:
+    build: ./services/auth/service
+    ports:
+      - "8080:80"
+    depends_on:
+      - auth-service-db
+  auth-service-db:
+    image: postgres:15-alpine
+    volumes:
+      - auth_postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: AuthenticationService
+    ports:
+      - "5433:5432"
+
+volumes:
+  auth_postgres_data:
