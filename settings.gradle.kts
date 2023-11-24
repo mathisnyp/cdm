@@ -20,4 +20,5 @@ rootProject.name = "city-disaster-management"
 include("frontend")
 include("services")
 include("services:sample-node-service")
+include("services:auth-service")
 include("backend-for-frontend")
