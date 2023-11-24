@@ -1,4 +1,4 @@
-from Utils import crud, database
+from Utils import crud, models, database
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from dto.create_user_dto import CreateUserDTO
