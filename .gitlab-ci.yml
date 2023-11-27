@@ -1,23 +1,23 @@
-image: python:3.9-slim-buster
-stages:
-  - test
+build-job:
+  stage: build
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN!"
 
-variables:
-  POSTGRES_DB: "AuthenticationService"
-  POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "password"
-  DOCKER_DRIVER: overlay2
-
-services:
-  - name: docker:dind
-
-before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
-test:
+test-job1:
   stage: test
   script:
-    - docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d
-    - docker-compose -f docker-compose.yml -f docker-compose.ci.yml exec auth-service pytest
-  only:
-    - main
+    - echo "This job tests something"
+
+test-job2:
+  stage: test
+  script:
+    - echo "This job tests something, but takes more time than test-job1."
+    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
+    - echo "which simulates a test that runs 20 seconds longer than test-job1"
+    - sleep 20
+
+deploy-prod:
+  stage: deploy
+  script:
+    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+  environment: production
