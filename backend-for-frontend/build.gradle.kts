@@ -28,6 +28,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
+
+    implementation(project(":services:auth:java-api"))
 }
 
 tasks.withType<Test> {

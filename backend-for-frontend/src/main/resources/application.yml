@@ -6,3 +6,6 @@ server:
 spring:
   kafka:
     bootstrap-servers: ${kafka-bootstrap-servers}
+
+service_endpoints:
+  auth: "${auth-service-endpoint}"
