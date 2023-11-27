@@ -4,7 +4,8 @@ from .models import Base
 from sqlalchemy.orm import sessionmaker
 
 #DATABASE_URL = "postgresql://postgres:password@db:5432/AuthenticationService"
-DATABASE_URL = "postgresql://postgres:password@auth-service-db:5432/AuthenticationService"
+#DATABASE_URL = "postgresql://postgres:password@auth-service-db:5432/AuthenticationService"
+DATABASE_URL = "postgresql://postgres:password@localhost:5432/AuthenticationService"
 
 engine = create_engine(DATABASE_URL)
 
