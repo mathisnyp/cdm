@@ -17,7 +17,6 @@ def get_db():
         db.close()
 
 @app.post("/users/")
-
 def create_user(create_user_dto: CreateUserDTO, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_username(db, create_user_dto.username)
     if db_user:
