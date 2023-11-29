@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
+    id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
 
 group = "ie.tcd.cdm"
@@ -24,6 +25,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -38,4 +40,11 @@ tasks.withType<Test> {
 
 tasks.bootBuildImage {
     builder.set("paketobuildpacks/builder-jammy-base:latest")
+}
+
+openApi {
+    apiDocsUrl.set("https://localhost:9000/api/docs")
+    outputDir.set(file("./spec"))
+    outputFileName.set("swagger.json")
+    waitTimeInSeconds.set(20)
 }
