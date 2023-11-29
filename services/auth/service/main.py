@@ -21,6 +21,7 @@ gen = Gen()
 
 # Dependency to get the database session
 def get_db():
+    print(gen.gen_mode)
     if gen.gen_mode:
         return None
     db = database.SessionLocal()
