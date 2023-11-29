@@ -1,0 +1,13 @@
+server:
+  port: ${application-port}
+  servlet:
+    context-path: "/geo/api"
+
+spring:
+  kafka:
+    bootstrap-servers: ${kafka-bootstrap-servers}
+  neo4j:
+    uri: neo4j://localhost:7687
+    authentication:
+      username: neo4j
+      password: password

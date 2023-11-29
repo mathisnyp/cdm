@@ -1,4 +1,4 @@
-package ie.tcd.cdm.backendforfrontend.configs;
+package ie.tcd.cdm.geo_service.configs;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KafkaProducerConfig extends KafkaEventsConfig {
+
     public Map<String, Object> producerConfig() {
         HashMap<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
