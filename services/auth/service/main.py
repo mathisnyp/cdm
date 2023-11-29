@@ -10,21 +10,9 @@ from dto.logged_in_successfully_dto import LoggedInSuccessfullyDTO
 
 app = FastAPI()
 
-
-class Gen:
-    def __init__(self):
-        self.gen_mode = False
-
-
-gen = Gen()
-
-
 # Dependency to get the database session
 def get_db():
-    print(gen.gen_mode)
-    if gen.gen_mode:
-        return None
-    db = database.SessionLocal()
+    db = database.init()
     try:
         yield db
     finally:
