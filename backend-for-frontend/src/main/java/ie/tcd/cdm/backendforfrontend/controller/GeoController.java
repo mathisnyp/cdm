@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GeoController {
     private GeoService geoService;
 
-    //TODO create endpoint that
     public GeoController(GeoService geoService) {
         this.geoService = geoService;
     }
