@@ -20,16 +20,16 @@ public class AuthController {
 
     @PostMapping("/users")
     public UserDTO createUser(@RequestBody CreateUserDTO createUserDTO) throws ApiException {
-        return authService.apiClient.createUserUsersPost(createUserDTO);
+        return authService.createUserUsersPost(createUserDTO);
     }
 
     @GetMapping("/users/{id}")
     public UserDTO getUser(@PathVariable Integer id) throws ApiException {
-        return authService.apiClient.readUserUsersUserIdGet(id);
+        return authService.readUserUsersUserIdGet(id);
     }
 
     @PostMapping("/login")
     public LoggedInSuccessfullyDTO login(@RequestBody LoginDTO loginDTO) throws ApiException {
-        return authService.apiClient.loginLoginPost(loginDTO);
+        return authService.loginLoginPost(loginDTO);
     }
 }

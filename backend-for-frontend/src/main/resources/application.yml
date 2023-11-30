@@ -1,5 +1,4 @@
 server:
-  port: ${application-port}
   servlet:
     context-path: "/bff/api"
 
@@ -9,3 +8,9 @@ spring:
 
 service_endpoints:
   auth: "${auth-service-endpoint}"
+
+springdoc:
+  api-docs:
+    path: "/api-docs"
+  swagger-ui:
+    path: "/swagger-ui-bff.html"

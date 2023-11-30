@@ -5,16 +5,10 @@ import org.springframework.stereotype.Service;
 import ie.tcd.cdm.auth.api.DefaultApi;
 
 @Service
-public class AuthService {
-    @Value("${service_endpoints.auth}")
-    private String baseurl;
-
-    public final DefaultApi apiClient;
-
-    public AuthService() {
-        DefaultApi defaultApi = new DefaultApi();
-        defaultApi.setCustomBaseUrl(baseurl);
-        apiClient = defaultApi;
+public class AuthService extends DefaultApi{
+    public AuthService(@Value("${service_endpoints.auth}") String baseurl) {
+        super();
+        this.setCustomBaseUrl(baseurl);
     }
 
 

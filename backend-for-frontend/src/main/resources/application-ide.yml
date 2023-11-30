@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 6060
 
 spring:
   kafka:
     bootstrap-servers: localhost:29092
 
 service_endpoints:
-  auth: "localhost:8079"
+  auth: http://localhost:8080
