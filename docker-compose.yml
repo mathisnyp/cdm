@@ -41,7 +41,7 @@ services:
   auth-service:
     build: ./services/auth/service
     ports:
-      - "8080:80"
+      - "8081:81"
     depends_on:
       - auth-service-db
   auth-service-db:
@@ -54,6 +54,7 @@ services:
       POSTGRES_DB: AuthenticationService
     ports:
       - "5432:5432"
+
 
 volumes:
   auth_postgres_data:
