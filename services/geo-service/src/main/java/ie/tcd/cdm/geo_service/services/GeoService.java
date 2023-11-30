@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class GeoService {
     @Value("${spring.neo4j.uri}")
-    private static String neo4jUri;
+    private String neo4jUri;
 
     @Value("${spring.neo4j.authentication.username}")
-    private static String username;
+    private String username;
 
     @Value("${spring.neo4j.authentication.password}")
-    private static String password;
+    private String password;
 
-    public static void TestConsume(String kafkaString) {
+    public void testConsume(String kafkaString) {
         System.out.println("Received " + kafkaString);
         // commented the create node becuase I have it on local decomment to create it
         // Neo4jExample.createNode(neo4jUri, username, password, kafkaString);
