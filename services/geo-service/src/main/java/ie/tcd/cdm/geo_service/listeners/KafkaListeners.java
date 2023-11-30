@@ -6,10 +6,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaListeners {
+    private final GeoService geoService;
+
+    public KafkaListeners(GeoService geoService) {
+        this.geoService = geoService;
+    }
+
 
     @KafkaListener(topics = "testTopic", groupId = "test1")
     void listener(String data) {
         System.out.println(data);
-        GeoService.TestConsume(data);
+        this.geoService.testConsume(data);
     }
 }
