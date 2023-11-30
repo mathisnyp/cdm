@@ -25,4 +25,4 @@ include("services:auth:service")
 include("services:auth:java-api")
 include("services:geo-service")
 include("backend-for-frontend")
-include("frontend")
+//include("frontend") TODO: include again once finished
