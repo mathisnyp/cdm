@@ -11,13 +11,13 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 22181:2181
+      - "22181:2181"
   kafka:
     build: ./external/kafka
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -28,8 +28,8 @@ services:
   neo4j:
     build: ./external/databases/neo4j
     ports:
-      - 7474:7474
-      - 7687:7687
+      - "7474:7474"
+      - "7687:7687"
     restart: unless-stopped
     environment:
       - NEO4J_AUTH=neo4j/password
@@ -44,8 +44,10 @@ services:
       - "8080:80"
     depends_on:
       - auth-service-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   auth-service-db:
-    image: postgres:15-alpine
+    build: ./external/databases/postgresql
     volumes:
       - auth_postgres_data:/var/lib/postgresql/data/
     environment:
@@ -54,6 +56,18 @@ services:
       POSTGRES_DB: AuthenticationService
     ports:
       - "5432:5432"
+  backend-for-frontend:
+    build: ./backend-for-frontend
+    ports:
+      - "6060:8080"
+    environment:
+      application-port: 6060
+      kafka-bootstrap-servers: http://kafka:29092
+      auth-service-endpoint: http://localhost:8080
+    depends_on:
+      - auth-service
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   auth_postgres_data:

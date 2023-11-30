@@ -1,5 +1,4 @@
 server:
-  port: ${application-port}
   servlet:
     context-path: "/bff/api"
 

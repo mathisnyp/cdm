@@ -2,7 +2,6 @@ plugins {
     java
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
-    id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
 
 group = "ie.tcd.cdm"
@@ -40,11 +39,4 @@ tasks.withType<Test> {
 
 tasks.bootBuildImage {
     builder.set("paketobuildpacks/builder-jammy-base:latest")
-}
-
-openApi {
-    apiDocsUrl.set("https://localhost:9000/api/docs")
-    outputDir.set(file("./spec"))
-    outputFileName.set("swagger.json")
-    waitTimeInSeconds.set(20)
 }
