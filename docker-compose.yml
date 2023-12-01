@@ -41,7 +41,7 @@ services:
   auth-service:
     build: ./services/auth/service
     ports:
-      - "8081:81"
+      - "8080:80"
     depends_on:
       - auth-service-db
     extra_hosts:
