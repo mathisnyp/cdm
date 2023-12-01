@@ -68,33 +68,6 @@ services:
       - auth-service
     extra_hosts:
       - "host.docker.internal:host-gateway"
-  grafana:
-    image: grafana/grafana-enterprise
-    container_name: grafana
-    restart: unless-stopped
-    environment:
-      - GF_SERVER_ROOT_URL=http://my.grafana.server/
-      - GF_INSTALL_PLUGINS=grafana-clock-panel
-    ports:
-      - '3000:3000'
-    volumes:
-      - 'grafana_storage:/var/lib/grafana'
-  loki:
-    build: ./external/observability/loki
-      - 3100:3100
-    command:
-      - config.file=/etc/loki/local-config.yaml
-    volumes:
-      - ./loki-config:/etc/loki
-    restart: always
-  promtail:
-    image: grafana/promtail:latest
-    volumes:
-      - /var/log:/var/log
-      - ./promtail-config:/etc/promtail
-    command: -config.file=/etc/promtail/promtail.yaml
-    restart: always
-
 
 volumes:
   auth_postgres_data: {}
