@@ -1,0 +1,18 @@
+{
+  "name": "tools",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2",
+    "@prettier/plugin-xml": "^3.2.2",
+    "@prettier/plugin-python": "^0.0.0-development",
+    "prettier-plugin-java": "^2.5.0",
+    "prettier-plugin-json-formats": "^0.5.0",
+    "prettier-check": "^2.0.0",
+    "prettier-sql": "^5.1.1",
+    "prettier-format": "^4.0.0"
+  },
+  "scripts": {
+  }
+}

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
+
+
+LC_ALL=C
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+valid_branch_regex="^((cdm-\d+|chore)-.{4,28})|(main(tenance)?|develop|HEAD|release)$"
+
+message="There is something wrong with the name of your branch. Branch names in this project must conform to this format:: $valid_branch_regex. Your commit will be rejected. You should rename your branch to a valid name and try again."
+
+if java ./.githooks/RegexTestHarness.java "$valid_branch_regex" "$local_branch"; then
+    echo "# Nice branch!"
+else
+    echo "$message"
+    echo "example: cdm-32-improve-traffic-routing-algorithm"
+    exit 1
+fi
+#prettier part
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
+[ -z "$FILES" ] && exit 0
+
+# Prettify all selected files
+echo "$FILES" | xargs ./tools/npm/node_modules/.bin/prettier --ignore-unknown --write
+
+# Add back the modified/prettified files to staging
+echo "$FILES" | xargs git add
+exit 0
