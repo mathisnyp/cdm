@@ -15,8 +15,6 @@
 # SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
 # grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
 
-# This example catches duplicate Signed-off-by lines.
-
 MSG_FILE=$1
 FILE_CONTENT="$(cat $MSG_FILE)"
 REGEX="(((feat|wip|fix|chore|merge|test)\(.{2,20}\):\[CDM-\d+])|(chore|merge)\(.{2,50}\):) .{5,60}"
