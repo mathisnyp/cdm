@@ -1,6 +1,10 @@
 # Group 7
 
-Please run ./tools/initscript.sh when first pulling the project
+### Please run 
+```bash 
+./tools/initscript.sh
+```
+### when first pulling the project
 
 CITY DISASTER RESPONSE APP
 
