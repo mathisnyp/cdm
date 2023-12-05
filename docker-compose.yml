@@ -1,10 +1,10 @@
 version: '3.9'
 
 services:
-#  web-ui:
-#    build: ./frontend
-#    ports:
-#      - "3000:3000"
+  #  web-ui:
+  #    build: ./frontend
+  #    ports:
+  #      - "3000:3000"
   zookeeper:
     build: external/zookeeper
     environment:
@@ -14,6 +14,7 @@ services:
       - "22181:2181"
   kafka:
     build: ./external/kafka
+    hostname: kafka
     depends_on:
       - zookeeper
     ports:
@@ -21,7 +22,8 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://kafka:29092
+      KAFKA_BROKERCONNECT: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -41,7 +43,7 @@ services:
   auth-service:
     build: ./services/auth/service
     ports:
-      - "8080:80"
+      - "8081:81"
     depends_on:
       - auth-service-db
     extra_hosts:
@@ -62,13 +64,15 @@ services:
       - "6060:8080"
     environment:
       application-port: 6060
-      kafka-bootstrap-servers: http://kafka:29092
+      kafka-bootstrap-servers: kafka:29092
       auth-service-endpoint: http://localhost:8080
     depends_on:
       - auth-service
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+
+# REMOVE
 volumes:
   auth_postgres_data: {}
   grafana-storage: {}
