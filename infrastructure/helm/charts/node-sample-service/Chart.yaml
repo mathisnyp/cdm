@@ -1,2 +1,3 @@
 #TODO
-#We may need additional subfolders for each service to create charts for the database etc. I haven't been able to look into Helm enough to know more, this is just an initial idea based on rough research.
+#
+We may need additional subfolders for each service to create charts for the database etc. I haven't been able to look into Helm enough to know more, this is just an initial idea based on rough research.
