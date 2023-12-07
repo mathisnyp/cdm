@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   web-ui:
@@ -43,6 +43,9 @@ services:
       neo4j-uri: neo4j://geoservice-neo4j:7687
       neo4j-username: neo4j
       neo4j-password: password
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
     ports:
       - "8079:8080"
     extra_hosts:
@@ -53,7 +56,6 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
-    restart: unless-stopped
     environment:
       - NEO4J_AUTH=neo4j/password
     volumes:
@@ -87,13 +89,87 @@ services:
     environment:
       kafka-bootstrap-servers: kafka:29092
       auth-service-endpoint: http://host.docker.internal:8080
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
     depends_on:
       - auth-service
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  #Local Observability:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.90.1
+    hostname: otel-collector
+    command:
+      - --config=/etc/otelcol-contrib/otel-collector.yml
+    volumes:
+      - ./configs/collector/otel-collector.yml:/etc/otelcol-contrib/otel-collector.yml
+    ports:
+      - "1888:1888" # pprof extension
+      - "8888:8888" # Prometheus metrics exposed by the collector
+      - "8889:8889" # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317" # OTLP gRPC receiver
+      - "4318:4318" # OTLP http receiver
+      - "55679:55679" # zpages extension
+  prometheus:
+    container_name: prometheus
+    hostname: prometheus
+    image: prom/prometheus
+    depends_on:
+      - mimir
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+  mimir:
+    container_name: mimir
+    hostname: mimir
+    build: ./external/observability/mimir
+    volumes:
+      - ./configs/mimir/demo.yml:/etc/mimir/demo.yml
+    command: ["--config.file=/etc/mimir/demo.yml"]
+    ports:
+      - "9009:9009"
+  loki:
+    image: grafana/loki:latest
+    hostname: loki
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./configs/loki/local-config.yaml:/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+  tempo:
+    image: grafana/tempo:latest
+    hostname: tempo
+    command: ["-config.file=/etc/tempo.yml"]
+    volumes:
+      - ./configs/tempo/tempo.yml:/etc/tempo.yml
+    ports:
+      - "3200:3200" # tempo
+      - "4317" # otlp grpc
 
+  grafana:
+    container_name: grafana
+    hostname: grafana
+    image: grafana/grafana
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_USERS_DEFAULT_THEME=light
+      - GF_LOG_MODE=console
+      - GF_LOG_LEVEL=critical
+    volumes:
+      - ./configs/grafana/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    ports:
+      - "4000:3000"
 
-# REMOVE
 volumes:
   auth_postgres_data: {}
   grafana-storage: {}
+
+networks:
+  cdm_network:
+    driver: bridge
