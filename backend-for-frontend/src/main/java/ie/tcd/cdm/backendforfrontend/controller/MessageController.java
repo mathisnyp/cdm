@@ -2,12 +2,10 @@ package ie.tcd.cdm.backendforfrontend.controller;
 
 import ie.tcd.cdm.backendforfrontend.dto.demo.MessageRequest;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:8081/", "http://localhost:3000/, http://web-ui:3000/"})
 @RequestMapping("/messages")
 public class MessageController {
 

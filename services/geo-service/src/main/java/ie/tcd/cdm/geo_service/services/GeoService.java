@@ -17,8 +17,8 @@ public class GeoService {
     public void testConsume(String kafkaString) {
         System.out.println("Received " + kafkaString);
         // commented the create node becuase I have it on local decomment to create it
-        // Neo4jExample.createNode(neo4jUri, username, password, kafkaString);
+        Neo4jExample.createNode(neo4jUri, username, password, kafkaString);
         String query = Neo4jExample.readNode(neo4jUri, username, password);
-        System.out.println("Queried "+query);
+        System.out.println("Queried " + query);
     }
 }

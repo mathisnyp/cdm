@@ -1,10 +1,15 @@
 version: '3.9'
 
 services:
-  #  web-ui:
-  #    build: ./frontend
-  #    ports:
-  #      - "3000:3000"
+  web-ui:
+    hostname: web-ui
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - backend-for-frontend
   zookeeper:
     build: external/zookeeper
     environment:
@@ -27,8 +32,24 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-  neo4j:
+  geoservice:
+    build: ./services/geo-service/
+    hostname: geoservice
+    depends_on:
+      - geoservice-neo4j
+      - kafka
+    environment:
+      kafka-bootstrap-servers: kafka:29092
+      neo4j-uri: neo4j://geoservice-neo4j:7687
+      neo4j-username: neo4j
+      neo4j-password: password
+    ports:
+      - "8079:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  geoservice-neo4j:
     build: ./external/databases/neo4j
+    hostname: geoservice-neo4j
     ports:
       - "7474:7474"
       - "7687:7687"
@@ -60,10 +81,10 @@ services:
       - "5432:5432"
   backend-for-frontend:
     build: ./backend-for-frontend
+    hostname: bff
     ports:
       - "6060:8080"
     environment:
-      application-port: 6060
       kafka-bootstrap-servers: kafka:29092
       auth-service-endpoint: http://host.docker.internal:8080
     depends_on:

@@ -8,8 +8,8 @@ import ie.tcd.cdm.auth.model.LoggedInSuccessfullyDTO;
 import ie.tcd.cdm.backendforfrontend.services.AuthService;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
+@CrossOrigin(origins = {"http://localhost:8081/", "http://localhost:3000/, http://web-ui:3000/"})
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
