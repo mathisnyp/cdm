@@ -1,10 +1,6 @@
-server:
-  servlet:
-    context-path: "/geo/api"
-
 spring:
   application:
-    name: "geo-service"
+    name: "incident-service"
   kafka:
     bootstrap-servers: ${kafka-bootstrap-servers}
   neo4j:

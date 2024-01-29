@@ -1,4 +1,4 @@
-package ie.tcd.cdm.geo_service.configs;
+package ie.tcd.cdm.incident_service.configs;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

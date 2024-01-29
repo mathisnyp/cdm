@@ -1,4 +1,4 @@
-package ie.tcd.cdm.geo_service.otel;
+package ie.tcd.cdm.incident_service.otel;
 
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationHandler;
