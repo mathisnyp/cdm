@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
+    id("org.springframework.cloud.contract") version "3.1.5"
 }
 
 group = "ie.tcd.cdm"
@@ -54,6 +55,11 @@ dependencies {
     implementation("io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:1.29.0-alpha")
 
     implementation("org.neo4j.driver:neo4j-java-driver:4.3.0")
+
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-zuul")
+    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
 }
 
 tasks.withType<Test> {
@@ -62,4 +68,10 @@ tasks.withType<Test> {
 
 tasks.bootBuildImage {
     builder.set("paketobuildpacks/builder-jammy-base:latest")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2021.0.3") // Replace with the desired version
+    }
 }
