@@ -1,13 +1,14 @@
-package ie.tcd.cdm.communication_service.create_incident;
+package ie.tcd.cdm.incident_service;
 
 import ie.tcd.cdm.geo_service.model.Event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+//import java.sql.Time;
+//import java.sql.Timestamp;
 
 class CreateEventTest {
+    @Test
     void CreateEvent()
     {
         Assertions.assertDoesNotThrow(() -> {

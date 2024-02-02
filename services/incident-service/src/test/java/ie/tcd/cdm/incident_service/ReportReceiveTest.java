@@ -1,4 +1,4 @@
-package ie.tcd.cdm.communication_service.create_incident;
+package ie.tcd.cdm.incident_service;
 
 import ie.tcd.cdm.geo_service.model.Report;
 import org.junit.jupiter.api.Assertions;
