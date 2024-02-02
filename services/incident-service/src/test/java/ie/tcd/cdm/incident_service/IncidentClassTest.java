@@ -13,5 +13,21 @@ public class IncidentClassTest {
 
             Assertions.assertNotNull(incident);
         });
-    }    
+    }
+
+    @Test
+    void IncidentsWithReportsFromDifferentLocation(){
+        Assertions.assertDoesNotThrow(() -> {
+            Report firstreport = new Report("report", "Dame Street", "Fire",
+                    "high", "fire in dame street", "noon");
+            Report secondreport = new Report("report", "Grafton Street", "Fire",
+                    "high", "fire in grafton street", "noon");
+            ArrayList<Report> reports = new ArrayList<>();
+            reports.add(firstreport);
+            reports.add(secondreport);
+            Incident incident = new Incident(reports);
+
+            Assertions.assertNotEquals(incident.getReports().get(0).getLocation(), incident.getReports().get(1).getLocation());
+        });
+    }
 }
