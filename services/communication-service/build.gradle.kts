@@ -27,33 +27,22 @@ dependencies {
 
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    runtimeOnly("io.micrometer:micrometer-registry-otlp")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 
-    implementation("io.micrometer:micrometer-tracing-bridge-otel")
-    implementation("io.opentelemetry:opentelemetry-api:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-context:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-trace:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-metrics:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-common:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-extension-trace-propagators:1.29.0")
-    runtimeOnly("io.opentelemetry.instrumentation:opentelemetry-kafka-clients-2.6:1.19.0-alpha")
-    implementation("io.opentelemetry:opentelemetry-exporter-common:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-exporter-otlp:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-exporter-otlp-common:1.29.0")
-    implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-semconv:1.29.0-alpha")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.2")
+    implementation("org.liquibase:liquibase-core:4.25.1")
+    implementation("org.postgresql:postgresql:42.7.1")
 
-    implementation("io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:1.29.0-alpha")
-
-    implementation("org.neo4j.driver:neo4j-java-driver:4.3.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
+    implementation("org.springframework:spring-webflux:6.1.3")
+    testRuntimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

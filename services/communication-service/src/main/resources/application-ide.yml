@@ -2,6 +2,12 @@ server:
   port: 8079
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
+  liquibase:
+    change-log: classpath:liquibase/local-changelog.xml
   kafka:
     bootstrap-servers: localhost:29092
   neo4j:

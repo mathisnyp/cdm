@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <include file="liquibase/main-changelog.xml"/>
+    <changeSet id="load_notification_data" author="Omar, Noel">
+        <loadData tableName="notification" file="liquibase/testdata/NotificationTestData.csv">
+            <column name="id" header="id" />
+            <column name="message_body" header="messageBody" />
+            <column name="message_header" header="messageHeader" />
+            <column name="message_sender" header="messageSender" />
+            <column name="receiver" header="receiver" />
+            <column name="receiver_group" header="receiverGroup" />
+            <column name="scheduled_time" header="scheduledTime" />
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
