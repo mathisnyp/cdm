@@ -12,8 +12,6 @@ dependencyResolutionManagement {
     }
 }
 
-//Dependency Versions:
-
 
 //Project structure:
 rootProject.name = "city-disaster-management"

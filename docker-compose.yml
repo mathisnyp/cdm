@@ -68,10 +68,10 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - auth-service-db
+      - local-db
     extra_hosts:
       - "host.docker.internal:host-gateway"
-  auth-service-db:
+  local-db:
     build: ./external/databases/postgresql
     volumes:
       - auth_postgres_data:/var/lib/postgresql/data/
