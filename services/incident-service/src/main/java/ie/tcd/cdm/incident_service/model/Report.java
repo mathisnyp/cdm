@@ -26,7 +26,7 @@ public class Report {
     private String name;
     @Setter
     @Getter
-    private String location;
+    private String location;    //TODO: update this to coordinates?
     @Setter
     @Getter
     private String emergencyType;
