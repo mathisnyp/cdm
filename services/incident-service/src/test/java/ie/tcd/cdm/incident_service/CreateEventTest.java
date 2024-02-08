@@ -1,6 +1,6 @@
 package ie.tcd.cdm.incident_service;
 
-import ie.tcd.cdm.geo_service.model.Event;
+import ie.tcd.cdm.incident_service.model.Event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

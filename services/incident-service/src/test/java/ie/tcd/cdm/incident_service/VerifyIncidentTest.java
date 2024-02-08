@@ -2,8 +2,8 @@ package ie.tcd.cdm.incident_service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ie.tcd.cdm.geo_service.model.Verifier;
-import ie.tcd.cdm.geo_service.model.Report;
+import ie.tcd.cdm.incident_service.model.Verifier;
+import ie.tcd.cdm.incident_service.model.Report;
 public class VerifyIncidentTest {
     @Test
     void CreateVerifier() {

@@ -19,7 +19,7 @@
 
 MSG_FILE=$1
 FILE_CONTENT="$(cat $MSG_FILE)"
-REGEX="(((feat|wip|fix|chore|merge|test)\(.{2,20}\):\[CDM-\d+])|(chore|merge)\(.{2,50}\):) .{5,60}"
+REGEX="(((feat|wip|fix|chore|merge|test|refactor)\(.{2,20}\):\[CDM-\d+])|(chore|merge)\(.{2,50}\):) .{5,60}"
 # shellcheck disable=SC2089
 ERROR_MSG="# Commit message format must match regex \"${REGEX}\""
 
