@@ -9,6 +9,4 @@ import java.util.Collection;
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
-    @Query("SELECT n FROM Report n WHERE n.messageSender = :senderID")
-    Collection<Report> getAllNotificationsBySender(@Param("senderID") Long senderID);
 }

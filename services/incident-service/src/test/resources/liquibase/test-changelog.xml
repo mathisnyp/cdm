@@ -10,14 +10,14 @@ http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
     <include file="liquibase/main-changelog.xml"/>
     <changeSet id="load_report_data" author="Omar, Noel">
-        <loadData tableName="reports" file="liquibase/testdata/ReportTestData.csv">
+        <loadData tableName="report" file="liquibase/testdata/ReportTestData.csv">
             <column name="id" header="id" />
-            <column name="name" type="varchar(250)" />
-            <column name="location" type="VARCHAR(255)"/>
-            <column name="emergency_type" type="VARCHAR(255)"/>
-            <column name="emergency_severity" type="VARCHAR(255)"/>
-            <column name="general_description" type="VARCHAR(255)"/>
-            <column name="time_received" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+            <column name="name" header="name" />
+            <column name="location" header="location"/>
+            <column name="emergency_type" header="emergencyType"/>
+            <column name="emergency_severity" header="emergencySeverity"/>
+            <column name="general_description" header="generalDescription"/>
+            <column name="time_received" header="timeReceived" />
         </loadData>
     </changeSet>
 </databaseChangeLog>

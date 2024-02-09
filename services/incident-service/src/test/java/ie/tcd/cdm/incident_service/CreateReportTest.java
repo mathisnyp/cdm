@@ -39,13 +39,13 @@ class CreateReportTest {
     @Test
     void sampleTest() throws Exception {
         webTestClient.
-                get().uri("incident/api/incident/1")
+                get().uri("incident/api/report/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Report.class).isEqualTo(Report.builder()
                         .id(1)
                         .name("John Smith")
-                        .location("O Connell St")
+                        .location("Dawson Street")
                         .emergencyType("Fire")
                         .emergencySeverity("High")
                         .generalDescription("Fire in a shop on Dawson Street")
@@ -53,6 +53,4 @@ class CreateReportTest {
                         .build());
     }
 }
-
-// Report report = new Report("John", "O Connell St", "Fire", "Major", "Fire in Cleary's Shopping Centre", "noon");
 
