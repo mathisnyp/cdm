@@ -31,4 +31,11 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="event_time" header="eventTime" />
         </loadData>
     </changeSet>
+    <changeSet id="load_incident_data" author="Omar, Noel">
+        <loadData tableName="incident" file="liquibase/testdata/ReportTestData.csv">
+            <column name="id" header="id" />
+            <column name="report_ids" header="name" />
+            <column name="incident_name" header="location"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>
