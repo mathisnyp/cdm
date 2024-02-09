@@ -20,4 +20,15 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             <column name="time_received" header="timeReceived" />
         </loadData>
     </changeSet>
+    <changeSet id="load_event_data" author="Omar, Noel">
+        <loadData tableName="event" file="liquibase/testdata/EventTestData.csv">
+            <column name="id" header="id" />
+            <column name="event_name" header="eventName" />
+            <column name="event_type" header="eventType"/>
+            <column name="venue" header="venue"/>
+            <column name="attendees" header="attendees"/>
+            <column name="general_description" header="generalDescription"/>
+            <column name="event_time" header="eventTime" />
+        </loadData>
+    </changeSet>
 </databaseChangeLog>

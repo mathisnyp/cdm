@@ -22,4 +22,18 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         </createTable>
         <addAutoIncrement tableName="report" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="202010211813" author="Omar, Noel">
+        <createTable tableName="event">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="event_id_pk" />
+            </column>
+            <column name="event_name" type="varchar(250)" />
+            <column name="event_type" type="varchar(255)"/>
+            <column name="venue" type="varchar(255)"/>
+            <column name="attendees" type="integer"/>
+            <column name="general_description" type="varchar(255)"/>
+            <column name="event_time" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </createTable>
+        <addAutoIncrement tableName="event" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
 </databaseChangeLog>

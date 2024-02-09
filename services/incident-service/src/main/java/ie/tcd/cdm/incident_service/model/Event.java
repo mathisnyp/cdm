@@ -8,6 +8,13 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 import java.sql.Timestamp;
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +23,19 @@ public class Event {
     private long id;
     @Setter
     @Getter
-    String eventName;
+    private String eventName;
     @Setter
     @Getter
-    String eventType;
+    private String eventType;
     @Setter
     @Getter
-    String venue;
+    private String venue;
     @Setter
     @Getter
-    Integer attendees;
+    private Integer attendees;
+    @Setter
+    @Getter
+    private String generalDescription;
     @Setter
     @Getter
     private Timestamp eventTime;
