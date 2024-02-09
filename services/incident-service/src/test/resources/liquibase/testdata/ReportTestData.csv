@@ -1,0 +1,8 @@
+id,name,location,emergency_type,emergency_severity,general_description,time_received
+1,"John Smith","Dawson Street", "Fire","High", "Fire in a shop on Dawson Street","2024-02-01 09:00:00"
+2,"Amy Pond","O'Connell Bridge","Flooding","Medium","Liffey is flooding and spilling onto the bridge","2024-02-01 10:30:00"
+3,"Sam Wilson","Dundrum Shopping Centre","Bomb Threat","High","Suspicious object left on bench, suspected explosive deivce","2024-02-01 11:45:00"
+4,"Steve Hardy","Dun Laoire","Assault","High","Group of teenagers have injured older couple, needs Gardaí and hospital","2024-02-01 17:15:00"
+5,"Will Du","Camden Street","Gas Leak","Low","Suspected gas leak from restaurant in the area, needs immediate attention","2024-02-02 08:20:00"
+
+

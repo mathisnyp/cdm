@@ -44,11 +44,11 @@ class CreateReportTest {
                 .expectStatus().isOk()
                 .expectBody(Report.class).isEqualTo(Report.builder()
                         .id(1)
-                        .name("John")
+                        .name("John Smith")
                         .location("O Connell St")
                         .emergencyType("Fire")
-                        .emergencySeverity("Major")
-                        .generalDescription("Fire in Cleary's Shopping Centre")
+                        .emergencySeverity("High")
+                        .generalDescription("Fire in a shop on Dawson Street")
                         .timeReceived(Timestamp.valueOf("2024-02-01 09:00:00"))
                         .build());
     }

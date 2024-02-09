@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <include file="liquibase/main-changelog.xml"/>
+    <changeSet id="load_report_data" author="Omar, Noel">
+        <loadData tableName="reports" file="liquibase/testdata/ReportTestData.csv">
+            <column name="id" header="id" />
+            <column name="name" type="varchar(250)" />
+            <column name="location" type="VARCHAR(255)"/>
+            <column name="emergency_type" type="VARCHAR(255)"/>
+            <column name="emergency_severity" type="VARCHAR(255)"/>
+            <column name="general_description" type="VARCHAR(255)"/>
+            <column name="time_received" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

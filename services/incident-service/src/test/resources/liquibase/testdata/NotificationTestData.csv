@@ -1,0 +1,6 @@
+id,messageBody,messageHeader,messageSender,receiver,receiverGroup,scheduledTime
+1,"Evacuation instructions for Smith Street residents","Emergency Evacuation",1001,2001,"Smith Street Residents","2024-02-01 09:00:00"
+2,"Road closure on Main Avenue due to flooding","Traffic Alert",1002,2003,"City Traffic Control","2024-02-01 10:30:00"
+3,"Shelter location change for displaced families","Shelter Update",1003,2005,"Dublin Shelter Services","2024-02-01 11:45:00"
+4,"Weather forecast: Heavy rain expected tonight","Weather Warning",1004,2001,"Smith Street Residents","2024-02-01 17:15:00"
+5,"Gas leak reported in downtown area, avoid the area","Emergency Alert",1005,2002,"City Residents","2024-02-02 08:20:00"
