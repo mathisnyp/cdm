@@ -22,16 +22,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         </createTable>
         
     </changeSet>
-    <changeSet id="202010211814" author ="Omar, Noel">
-        <createTable tableName="incident">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" primaryKeyName="incident_id_pk" />
-            </column>
-            <column name="report_ids" type="integer"/>
-            <column name="incident_name" type="VARCHAR(255)"/>
-        </createTable>
-        <addAutoIncrement tableName="incident" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
-    </changeSet>
+    
     <changeSet id="202010211813" author="Omar, Noel">
         <createTable tableName="event">
             <column name="id" type="bigint">
@@ -46,4 +37,16 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         </createTable>
         <addAutoIncrement tableName="event" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
     </changeSet>
+
+    <changeSet id="202010211814" author="Omar, Noel">
+        <createTable tableName="incident">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="incident_id_pk" />
+            </column>
+            <column name="report_ids" type="integer"/>
+            <column name="incident_name" type="VARCHAR(255)"/>
+        </createTable>
+        <addAutoIncrement tableName="incident" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
 </databaseChangeLog>
+

@@ -45,7 +45,7 @@ class CreateIncidentTest {
                 .expectBody(Incident.class).isEqualTo(Incident.builder()
                         .id(1)
                         .reportIds(3)
-                        .incidentName("Fire at Dawson Street")
+                        .incidentName("Fire at Dawson St")
                         .build());
     }
 }

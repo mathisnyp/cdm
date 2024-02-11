@@ -32,10 +32,10 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         </loadData>
     </changeSet>
     <changeSet id="load_incident_data" author="Omar, Noel">
-        <loadData tableName="incident" file="liquibase/testdata/ReportTestData.csv">
+        <loadData tableName="incident" file="liquibase/testdata/IncidentTestData.csv">
             <column name="id" header="id" />
-            <column name="report_ids" header="name" />
-            <column name="incident_name" header="location"/>
+            <column name="report_ids" header="reportIds" />
+            <column name="incident_name" header="incidentName"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

@@ -1,5 +1,5 @@
 package ie.tcd.cdm.incident_service.model;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
