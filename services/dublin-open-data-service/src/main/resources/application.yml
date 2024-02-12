@@ -1,17 +1,12 @@
 server:
   servlet:
-    context-path: "/geo/api"
+    context-path: "/dod/api"
 
 spring:
   application:
-    name: "geo-service"
+    name: "dod-service"
   kafka:
     bootstrap-servers: ${kafka-bootstrap-servers}
-  neo4j:
-    uri: ${neo4j-uri}
-    authentication:
-      username: ${neo4j-username}
-      password: ${neo4j-password}
 
 management:
   endpoints:

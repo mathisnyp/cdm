@@ -34,6 +34,8 @@ sourceSets {
 }
 
 dependencies {
+    implementation(project(":services:auth:service"))
+
     implementation("io.swagger:swagger-annotations:1.6.8")
     implementation("com.google.code.findbugs:jsr305:3.0.2")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")

@@ -1,15 +1,6 @@
 version: "3.9"
 
 services:
-  web-ui:
-    hostname: web-ui
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    depends_on:
-      - backend-for-frontend
   zookeeper:
     build: external/zookeeper
     environment:
@@ -32,6 +23,56 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  web-ui:
+    hostname: web-ui
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - backend-for-frontend
+  backend-for-frontend:
+    build: ./backend-for-frontend
+    hostname: bff
+    ports:
+      - "8090:8080"
+    environment:
+      kafka-bootstrap-servers: kafka:29092
+      auth-service-endpoint: http://host.docker.internal:8080
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
+    depends_on:
+      - auth-service
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  auth-service:
+    build: ./services/auth/service
+    ports:
+      - "8075:80"
+    depends_on:
+      - auth-service-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  auth-service-db:
+    build: ./external/databases/postgresql
+    volumes:
+      - auth_postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: AuthenticationService
+    ports:
+      - "5432:5432"
+  gen-ai-service:
+    build: ./services/gen-ai-service/service
+    ports:
+      - "8072:80"
+    depends_on:
+      - kafka
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   geoservice:
     build: ./services/geo-service/
     hostname: geoservice
@@ -47,7 +88,7 @@ services:
       otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
       otlp-collector-endpoint: http://otel-collector:4317
     ports:
-      - "8079:8080"
+      - "8071:8080"
     extra_hosts:
       - "host.docker.internal:host-gateway"
   geoservice-neo4j:
