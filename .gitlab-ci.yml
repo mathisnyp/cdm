@@ -1,7 +1,7 @@
 build-job:
   stage: build
   tags:
-      - linux  
+  - saas-linux-medium-amd64
   image:
       -gradle:7.6.4-jdk-17-alpine
   script:
