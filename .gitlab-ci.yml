@@ -1,5 +1,9 @@
 build-job:
   stage: build
+  tags:
+      - linux  
+  image:
+      -gradle:7.6.4-jdk-17-alpine
   script:
     - ./gradlew build -x test
 
