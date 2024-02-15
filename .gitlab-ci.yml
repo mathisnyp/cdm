@@ -1,7 +1,8 @@
 build-job:
   stage: build
   script:
-    - ./gradlew build -x test
+    - ./gradlew build -x test   --debug
+    
 
 sonarscan:
   stage:
