@@ -1,9 +1,5 @@
 build-job:
   stage: build
-  tags:
-  - saas-linux-medium-amd64
-  image:
-      -gradle:7.6.4-jdk-17-alpine
   script:
     - ./gradlew build -x test
 
