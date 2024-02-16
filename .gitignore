@@ -49,3 +49,6 @@ bin/
 
 ### Neo4j ###
 /external/databases/neo4j/db/
+
+### Python Venv ###
+**/venv/
