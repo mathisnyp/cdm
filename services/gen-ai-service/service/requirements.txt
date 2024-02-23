@@ -4,3 +4,8 @@ pydantic
 textblob
 pytest
 requests
+pandas
+PyMuPDF
+transformers
+torch
+sklearn
