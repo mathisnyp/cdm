@@ -11,15 +11,48 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
     <changeSet id="202010211812" author="Omar, Noel">
         <createTable tableName="notification">
             <column name="id" type="bigint">
-                <constraints primaryKey="true" primaryKeyName="notification_id_pk" />
+                <constraints primaryKey="true" primaryKeyName="notification_id_pk"/>
             </column>
-            <column name="message_body" type="varchar(250)" />
+            <column name="message_body" type="varchar(250)"/>
             <column name="message_header" type="VARCHAR(255)"/>
             <column name="message_sender" type="INT"/>
             <column name="receiver" type="INT"/>
             <column name="receiver_group" type="VARCHAR(255)"/>
-            <column name="scheduled_time" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+            <column name="scheduled_time" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
-        <addAutoIncrement tableName="notification" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+        <addAutoIncrement tableName="notification" columnName="id" columnDataType="bigint" startWith="1"
+                          incrementBy="1"/>
+    </changeSet>
+    <changeSet id="create_user_push_notification_id" author="Ricardo, Noel">
+        <createTable tableName="user_push_notification_id">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_push_notification_id_pk"/>
+            </column>
+            <column name="user_id" type="bigint"/>
+            <column name="token_id" type="bigint"/>
+            <column name="group_id" type="bigint"/>
+        </createTable>
+        <addAutoIncrement tableName="user_push_notification_id" columnName="id" columnDataType="bigint" startWith="1"
+                          incrementBy="1"/>
+        <addUniqueConstraint tableName="user_push_notification_id" columnNames="token_id"/>
+        <addUniqueConstraint tableName="user_push_notification_id" columnNames="user_id"/>
+
+    </changeSet>
+    <changeSet id="push_notification_token" author="Ricardo, Noel">
+        <createTable tableName="push_notification_token">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="push_notification_id_pk"/>
+            </column>
+            <column name="token" type="VARCHAR(255)"/>
+        </createTable>
+        <addAutoIncrement tableName="push_notification_token" columnName="id" columnDataType="bigint" startWith="1"
+                          incrementBy="1"/>
+        <addUniqueConstraint tableName="push_notification_token" columnNames="token"/>
+    </changeSet>
+    <changeSet id="link_push_notification_ids_to_users" author="Ricardo, Noel">
+        <addForeignKeyConstraint baseTableName="user_push_notification_id" baseColumnNames="token_id"
+                                 constraintName="fk_push_notification_token_to_user_push_notification_id"
+                                 referencedTableName="push_notification_token"
+                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

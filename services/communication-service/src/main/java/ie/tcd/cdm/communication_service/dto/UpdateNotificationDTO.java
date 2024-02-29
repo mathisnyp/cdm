@@ -9,9 +9,9 @@ public record UpdateNotificationDTO(
 
         String messageHeader,
 
-        int messageSender,
+        long messageSender,
 
-        int receiver,
+        long receiver,
 
         String receiverGroup,
 

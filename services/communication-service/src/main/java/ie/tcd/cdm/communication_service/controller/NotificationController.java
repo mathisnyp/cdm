@@ -1,39 +1,30 @@
 package ie.tcd.cdm.communication_service.controller;
 
-import ie.tcd.cdm.communication_service.dto.CreateNotificationDTO;
-import ie.tcd.cdm.communication_service.dto.UpdateNotificationDTO;
+import ie.tcd.cdm.communication_service.dto.*;
 import ie.tcd.cdm.communication_service.model.Notification;
 import ie.tcd.cdm.communication_service.services.NotificationService;
+import io.github.jav.exposerversdk.PushClientException;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notification")
+@AllArgsConstructor
 public class NotificationController {
     private final NotificationService notificationService;
 
-    public NotificationController(NotificationService notificationService) {
-        this.notificationService = notificationService;
+    @PostMapping("/send")
+    public void sendNotification(@RequestBody SendNotificationUserToUserDTO sendNotificationUserToUserDTO) throws PushClientException {
+        this.notificationService.sendNotification(sendNotificationUserToUserDTO);
     }
 
-    @GetMapping("/{id}")
-    public Notification getNotification(@PathVariable long id) {
-        return notificationService.getNotificationById(id);
+    @PostMapping("/broadcast")
+    public void broadcastNotification(@RequestBody BroadcastNotificationFromUserDTO broadcastNotificationFromUserDTO) throws PushClientException {
+        this.notificationService.broadcastNotification(broadcastNotificationFromUserDTO);
     }
 
-    @PostMapping
-    public void createNotification(@RequestBody CreateNotificationDTO notification) {
-        notificationService.createNotification(notification);
+    @PostMapping("/broadcast/group")
+    public void broadcastNotificationGroup(@RequestBody BroadcastNotificationUserToGroupDTO broadcastNotificationUserToGroupDTO) throws PushClientException {
+        this.notificationService.broadcastNotificationToGroup(broadcastNotificationUserToGroupDTO);
     }
-
-    @PutMapping("/{id}")
-    public void updateNotification(@PathVariable long id, @RequestBody UpdateNotificationDTO notification) {
-        notificationService.updateNotification(id, notification);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteNotification(@PathVariable long id) {
-        notificationService.deleteNotification(id);
-    }
-
-
 }

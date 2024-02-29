@@ -40,6 +40,8 @@ dependencies {
     implementation("org.liquibase:liquibase-core:4.25.1")
     implementation("org.postgresql:postgresql:42.7.1")
 
+    implementation("io.github.jav:expo-server-sdk:1.1.0")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
     implementation("org.springframework:spring-webflux:6.1.3")
     testRuntimeOnly("com.h2database:h2")

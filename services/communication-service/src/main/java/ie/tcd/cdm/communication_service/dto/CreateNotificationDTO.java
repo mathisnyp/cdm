@@ -10,9 +10,9 @@ public record CreateNotificationDTO(
         @NotNull
         String messageHeader,
         @NotNull
-        int messageSender,
+        long messageSender,
         @NotNull
-        int receiver,
+        long receiver,
         @NotNull
         String receiverGroup,
         @NotNull
