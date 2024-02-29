@@ -2,8 +2,6 @@ from fastapi.openapi.utils import get_openapi
 from main import app
 import json
 
-from fastapi import FastAPI
-
 with open('./specs/openapi.json', 'w') as f:
     json.dump(get_openapi(
         title=app.title,

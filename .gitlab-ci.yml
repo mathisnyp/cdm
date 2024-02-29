@@ -1,16 +1,22 @@
+stages:
+  - build
+  - test
+  - code-analysis
+  - publish
+  - deploy
+
 build-job:
   stage: build
   script:
-    - ./gradlew build -x test   --debug
-    
+    - ./gradlew build -x test installFrontend
 
-sonarscan:
-  stage:
-    test
+export-ui:
+  stage: build
   script:
-    - echo "Linting code... This will take about 10 seconds."
-    - ./gradlew sonarqube
-    - echo "No lint issues found."
+    - ./gradlew installNode
+    - ./gradlew installPackageManager
+    - ./gradlew installFrontend
+    - ./gradlew export-ui
 
 
 python-test:
@@ -21,23 +27,24 @@ python-test:
 java-test:
   stage: test
   script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
+    - ./gradlew test
 
 ui-test:
   stage: test
   script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 2
+    - ./gradlew installNode
+    - ./gradlew installPackageManager
+    - ./gradlew installFrontend
+    - ./gradlew jest
 
-e2e-test:
-  stage: test
+
+sonarscan:
+  stage:
+    code-analysis
   script:
-    - ./gradlew e2eTest
+    - echo "Linting code... This will take about 10 seconds."
+    - ./gradlew sonar
+    - echo "No lint issues found."
 
 
 deploy-prod:

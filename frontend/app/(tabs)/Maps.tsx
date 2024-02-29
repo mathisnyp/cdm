@@ -11,15 +11,14 @@ interface LocationState {
     };
 }
 
-export default function mapsScreen() {
-    const [location, setLocation] = useState<LocationState | null>(null);
+export default function Maps() {
+    const [location, _] = useState<LocationState | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             setErrorMsg("Permission to access location was denied");
-            return;
         })();
     }, []);
 

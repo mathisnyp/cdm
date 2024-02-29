@@ -3,7 +3,7 @@
 #node
 node/
 .frontend-gradle-plugin/
-
+coverage
 #Gradle
 build/
 

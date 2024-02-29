@@ -14,6 +14,12 @@ pythonPlugin {
     pythonVersion.set("3.9")
 }
 
+sonarqube {
+    properties {
+        property ("sonar.sources", "src")
+    }
+}
+
 tasks {
     val pipInstall by registering(VenvTask::class) {
         venvExec = "pip"
@@ -21,7 +27,7 @@ tasks {
     }
 
     val makeApiSchema by registering(VenvTask::class) {
-        args = listOf("./export_openapi.py")
+        args = listOf("./src/main/python/auth/export_openapi.py")
         dependsOn(pipInstall)
     }
     compileJava {
