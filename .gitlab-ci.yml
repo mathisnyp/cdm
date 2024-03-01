@@ -15,10 +15,10 @@ build-job:
       - backend-for-frontend/build
       - services/auth/java-api/build
       - services/gen-ai-service/java-api/build
-      - communication-service/build
-      - dublin-open-data-service/build
-      - geo-service/build
-      - incident-service/build
+      - services/communication-service/build
+      - services/dublin-open-data-service/build
+      - services/geo-service/build
+      - services/incident-service/build
 
 export-ui:
   stage: build
@@ -56,9 +56,9 @@ java-test:
       - backend-for-frontend/build
       - services/auth/java-api/build
       - services/gen-ai-service/java-api/build
-      - communication-service/build
-      - dublin-open-data-service/build
-      - geo-service/build
+      - services/communication-service/build
+      - services/dublin-open-data-service/build
+      - services/geo-service/build
       - incident-service/build
 
 ui-test:
