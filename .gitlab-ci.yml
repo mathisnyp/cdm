@@ -11,7 +11,6 @@ build-job:
     - ./gradlew build -x test installFrontend
   artifacts:
     paths:
-      - .gradle
       - build
       - backend-for-frontend/build
       - services/auth/java-api/build
@@ -31,8 +30,6 @@ export-ui:
   artifacts:
     paths:
       - frontend/dist
-      - frontend/node_modules
-      - frontend/node
 
 python-test:
   stage: test
@@ -55,7 +52,6 @@ java-test:
     - export-ui
   artifacts:
     paths:
-      - .gradle
       - build
       - backend-for-frontend/build
       - services/auth/java-api/build
@@ -74,9 +70,6 @@ ui-test:
     - ./gradlew jest
   artifacts:
     paths:
-      - frontend/dist
-      - frontend/node_modules
-      - frontend/node
       - frontend/coverage
 
 
