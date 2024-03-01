@@ -9,6 +9,17 @@ build-job:
   stage: build
   script:
     - ./gradlew build -x test installFrontend
+  artifacts:
+    paths:
+      - .gradle
+      - build
+      - backend-for-frontend/build
+      - services/auth/java-api/build
+      - services/gen-ai-service/java-api/build
+      - communication-service/build
+      - dublin-open-data-service/build
+      - geo-service/build
+      - incident-service/build
 
 export-ui:
   stage: build
@@ -17,17 +28,42 @@ export-ui:
     - ./gradlew installPackageManager
     - ./gradlew installFrontend
     - ./gradlew export-ui
-
+  artifacts:
+    paths:
+      - frontend/dist
+      - frontend/node_modules
+      - frontend/node
 
 python-test:
   stage: test
   script:
     - ./gradlew pTest
+  dependencies:
+    - build-job
+    - export-ui
+  artifacts:
+    paths:
+      - services/auth/service/src/test/python/
+      - services/gen-ai-service/service/src/test/python/
 
 java-test:
   stage: test
   script:
     - ./gradlew test
+  dependencies:
+    - build-job
+    - export-ui
+  artifacts:
+    paths:
+      - .gradle
+      - build
+      - backend-for-frontend/build
+      - services/auth/java-api/build
+      - services/gen-ai-service/java-api/build
+      - communication-service/build
+      - dublin-open-data-service/build
+      - geo-service/build
+      - incident-service/build
 
 ui-test:
   stage: test
@@ -36,11 +72,21 @@ ui-test:
     - ./gradlew installPackageManager
     - ./gradlew installFrontend
     - ./gradlew jest
+  artifacts:
+    paths:
+      - frontend/dist
+      - frontend/node_modules
+      - frontend/node
+      - frontend/coverage
 
 
 sonarscan:
   stage:
     code-analysis
+  dependencies:
+    - python-test
+    - ui-test
+    - java-test
   script:
     - echo "Linting code... This will take about 10 seconds."
     - ./gradlew sonar
