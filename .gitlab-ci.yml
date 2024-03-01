@@ -8,17 +8,7 @@ stages:
 build-job:
   stage: build
   script:
-    - ./gradlew build -x test installFrontend
-  artifacts:
-    paths:
-      - build
-      - backend-for-frontend/build
-      - services/auth/java-api/build
-      - services/gen-ai-service/java-api/build
-      - services/communication-service/build
-      - services/dublin-open-data-service/build
-      - services/geo-service/build
-      - services/incident-service/build
+    - ./gradlew build -x test -x installFrontend
 
 export-ui:
   stage: build
@@ -27,9 +17,7 @@ export-ui:
     - ./gradlew installPackageManager
     - ./gradlew installFrontend
     - ./gradlew export-ui
-  artifacts:
-    paths:
-      - frontend/dist
+
 
 python-test:
   stage: test
@@ -38,28 +26,14 @@ python-test:
   dependencies:
     - build-job
     - export-ui
-  artifacts:
-    paths:
-      - services/auth/service/src/test/python/
-      - services/gen-ai-service/service/src/test/python/
 
 java-test:
   stage: test
   script:
-    - ./gradlew test
+    - ./gradlew test -x installFrontend
   dependencies:
     - build-job
     - export-ui
-  artifacts:
-    paths:
-      - build
-      - backend-for-frontend/build
-      - services/auth/java-api/build
-      - services/gen-ai-service/java-api/build
-      - services/communication-service/build
-      - services/dublin-open-data-service/build
-      - services/geo-service/build
-      - incident-service/build
 
 ui-test:
   stage: test
@@ -68,9 +42,6 @@ ui-test:
     - ./gradlew installPackageManager
     - ./gradlew installFrontend
     - ./gradlew jest
-  artifacts:
-    paths:
-      - frontend/coverage
 
 
 sonarscan:
@@ -91,3 +62,23 @@ deploy-prod:
   script:
     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
   environment: production
+
+default:
+  cache:
+    key: $CI_COMMIT_REF_NAME
+    path:
+      - build
+      - backend-for-frontend/build
+      - services/auth/java-api/build
+      - services/gen-ai-service/java-api/build
+      - services/communication-service/build
+      - services/dublin-open-data-service/build
+      - services/geo-service/build
+      - incident-service/build
+      - frontend/coverage
+      - frontend/dist
+      - .gradle
+      - frontend/node
+      - frontend/node-modules
+      - services/auth/service/src/test/python/
+      - services/gen-ai-service/service/src/test/python/
