@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from "react";
-import { Button, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
+import { Button, StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView,Platform  } from "react-native";
 import { useFocusEffect } from "expo-router";
 import states from '../lib/bff-api-client/core/Global';
 import { Formik } from "formik";
@@ -61,12 +61,16 @@ export default function ReportTabScreen() {
                                         {question.options ? (
 
                                             <SelectList
+
                                                 placeholder={'Select an item'}
                                                 setSelected={(val:any) => setSelected(val)}
                                                 data={question.options.map(option => ({
                                                                  label: option, // This is what the user sees
                                                                  value: option, // This is the actual value
                                                 }))}
+                                                
+                                                inputStyles={{color: Platform.OS === 'android' ? 'white':'black'}}
+                                                dropdownTextStyles={{color: Platform.OS === 'android' ? 'white':'black'}}
                                                 save="value"
                                             />
 
@@ -166,6 +170,7 @@ const styles = StyleSheet.create({
     },
     button2Container: {
         backgroundColor: "red",
+        color: "white",
         padding: 15,
         borderRadius: 8,
         width: "45%",

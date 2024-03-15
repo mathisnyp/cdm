@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, StyleSheet, View, Alert, Text } from "react-native";
+import { Button, StyleSheet, View, Alert, Text,Platform } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
-
+//import MapView from '@teovilla/react-native-web-maps'
 // If you have a specific type for location, use that instead of any.
 interface LocationState {
     coords: {
@@ -12,30 +12,55 @@ interface LocationState {
 }
 
 export default function Maps() {
-    const [location, _] = useState<LocationState | null>(null);
+    const [location, setLocation] = useState<LocationState | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
-            setErrorMsg("Permission to access location was denied");
+            if (status !== 'granted')
+            {
+                setErrorMsg("Permission to access location was denied");
+            }
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
         })();
     }, []);
 
     return (
         <View style={styles.container}>
-            {errorMsg && <Text>{errorMsg}</Text>} {/* Render the error message if it exists */}
-            <MapView style={styles.map} showsUserLocation={true} testID="MapView">
+            {/* {errorMsg && <Text>{errorMsg}</Text>} Render the error message if it exists */}
+            {/* <Text style = {{color:'white'}}>Location is : {location.coords.latitude}</Text> */}
+            
+            {location && (
+                <Text style={{color:'white'}}>{location.coords.latitude}</Text>
+            )}
+            {Platform.OS !== 'web' &&
+            
+            
+            <MapView style={styles.map} showsUserLocation={true} testID="MapView"
+            initialRegion={{
+                latitude: 53.350140,
+                longitude: -6.266155,
+                latitudeDelta:1,
+                longitudeDelta:1,
+              }}
+            >
                 {location && (
+                    <>
+                    {/* <Text style={{color:'white'}}>"Bruh"</Text> */}
                     <Marker
+                        key={0}
                         coordinate={{
-                            latitude: location.coords.latitude,
-                            longitude: location.coords.longitude,
+                            latitude: 53.350140,
+                            longitude: -6.266155,
                         }}
                         title={"Your Location"}
                     />
+                    </>
                 )}
             </MapView>
+            }
             <Button
                 title={"Send hello message to GeoService"}
                 onPress={() => {
