@@ -4,15 +4,12 @@ server:
 spring:
   kafka:
     bootstrap-servers: localhost:29092
+  cloud:
+    gateway:
+      routes:
+        service1: http://localhost:8081
+        service2: http://localhost:8082
+        service3: http://localhost:8083
 
 service_endpoints:
   auth: http://localhost:8080
-
-management:
-  otlp:
-    collector_endpoint: http://localhost:4317
-    metrics:
-      export:
-        url: http://localhost:4318/v1/metrics
-    tracing:
-      endpoint: http://localhost:4318/v1/traces
