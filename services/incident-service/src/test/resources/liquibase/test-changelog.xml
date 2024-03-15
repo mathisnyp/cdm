@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <include file="liquibase/main-changelog.xml"/>
+    <changeSet id="load_report_data" author="Omar, Noel">
+        <loadData tableName="report" file="liquibase/testdata/ReportTestData.csv">
+            <column name="id" header="id" />
+            <column name="name" header="name" />
+            <column name="location" header="location"/>
+            <column name="emergency_type" header="emergencyType"/>
+            <column name="emergency_severity" header="emergencySeverity"/>
+            <column name="general_description" header="generalDescription"/>
+            <column name="time_received" header="timeReceived" />
+        </loadData>
+    </changeSet>
+    <changeSet id="load_event_data" author="Omar, Noel">
+        <loadData tableName="event" file="liquibase/testdata/EventTestData.csv">
+            <column name="id" header="id" />
+            <column name="event_name" header="eventName" />
+            <column name="event_type" header="eventType"/>
+            <column name="venue" header="venue"/>
+            <column name="attendees" header="attendees"/>
+            <column name="general_description" header="generalDescription"/>
+            <column name="event_time" header="eventTime" />
+        </loadData>
+    </changeSet>
+    <changeSet id="load_incident_data" author="Omar, Noel">
+        <loadData tableName="incident" file="liquibase/testdata/IncidentTestData.csv">
+            <column name="id" header="id" />
+            <column name="report_ids" header="reportIds" />
+            <column name="incident_name" header="incidentName"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
