@@ -1,0 +1,12 @@
+server:
+  port: 8090
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+
+  service_endpoints:
+    auth: http://localhost:8080
+    service1: http://localhost:8081
+    service2: http://localhost:8082
+    service3: http://localhost:8083

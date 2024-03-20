@@ -1,0 +1,49 @@
+server:
+  servlet:
+    context-path: "/bff/api"
+
+spring:
+  application:
+    name: "backend-for-frontend"
+  kafka:
+    bootstrap-servers: ${kafka-bootstrap-servers}
+  cloud:
+    gateway:
+      routes:
+        - id: service1_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/service1/**
+        - id: service2_route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/service2/**
+        - id: service3_route
+          uri: http://localhost:8083
+          predicates:
+            - Path=/service3/**
+
+service_endpoints:
+  auth: "${auth-service-endpoint}"
+
+springdoc:
+  api-docs:
+    path: "/api-docs"
+  swagger-ui:
+    path: "/swagger-ui-bff.html"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+#zuul:
+#  host:
+#    socket-timeout-millis: 100000
+#  ribbon:
+#    eager-load:
+#      enabled: true
+#  routes:
+#    test:
+#      url: http://localhost:8001
+#  ssl-hostname-validation-enabled: false
