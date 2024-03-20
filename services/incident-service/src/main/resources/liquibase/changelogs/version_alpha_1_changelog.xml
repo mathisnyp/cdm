@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="202010211812" author="Omar, Noel">
+        <createTable tableName="report">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="report_id_pk" />
+            </column>
+            <column name="name" type="varchar(250)" />
+            <column name="location" type="VARCHAR(255)"/>
+            <column name="emergency_type" type="VARCHAR(255)"/>
+            <column name="emergency_severity" type="VARCHAR(255)"/>
+            <column name="general_description" type="VARCHAR(255)"/>
+            <column name="time_received" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </createTable>
 
-</beans>
+    </changeSet>
+
+    <changeSet id="202010211813" author="Omar, Noel">
+        <createTable tableName="event">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="event_id_pk" />
+            </column>
+            <column name="event_name" type="varchar(250)" />
+            <column name="event_type" type="varchar(255)"/>
+            <column name="venue" type="varchar(255)"/>
+            <column name="attendees" type="integer"/>
+            <column name="general_description" type="varchar(255)"/>
+            <column name="event_time" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP" />
+        </createTable>
+        <addAutoIncrement tableName="event" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
+
+    <changeSet id="202010211814" author="Omar, Noel">
+        <createTable tableName="incident">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="incident_id_pk" />
+            </column>
+            <column name="report_ids" type="integer"/>
+            <column name="incident_name" type="VARCHAR(255)"/>
+        </createTable>
+        <addAutoIncrement tableName="incident" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
+</databaseChangeLog>

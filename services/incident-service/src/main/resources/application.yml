@@ -7,6 +7,11 @@ spring:
     name: "incident-service"
   kafka:
     bootstrap-servers: ${kafka-bootstrap-servers}
+  neo4j:
+    uri: ${postgres-uri}
+    authentication:
+      username: ${postgres-username}
+      password: ${postgres-password}
 
 management:
   endpoints:
@@ -41,3 +46,4 @@ management:
       slo:
         do.sleep.method.timed: 300ms,500ms,1s,2s
         http.server.requests: 300ms,500ms,1s,2s
+

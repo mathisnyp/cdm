@@ -1,4 +1,4 @@
-package ie.tcd.cdm.geo_service.configs;
+package ie.tcd.cdm.incident_service.configs;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

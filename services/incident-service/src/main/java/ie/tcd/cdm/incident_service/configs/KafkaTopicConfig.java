@@ -1,4 +1,4 @@
-package ie.tcd.cdm.geo_service.configs;
+package ie.tcd.cdm.incident_service.configs;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

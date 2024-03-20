@@ -47,14 +47,14 @@ services:
       - auth-service
     extra_hosts:
       - "host.docker.internal:host-gateway"
-  auth-service:
-    build: ./services/auth/service
-    ports:
-      - "8075:80"
-    depends_on:
-      - auth-service-db
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+#  auth-service:
+#    build: ./services/auth/service
+#    ports:
+#      - "8075:80"
+#    depends_on:
+#      - auth-service-db
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
   auth-service-db:
     build: ./external/databases/postgresql
     volumes:
@@ -122,22 +122,22 @@ services:
       POSTGRES_DB: AuthenticationService
     ports:
       - "5432:5432"
-  backend-for-frontend:
-    build: ./backend-for-frontend
-    hostname: bff
-    ports:
-      - "6060:8080"
-    environment:
-      kafka-bootstrap-servers: kafka:29092
-      auth-service-endpoint: http://host.docker.internal:8080
-      otlp-metrics-url: http://otel-collector:4318/v1/metrics
-      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
-      otlp-collector-endpoint: http://otel-collector:4317
-    depends_on:
-      - auth-service
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-  #Local Observability:
+#  backend-for-frontend:
+#    build: ./backend-for-frontend
+#    hostname: bff
+#    ports:
+#      - "6060:8080"
+#    environment:
+#      kafka-bootstrap-servers: kafka:29092
+#      auth-service-endpoint: http://host.docker.internal:8080
+#      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+#      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+#      otlp-collector-endpoint: http://otel-collector:4317
+#    depends_on:
+#      - auth-service
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+#  #Local Observability:
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.90.1
     hostname: otel-collector
