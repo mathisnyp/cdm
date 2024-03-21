@@ -1,4 +1,4 @@
-package ie.tcd.cdm.geo_service.apis;
+package ie.tcd.cdm.incident_service.apis;
 
 public class AuthServiceApi {
 }

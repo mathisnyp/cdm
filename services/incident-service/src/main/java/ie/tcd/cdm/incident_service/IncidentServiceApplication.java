@@ -1,4 +1,4 @@
-package ie.tcd.cdm.geo_service;
+package ie.tcd.cdm.incident_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
