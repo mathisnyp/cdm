@@ -12,3 +12,4 @@ public class BackendForFrontendApplication {
         SpringApplication.run(BackendForFrontendApplication.class, args);
     }
 }
+

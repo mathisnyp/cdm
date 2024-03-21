@@ -3,10 +3,21 @@ server:
     context-path: "/bff/api"
 
 spring:
-  application:
-    name: "backend-for-frontend"
-  kafka:
-    bootstrap-servers: ${kafka-bootstrap-servers}
+  cloud:
+    gateway:
+      routes:
+        - id: service1_route
+          uri: http://localhost:8081  # Assuming service 1 is running on port 8081
+          predicates:
+            - Path=/service1/**
+        - id: service2_route
+          uri: http://localhost:8082  # Assuming service 2 is running on port 8082
+          predicates:
+            - Path=/service2/**
+        - id: service3_route
+          uri: http://localhost:8083  # Assuming service 3 is running on port 8083
+          predicates:
+            - Path=/service3/**
 
 service_endpoints:
   auth: "${auth-service-endpoint}"
@@ -22,31 +33,13 @@ management:
     web:
       exposure:
         include: health,metrics,prometheus
-  otlp:
-    collector_endpoint: ${otlp-collector-endpoint}
-    metrics:
-      export:
-        url: ${otlp-metrics-url}
-        step: 10s
-    tracing:
-      endpoint: ${otlp-tracing-endpoint}
-  tracing:
-    sampling:
-      probability: 1.0
-  metrics:
-    distribution:
-      percentiles:
-        do.sleep.method.timed: 0.99, 0.95, 0.9, 0.7, 0.5
-        http.server.requests: 0.99, 0.95, 0.9, 0.7, 0.5
-      percentiles-histogram:
-        do.sleep.method.timed: true
-        http.server.requests: true
-      minimum-expected-value:
-        do.sleep.method.timed: 100ms
-        http.server.requests: 100ms
-      maximum-expected-value:
-        do.sleep.method.timed: 10s
-        http.server.requests: 10s
-      slo:
-        do.sleep.method.timed: 300ms,500ms,1s,2s
-        http.server.requests: 300ms,500ms,1s,2s
+#zuul:
+#  host:
+#    socket-timeout-millis: 100000
+#  ribbon:
+#    eager-load:
+#      enabled: true
+#  routes:
+#    test:
+#      url: http://localhost:8001
+#  ssl-hostname-validation-enabled: false
