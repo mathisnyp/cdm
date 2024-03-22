@@ -5,7 +5,9 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY ./main/python/auth /app
+COPY ./ /app
+RUN mv ./src/main/python/auth ./
+RUN rm -r ./src
 
 COPY ./requirements.txt /app
 

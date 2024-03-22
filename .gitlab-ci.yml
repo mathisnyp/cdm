@@ -57,6 +57,14 @@ sonarscan:
     - echo "No lint issues found."
 
 
+publish-docker-images:
+  stage: publish
+  before_script:
+    - echo "$DOCKER_REGISTRY_PASS" | docker login --username $DOCKER_REGISTRY_USER --password-stdin
+  script:
+    - ./gradlew build -x test -x installFrontend
+    - docker-compose build
+    - docker-compose push
 deploy-prod:
   stage: deploy
   script:

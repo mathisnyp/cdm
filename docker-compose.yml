@@ -1,30 +1,9 @@
 version: "3.9"
 
 services:
-  zookeeper:
-    build: external/zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "22181:2181"
-  kafka:
-    build: ./external/kafka
-    hostname: kafka
-    depends_on:
-      - zookeeper
-    ports:
-      - "29092:29092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://kafka:29092
-      KAFKA_BROKERCONNECT: PLAINTEXT://kafka:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
   web-ui:
     hostname: web-ui
+    image: mathisntcd/cdm-webui
     build: ./frontend
     ports:
       - "3000:3000"
@@ -34,6 +13,7 @@ services:
       - backend-for-frontend
   backend-for-frontend:
     build: ./backend-for-frontend
+    image: mathisntcd/cdm-bff
     hostname: bff
     ports:
       - "8090:8080"
@@ -47,16 +27,18 @@ services:
       - auth-service
     extra_hosts:
       - "host.docker.internal:host-gateway"
-#  auth-service:
-#    build: ./services/auth/service
-#    ports:
-#      - "8075:80"
-#    depends_on:
-#      - auth-service-db
-#    extra_hosts:
-#      - "host.docker.internal:host-gateway"
+  auth-service:
+    build: ./services/auth/service
+    image: mathisntcd/cdm-authservice
+    ports:
+      - "8075:80"
+    depends_on:
+      - auth-service-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   auth-service-db:
     build: ./external/databases/postgresql
+    image: mathisntcd/cdm-pgsql
     volumes:
       - auth_postgres_data:/var/lib/postgresql/data/
     environment:
@@ -67,18 +49,17 @@ services:
       - "5432:5432"
   gen-ai-service:
     build: ./services/gen-ai-service/service
+    image: mathisntcd/cdm-genai-service
     ports:
       - "8072:80"
-    depends_on:
-      - kafka
     extra_hosts:
       - "host.docker.internal:host-gateway"
   geoservice:
     build: ./services/geo-service/
+    image: mathisntcd/cdm-geoservice
     hostname: geoservice
     depends_on:
       - geoservice-neo4j
-      - kafka
     environment:
       kafka-bootstrap-servers: kafka:29092
       neo4j-uri: neo4j://geoservice-neo4j:7687
@@ -93,29 +74,21 @@ services:
       - "host.docker.internal:host-gateway"
   geoservice-neo4j:
     build: ./external/databases/neo4j
+    image: mathisntcd/cdm-neo4j
     hostname: geoservice-neo4j
     ports:
       - "7474:7474"
       - "7687:7687"
     environment:
       - NEO4J_AUTH=neo4j/password
-      - NEO4JLABS_PLUGINS=["apoc"]
     volumes:
       - ./external/databases/neo4j/db/data:/data
       - ./external/databases/neo4j/db/conf:/conf
       - ./external/databases/neo4j/db/logs:/logs
       - ./external/databases/neo4j/db/plugins:/plugins
-      - ./external/databases/neo4j/db/import:/import
-  auth-service:
-    build: ./services/auth/service
-    ports:
-      - "8080:80"
-    depends_on:
-      - local-db
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
   local-db:
     build: ./external/databases/postgresql
+    image: mathisntcd/cdm-pgsql
     volumes:
       - auth_postgres_data:/var/lib/postgresql/data/
     environment:
@@ -124,22 +97,7 @@ services:
       POSTGRES_DB: AuthenticationService
     ports:
       - "5432:5432"
-#  backend-for-frontend:
-#    build: ./backend-for-frontend
-#    hostname: bff
-#    ports:
-#      - "6060:8080"
-#    environment:
-#      kafka-bootstrap-servers: kafka:29092
-#      auth-service-endpoint: http://host.docker.internal:8080
-#      otlp-metrics-url: http://otel-collector:4318/v1/metrics
-#      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
-#      otlp-collector-endpoint: http://otel-collector:4317
-#    depends_on:
-#      - auth-service
-#    extra_hosts:
-#      - "host.docker.internal:host-gateway"
-#  #Local Observability:
+  #Local Observability:
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.90.1
     hostname: otel-collector
