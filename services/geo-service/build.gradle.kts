@@ -26,6 +26,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
 
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("fr.dudie:nominatim-api:3.4")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
@@ -33,27 +34,14 @@ dependencies {
     testImplementation("org.springframework.kafka:spring-kafka-test")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    runtimeOnly("io.micrometer:micrometer-registry-otlp")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 
-    implementation("io.micrometer:micrometer-tracing-bridge-otel")
-    implementation("io.opentelemetry:opentelemetry-api:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-context:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-trace:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-metrics:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-common:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-extension-trace-propagators:1.29.0")
-    runtimeOnly("io.opentelemetry.instrumentation:opentelemetry-kafka-clients-2.6:1.19.0-alpha")
-    implementation("io.opentelemetry:opentelemetry-exporter-common:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-exporter-otlp:1.29.0")
-    implementation("io.opentelemetry:opentelemetry-exporter-otlp-common:1.29.0")
-    implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-semconv:1.29.0-alpha")
+    implementation("org.neo4j.driver:neo4j-java-driver")
+    implementation("org.springframework.boot:spring-boot-starter-data-neo4j")
+    implementation("org.springframework.boot:spring-boot-starter-logging")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    //testImplementation("org.neo4j.test:neo4j-harness:4.4.3")
 
-    implementation("io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:1.29.0-alpha")
 
-    implementation("org.neo4j.driver:neo4j-java-driver:4.3.0")
 }
 
 tasks.withType<Test> {

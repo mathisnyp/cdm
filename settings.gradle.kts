@@ -27,3 +27,5 @@ include("services:geo-service")
 include("services:incident-service")
 include("backend-for-frontend")
 include("frontend")
+include("services:geo-service:nominatim")
+findProject(":services:geo-service:nominatim")?.name = "nominatim"

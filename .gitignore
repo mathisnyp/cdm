@@ -48,7 +48,8 @@ bin/
 /node/node_modules
 
 ### Neo4j ###
-/external/databases/neo4j/db/
+/external/databases/neo4j/db/data
+/external/databases/neo4j/db/logs
 
 ### Python Venv ###
 **/venv/

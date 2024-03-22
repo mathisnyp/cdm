@@ -1,1 +1,1 @@
-FROM neo4j:5.13-community-ubi8
+FROM neo4j:4.4.30-community
