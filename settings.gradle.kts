@@ -28,5 +28,3 @@ include("services:gen-ai-service")
 include("services:gen-ai-service:service")
 include("backend-for-frontend")
 include("frontend")
-include("services:geo-service:nominatim")
-findProject(":services:geo-service:nominatim")?.name = "nominatim"
