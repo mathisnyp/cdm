@@ -25,13 +25,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-aop")
 
-    implementation("org.springframework.kafka:spring-kafka")
     implementation("fr.dudie:nominatim-api:3.4")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
