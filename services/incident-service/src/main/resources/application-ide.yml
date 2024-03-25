@@ -1,6 +1,10 @@
 server:
-  port: 8070
+  port: 8096
 
 spring:
-  kafka:
-    bootstrap-servers: localhost:29092
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
+  liquibase:
+    change-log: classpath:liquibase/local-changelog.xml

@@ -32,7 +32,6 @@ dependencies {
 //    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 //    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
-    implementation(project(":services:auth:java-api"))
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     testImplementation("org.testng:testng:7.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.5")

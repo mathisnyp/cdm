@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine3.16
+FROM amazoncorretto:17
 #
 #WORKDIR /app
 #

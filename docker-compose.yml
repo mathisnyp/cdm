@@ -30,28 +30,57 @@ services:
   auth-service:
     build: ./services/auth/service
     image: mathisntcd/cdm-authservice
+    hostname: auth-service
     ports:
-      - "8075:80"
+      - "8091:80"
     depends_on:
-      - auth-service-db
+      - local-db
     extra_hosts:
       - "host.docker.internal:host-gateway"
-  auth-service-db:
-    build: ./external/databases/postgresql
-    image: mathisntcd/cdm-pgsql
-    volumes:
-      - auth_postgres_data:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: AuthenticationService
+  communication-service:
+    build: ./services/communication-service
+    image: mathisntcd/cdm-communicationservice
+    hostname: communication-service
     ports:
-      - "5432:5432"
+      - "8092:8080"
+    environment:
+      database-url: jdbc:postgresql://local-db:5432/postgres
+      database-username: postgres
+      database-password: password
+      kafka-bootstrap-servers: kafka:29092
+      auth-service-endpoint: http://host.docker.internal:8080
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
+    depends_on:
+      - local-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  dublin-open-data-service:
+    build: ./services/dublin-open-data-service
+    image: mathisntcd/cdm-dublin-open-data-service
+    hostname: dublin-open-data-service
+    ports:
+      - "8093:8080"
+    environment:
+      database-url: jdbc:postgresql://local-db:5432/postgres
+      database-username: postgres
+      database-password: password
+      kafka-bootstrap-servers: kafka:29092
+      auth-service-endpoint: http://host.docker.internal:8080
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
+    depends_on:
+      - local-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   gen-ai-service:
     build: ./services/gen-ai-service/service
     image: mathisntcd/cdm-genai-service
+    hostname: gen-ai-service
     ports:
-      - "8072:80"
+      - "8094:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
   geoservice:
@@ -60,7 +89,11 @@ services:
     hostname: geoservice
     depends_on:
       - geoservice-neo4j
+      - local-db
     environment:
+      database-url: jdbc:postgresql://local-db:5432/postgres
+      database-username: postgres
+      database-password: password
       kafka-bootstrap-servers: kafka:29092
       neo4j-uri: neo4j://geoservice-neo4j:7687
       neo4j-username: neo4j
@@ -69,7 +102,26 @@ services:
       otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
       otlp-collector-endpoint: http://otel-collector:4317
     ports:
-      - "8071:8080"
+      - "8095:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  incident-service:
+    build: ./services/incident-service/
+    image: mathisntcd/cdm-incident-service
+    hostname: incident-service
+    ports:
+      - "8096:8080"
+    environment:
+      database-url: jdbc:postgresql://local-db:5432/postgres
+      database-username: postgres
+      database-password: password
+      kafka-bootstrap-servers: kafka:29092
+      auth-service-endpoint: http://host.docker.internal:8080
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
+    depends_on:
+      - local-db
     extra_hosts:
       - "host.docker.internal:host-gateway"
   geoservice-neo4j:
@@ -88,13 +140,14 @@ services:
       - ./external/databases/neo4j/db/plugins:/plugins
   local-db:
     build: ./external/databases/postgresql
+    hostname: local-db
     image: mathisntcd/cdm-pgsql
     volumes:
-      - auth_postgres_data:/var/lib/postgresql/data/
+      - local_postgres_data:/var/lib/postgresql/data/
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: AuthenticationService
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
   #Local Observability:
@@ -168,7 +221,7 @@ services:
       - "4000:3000"
 
 volumes:
-  auth_postgres_data: {}
+  local_postgres_data: {}
   grafana-storage: {}
 
 networks:

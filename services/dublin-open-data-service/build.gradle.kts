@@ -52,8 +52,6 @@ dependencies {
     implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-semconv:1.29.0-alpha")
 
     implementation("io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:1.29.0-alpha")
-
-    implementation("org.neo4j.driver:neo4j-java-driver:4.3.0")
 }
 
 tasks.withType<Test> {

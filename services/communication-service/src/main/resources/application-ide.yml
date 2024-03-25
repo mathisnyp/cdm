@@ -1,5 +1,5 @@
 server:
-  port: 8074
+  port: 8092
 
 spring:
   datasource:
@@ -8,10 +8,3 @@ spring:
     password: password
   liquibase:
     change-log: classpath:liquibase/local-changelog.xml
-  kafka:
-    bootstrap-servers: localhost:29092
-  neo4j:
-    uri: neo4j://localhost:7687
-    authentication:
-      username: neo4j
-      password: password

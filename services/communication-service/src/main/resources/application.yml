@@ -11,13 +11,6 @@ spring:
     change-log: classpath:liquibase/main-changelog.xml
   application:
     name: "communication-service"
-  kafka:
-    bootstrap-servers: ${kafka-bootstrap-servers}
-  neo4j:
-    uri: ${postgres-uri}
-    authentication:
-      username: ${postgres-username}
-      password: ${postgres-password}
 
 management:
   endpoints:

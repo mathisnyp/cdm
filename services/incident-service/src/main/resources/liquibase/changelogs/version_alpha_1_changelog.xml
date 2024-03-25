@@ -8,7 +8,7 @@
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
 http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-    <changeSet id="202010211812" author="Omar, Noel">
+    <changeSet id="09324803" author="Omar, Noel">
         <createTable tableName="report">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="report_id_pk" />
@@ -23,7 +23,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 
     </changeSet>
 
-    <changeSet id="202010211813" author="Omar, Noel">
+    <changeSet id="23459803" author="Omar, Noel">
         <createTable tableName="event">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="event_id_pk" />
@@ -38,7 +38,7 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         <addAutoIncrement tableName="event" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
     </changeSet>
 
-    <changeSet id="202010211814" author="Omar, Noel">
+    <changeSet id="34589074" author="Omar, Noel">
         <createTable tableName="incident">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="incident_id_pk" />

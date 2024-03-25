@@ -1,15 +1,14 @@
-from Utils import crud, database
+from auth.Utils import crud, database
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from dto.create_user_dto import CreateUserDTO
-from dto.login_user_dto import LoginDTO
-from dto.user_dto import UserDTO
-from dto.logged_in_successfully_dto import LoggedInSuccessfullyDTO
+from auth.dto.create_user_dto import CreateUserDTO
+from auth.dto.login_user_dto import LoginDTO
+from auth.dto.user_dto import UserDTO
+from auth.dto.logged_in_successfully_dto import LoggedInSuccessfullyDTO
 
 # from . import crud, models, database
 
 app = FastAPI()
-
 # Dependency to get the database session
 def get_db():
     db = database.init()

@@ -20,11 +20,11 @@ tasks {
         args = listOf("install", "--isolated", "-r", "requirements.txt")
     }
 
-    val makeApiSchema by registering(VenvTask::class) {
-        args = listOf("./export_openapi.py")
-        dependsOn(pipInstall)
-    }
-    compileJava {
-        dependsOn(makeApiSchema)
-    }
+//    val makeApiSchema by registering(VenvTask::class) {
+//        args = listOf("./export_openapi.py")
+//        dependsOn(pipInstall)
+//    }
+//    compileJava {
+//        dependsOn(makeApiSchema)
+//    }
 }
