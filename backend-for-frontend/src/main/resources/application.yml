@@ -10,10 +10,10 @@ spring:
           uri: http://localhost:8081  # Assuming service 1 is running on port 8081
           predicates:
             - Path=/service1/**
-        - id: service2_route
-          uri: http://localhost:8082  # Assuming service 2 is running on port 8082
+        - id: geo_service
+          uri: http://geo-service:8080  # Assuming service 2 is running on port 8082
           predicates:
-            - Path=/service2/**
+            - Path=/geo/**
         - id: service3_route
           uri: http://localhost:8083  # Assuming service 3 is running on port 8083
           predicates:
