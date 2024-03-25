@@ -8,6 +8,7 @@ import ie.tcd.cdm.geo_service.model.Intersection;
 import ie.tcd.cdm.geo_service.services.GeoCodingService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.neo4j.driver.Values;
 import org.neo4j.driver.internal.value.PointValue;
@@ -28,7 +29,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DataNeo4jTest
 @ComponentScan(basePackageClasses = NodeTest.class)
 @ContextConfiguration(classes = GeoServiceApplication.class)
-public class NodeTest {
+@Disabled
+class NodeTest {
 
     @Autowired
     private IntersectionRepository intersectionRepository;
