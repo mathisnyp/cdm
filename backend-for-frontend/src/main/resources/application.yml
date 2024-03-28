@@ -6,12 +6,12 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: service1_route
-          uri: http://localhost:8081  # Assuming service 1 is running on port 8081
+        - id: incident_service
+          uri: http://incident-service:8080
           predicates:
-            - Path=/service1/**
-        - id: geo_service
-          uri: http://geo-service:8080  # Assuming service 2 is running on port 8082
+            - Path=/incident/**
+        - id: service2_route
+          uri: http://localhost:8082  # Assuming service 2 is running on port 8082
           predicates:
             - Path=/geo/**
         - id: service3_route
