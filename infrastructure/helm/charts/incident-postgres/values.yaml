@@ -1,14 +1,14 @@
-# Default values for geo-service-neo4j.
+# Default values for incident-postgres.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: mathisntcd/cdm-neo4j
+  repository: mathisntcd/cdm-pgsql
   pullPolicy: always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
