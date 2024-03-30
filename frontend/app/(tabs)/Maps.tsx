@@ -3,6 +3,7 @@ import { Button, StyleSheet, View, Alert, Text,Platform } from "react-native";
 import MapView, {Geojson} from "react-native-maps";
 import {Map, Marker, GeoJson} from 'pigeon-maps'
 import * as Location from "expo-location";
+import { CdmPoint, PointDTO, RouteControllerService } from "../lib/geoservice";
 //import MapView from '@teovilla/react-native-web-maps'
 // If you have a specific type for location, use that instead of any.
 interface LocationState {
@@ -15,7 +16,9 @@ interface LocationState {
 export default function Maps() {
     const [location, setLocation] = useState<LocationState | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
+    const [coordinates, setCoordinates] = useState<number[][]>([
+        [-6.2532384, 53.3415142],[-6.252328,53.341952]
+    ]) 
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -25,8 +28,32 @@ export default function Maps() {
             }
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
+            const k = await fetch("http://localhost:8090/incident/api/incident/",{
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                // headers: {
+                //     "Content-Type": "application/json",
+                //     // 'Content-Type': 'application/x-www-form-urlencoded',
+                // },
+                // body: JSON.stringify({location: startpoint, destination: "GPO"})
+            })
+
+            const c = k.json
+            console.log(c)
         })();
     }, []);
+
+    const startpoint:PointDTO = {
+        longitude : 53.3415142,
+        latitude : -6.2532384
+    }
+    // RouteControllerService.getRoute({location: startpoint, destination: "GPO"}).then(cdmPoints => {
+    //     const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lat!!, eachPoint.lon!!]})
+    //     setCoordinates(mappedPoints)
+    // })
+    
+
+    
 
     const geoJsonSample = { 
         "type": "FeatureCollection",
