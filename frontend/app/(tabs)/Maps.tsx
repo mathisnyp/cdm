@@ -28,7 +28,7 @@ export default function Maps() {
             }
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
-            const k = await fetch("http://localhost:8090/incident/api/incident/",{
+            const k = await fetch("http://localhost:8090/geo/api/route",{
                 method: "GET", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 // headers: {
@@ -38,8 +38,14 @@ export default function Maps() {
                 // body: JSON.stringify({location: startpoint, destination: "GPO"})
             })
 
-            const c = k.json
+            const c = k.text()
             console.log(c)
+
+            RouteControllerService.getRoute({location: startpoint, destination: "GPO"}).then(cdmPoints => {
+                const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lon!!, eachPoint.lat!!]})
+                console.log(mappedPoints)
+                setCoordinates(mappedPoints)
+            })
         })();
     }, []);
 
@@ -47,10 +53,7 @@ export default function Maps() {
         longitude : 53.3415142,
         latitude : -6.2532384
     }
-    // RouteControllerService.getRoute({location: startpoint, destination: "GPO"}).then(cdmPoints => {
-    //     const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lat!!, eachPoint.lon!!]})
-    //     setCoordinates(mappedPoints)
-    // })
+    
     
 
     
@@ -62,7 +65,7 @@ export default function Maps() {
             "geometry": {
             "type": "LineString",
             "coordinates": [
-                [-6.2532384, 53.3415142],[-6.252328,53.341952]
+                coordinates[0],coordinates[1]
             ]
             },
             },
