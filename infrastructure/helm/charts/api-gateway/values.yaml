@@ -1,11 +1,11 @@
-# Default values for frontend.
+# Default values for api-gateway.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: mathisntcd/cdm-webui
+  repository: mathisntcd/cdm-bff
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 3000
+  port: 8080
 
 ingress:
   enabled: false
@@ -73,11 +73,11 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /
+    path: /actuator/health
     port: http
 readinessProbe:
   httpGet:
-    path: /
+    path: /actuator/health
     port: http
 
 autoscaling:
