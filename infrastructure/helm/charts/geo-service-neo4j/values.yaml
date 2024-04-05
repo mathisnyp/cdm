@@ -20,11 +20,11 @@ serviceAccount:
 podAnnotations: {}
 podLabels: {}
 
-podSecurityContext:
- fsGroup: 1000  # Adjust as needed for Neo4j
+podSecurityContext: {}
+# fsGroup: 1000  # Adjust as needed for Neo4j
 
-securityContext:
- runAsUser: 1000  # adjust as needed for Neo4j
+securityContext: {}
+# runAsUser: 1000  # adjust as needed for Neo4j
 
 service:
   type: ClusterIP
@@ -34,13 +34,13 @@ service:
 ingress:
   enabled: false
 
-resources:
-   limits:
-     cpu: "1"
-     memory: 2Gi
-   requests:
-     cpu: "500m"
-     memory: 1Gi
+resources: {}
+#   limits:
+#     cpu: "1"
+#     memory: 2Gi
+#   requests:
+#     cpu: "500m"
+#     memory: 1Gi
 
 livenessProbe:
   tcpSocket:
