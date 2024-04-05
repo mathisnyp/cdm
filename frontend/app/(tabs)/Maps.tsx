@@ -14,10 +14,13 @@ interface LocationState {
 }
 
 export default function Maps() {
-    const [location, setLocation] = useState<LocationState | null>(null);
+    const [location, setLocation] = useState<LocationState>({'coords':
+        {latitude : 0,longitude : 0}
+});
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [coordinates, setCoordinates] = useState<number[][]>([
         [-6.2532384, 53.3415142],[-6.252328,53.341952]
+        //[0,0], [0,5]
     ]) 
     useEffect(() => {
         (async () => {
@@ -50,8 +53,8 @@ export default function Maps() {
     }, []);
 
     const startpoint:PointDTO = {
-        longitude : 53.3415142,
-        latitude : -6.2532384
+        longitude : 53.341514,
+        latitude : -6.253238
     }
     
     
@@ -133,12 +136,14 @@ export default function Maps() {
                             // };
                         }}
                     ></GeoJson>
-                    {location !== null && (
-                    <>
                     <Marker
                         width={50}
-                        anchor={[location.coords.latitude,location.coords.longitude]}
+                        anchor={[location.coords.latitude, location.coords.longitude]}
                     />
+                    
+                    {location !== null && (
+                    <>
+                        
                     </>
                 )}
                 </Map>
