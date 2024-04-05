@@ -44,14 +44,14 @@ resources:
 
 livenessProbe:
   tcpSocket:
-    port: boltPort  # Using the Bolt port for liveness probe
+    port: 7687
   initialDelaySeconds: 40
   periodSeconds: 10
   failureThreshold: 6
 
 readinessProbe:
   tcpSocket:
-    port: boltPort  # Using the Bolt port for readiness probe
+    port: 7687
   initialDelaySeconds: 40
   periodSeconds: 10
   failureThreshold: 6
