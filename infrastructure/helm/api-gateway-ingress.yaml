@@ -6,14 +6,15 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: api-gateway
+  ingressClassName: nginx
   rules:
-    - http:
+    - host: api-gateway.project-unified.eu
+      http:
         paths:
-          - path: /api-gateway
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: api-gateway
                 port:
-                  number: 3000
+                  number: 8080
