@@ -73,12 +73,12 @@ resources: {}
 
 readinessProbe:
   exec:
-    command: ["psql", "-w", "-U", "abcd", "-d", "incident-db", "-c", "SELECT 1"]
+    command: ["psql", "-w", "-U", "postgres", "-d", "incident-db", "-c", "SELECT 1"]
   initialDelaySeconds: 15
   timeoutSeconds: 2
 livenessProbe:
   exec:
-    command: ["psql", "-w", "-U", "abcd", "-d", "incident-db", "-c", "SELECT 1"]
+    command: ["psql", "-w", "-U", "postgres", "-d", "incident-db", "-c", "SELECT 1"]
   initialDelaySeconds: 45
   timeoutSeconds: 2
 
