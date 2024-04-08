@@ -3,9 +3,9 @@
 replicaCount: 1
 
 image:
-  repository: mathisntcd/cdm-pgsql
+  repository: postgres
   pullPolicy: Always
-  tag: "latest"
+  tag: "16-alpine"
 
 imagePullSecrets: []
 nameOverride: ""
