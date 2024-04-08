@@ -39,7 +39,7 @@ class CreateReportTest {
     @Test
     void sampleTest() throws Exception {
         webTestClient.
-                get().uri("incident/api/report/1")
+                get().uri("incident-service/report/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Report.class).isEqualTo(Report.builder()

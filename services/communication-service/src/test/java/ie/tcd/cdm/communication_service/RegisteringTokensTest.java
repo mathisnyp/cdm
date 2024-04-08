@@ -30,7 +30,7 @@ class RegisteringTokensTest {
 
     @BeforeEach
     void setUp() {
-        webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:" + port + "/communication/api").build();
+        webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:" + port + "/communication-service/").build();
     }
 
     @Test

@@ -1,7 +1,9 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, APIRouter
 from pydantic import BaseModel, Field
 from datetime import datetime
 from textblob import TextBlob
+
+router = APIRouter(prefix="/gen-ai-service")
 
 # Define a Pydantic model that corresponds to the incident service's Report model
 class IncidentReport(BaseModel):
@@ -27,9 +29,6 @@ class IncidentReport(BaseModel):
                 "timeReceived": "2024-02-15T10:00:00"
             }
         }
-
-# Initialize the FastAPI app
-app = FastAPI()
 
 # Assume we have a dictionary where the keys are words/phrases and the values are their sentiment scores
 disaster_lexicon = {
@@ -57,7 +56,7 @@ def analyze_sentiment_with_lexicon(text):
         return 0  # Neutral sentiment if no specific words are found
 
 # Define an endpoint for sentiment analysis
-@app.post("/analyze/")
+@router.post("/analyze/")
 async def analyze_sentiment(report: IncidentReport):
 
     # Perform custom lexicon sentiment analysis
@@ -66,6 +65,9 @@ async def analyze_sentiment(report: IncidentReport):
         return {"sentiment_score": sentiment_score}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+app = FastAPI()
+app.include_router(router)
 
 if __name__ == "__main__":
     import uvicorn

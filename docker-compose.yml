@@ -19,10 +19,15 @@ services:
       - "8090:8080"
     environment:
       kafka-bootstrap-servers: kafka:29092
-      auth-service-endpoint: http://host.docker.internal:8080
+#      auth-service-endpoint: http://host.docker.internal:8080
       otlp-metrics-url: http://otel-collector:4318/v1/metrics
       otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
       otlp-collector-endpoint: http://otel-collector:4317
+      incident-service-endpoint: incident-service:8080
+      auth-service-endpoint: auth-service:80
+      communication-service-endpoint: communication-service:8080
+      geo-service-endpoint: geo-service:8080
+      gen-ai-service-endpoint: gen-ai-service:80
     depends_on:
       - auth-service
     extra_hosts:
@@ -86,7 +91,7 @@ services:
   geoservice:
     build: ./services/geo-service/
     image: mathisntcd/cdm-geoservice
-    hostname: geoservice
+    hostname: geo-service
     depends_on:
       - geoservice-neo4j
       - local-db

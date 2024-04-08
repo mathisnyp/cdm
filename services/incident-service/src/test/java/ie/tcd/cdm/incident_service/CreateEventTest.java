@@ -39,7 +39,7 @@ class CreateEventTest {
     @Test
     void sampleTest() throws Exception {
         webTestClient.
-                get().uri("incident/api/event/1")
+                get().uri("incident-service/event/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Event.class).isEqualTo(Event.builder()

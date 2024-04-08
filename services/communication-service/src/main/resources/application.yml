@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: "/communication/api"
+    context-path: "/communication-service"
 
 spring:
   datasource:

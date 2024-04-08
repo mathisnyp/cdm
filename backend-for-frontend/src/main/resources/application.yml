@@ -7,17 +7,25 @@ spring:
     gateway:
       routes:
         - id: incident_service
-          uri: http://incident-service:8080
+          uri: http://${incident-service-endpoint}/incident-service
           predicates:
-            - Path=/incident/**
-        - id: service2_route
-          uri: http://localhost:8082  # Assuming service 2 is running on port 8082
+            - Path=/incident-service/**
+        - id: auth_service
+          uri: http://${auth-service-endpoint}/auth-service
           predicates:
-            - Path=/geo/**
-        - id: service3_route
-          uri: http://localhost:8083  # Assuming service 3 is running on port 8083
+            - Path=/auth-service/**
+        - id: communication_service
+          uri: http://${communication-service-endpoint}/communication-service
           predicates:
-            - Path=/service3/**
+            - Path=/communication-service/**
+        - id: geo_service
+          uri: http://${geo-service-endpoint}/geo-service
+          predicates:
+            - Path=/geo-service/**
+        - id: gen_ai_service
+          uri: http://${gen-ai-service-endpoint}/gen-ai-service
+          predicates:
+            - Path=/gen-ai-service/**
 
 service_endpoints:
   auth: "${auth-service-endpoint}"

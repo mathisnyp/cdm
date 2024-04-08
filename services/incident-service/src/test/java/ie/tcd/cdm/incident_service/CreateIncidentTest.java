@@ -39,7 +39,7 @@ class CreateIncidentTest {
     @Test
     void sampleTest() throws Exception {
         webTestClient.
-                get().uri("incident/api/incident/1")
+                get().uri("incident-service/incident/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Incident.class).isEqualTo(Incident.builder()

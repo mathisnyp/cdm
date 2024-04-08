@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: "/geo/api"
+    context-path: "/geo-service"
 
 spring:
   application:
