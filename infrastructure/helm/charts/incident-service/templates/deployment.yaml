@@ -56,12 +56,12 @@ spec:
                 configMapKeyRef:
                   key: database-url
                   name: incident-configmap
-            - name: database-username
+            - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
                   key: POSTGRES_USER
                   name: postgres-config
-            - name: database-password
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: POSTGRES_PASSWORD
