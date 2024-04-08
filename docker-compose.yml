@@ -123,25 +123,6 @@ services:
       otlp-metrics-url: http://otel-collector:4318/v1/metrics
       otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
       otlp-collector-endpoint: http://otel-collector:4317
-    ports:
-      - "8095:8080"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-  incident-service:
-    build: ./services/incident-service/
-    image: mathisntcd/cdm-incident-service
-    hostname: incident-service
-    ports:
-      - "8096:8080"
-    environment:
-      database-url: jdbc:postgresql://local-db:5432/postgres
-      database-username: postgres
-      database-password: password
-      kafka-bootstrap-servers: kafka:29092
-      auth-service-endpoint: http://host.docker.internal:8080
-      otlp-metrics-url: http://otel-collector:4318/v1/metrics
-      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
-      otlp-collector-endpoint: http://otel-collector:4317
     depends_on:
       - local-db
     extra_hosts:
@@ -240,15 +221,7 @@ services:
       - ./configs/grafana/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
     ports:
       - "4000:3000"
-  incident-service:
-    build: ./services/incident-service/
-    hostname: incidentservice
-    ports:
-      - "8091:8080"
-    depends_on:
-      - auth-service
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+  
 
 
 volumes:
