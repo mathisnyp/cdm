@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: incident-configmap
 data:
-  database-url: jdbc:postgresql://incident-postgres:5432/incident-db
+  database-url: "jdbc:postgresql://incident-postgres:5432/postgres"
 

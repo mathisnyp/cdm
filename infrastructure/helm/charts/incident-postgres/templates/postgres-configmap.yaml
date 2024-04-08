@@ -4,4 +4,4 @@ metadata:
   name: postgres-config
 data:
   POSTGRES_USER: "postgres"
-  POSTGRES_DB: "incident-db"
+  POSTGRES_DB: "postgres"
