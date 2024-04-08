@@ -44,12 +44,12 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 configMapKeyRef:
-                  key: POSTGRES_DB
+                  key: POSTGRES_USER
                   name: postgres-config
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
-                  key: POSTGRES_USER
+                  key: POSTGRES_DB
                   name: postgres-config
             - name: POSTGRES_PASSWORD
               valueFrom:
