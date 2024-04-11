@@ -44,7 +44,7 @@ service:
   port: 8080
 
 neo4j:
-  host: geoservice-neo4j-geo-service-neo4j.cdm.svc.cluster.local
+  host: geoservice-neo4j-geo-service-neo4j
   port: 7474
   username: neo4j
 
