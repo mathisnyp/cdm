@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dod-postgres-config
+data:
+  POSTGRES_USER: "postgres"
+  POSTGRES_DB: "postgres"

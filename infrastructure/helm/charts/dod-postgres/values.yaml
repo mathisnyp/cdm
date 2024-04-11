@@ -1,0 +1,79 @@
+# Default values for incident-postgres.
+
+replicaCount: 1
+
+image:
+  repository: postgres
+  pullPolicy: Always
+  tag: "16-alpine"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 5432  # Changed from 80 to 5432, the default PostgreSQL port
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources: {}
+
+livenessProbe:
+  tcpSocket:
+    port: 5432  # Changed from httpGet to tcpSocket for PostgreSQL
+  initialDelaySeconds: 15
+  periodSeconds: 20
+
+readinessProbe:
+  tcpSocket:
+    port: 5432  # Changed from httpGet to tcpSocket for PostgreSQL
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+volumes: []
+
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Added persistence section for PostgreSQL data storage
+persistence:
+  enabled: true
+  storageClass: "-"  # "-" for default storage class or specify your storage class
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi  # Adjust the size according to your data storage needs
+

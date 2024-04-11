@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dod-configmap
+  namespace: cdm
+data:
+  database-url: "jdbc:postgresql://dod-postgres.cdm.svc.cluster.local:5432/postgres"
+
+
