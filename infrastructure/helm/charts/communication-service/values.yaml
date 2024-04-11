@@ -72,12 +72,14 @@ resources: { }
 #   memory: 128Mi
 
 livenessProbe:
+  failureThreshold: 20
   httpGet:
     path: /communication-service/actuator/health
     port: http
   initialDelaySeconds: 15
   periodSeconds: 20
 readinessProbe:
+  failureThreshold: 20
   httpGet:
     path: /communication-service/actuator/health
     port: http

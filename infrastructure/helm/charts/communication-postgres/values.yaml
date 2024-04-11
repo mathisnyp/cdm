@@ -40,12 +40,14 @@ ingress:
 resources: {}
 
 livenessProbe:
+  failureThreshold: 20
   tcpSocket:
     port: 5432  # Changed from httpGet to tcpSocket for PostgreSQL
   initialDelaySeconds: 15
   periodSeconds: 20
 
 readinessProbe:
+  failureThreshold: 20
   tcpSocket:
     port: 5432  # Changed from httpGet to tcpSocket for PostgreSQL
   initialDelaySeconds: 5
