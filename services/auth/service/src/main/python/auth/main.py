@@ -5,6 +5,7 @@ from auth.dto.create_user_dto import CreateUserDTO
 from auth.dto.login_user_dto import LoginDTO
 from auth.dto.user_dto import UserDTO
 from auth.dto.logged_in_successfully_dto import LoggedInSuccessfullyDTO
+from fastapi.responses import PlainTextResponse
 
 # from . import crud, models, database
 
@@ -48,6 +49,10 @@ def login(login_dto: LoginDTO, db: Session = Depends(get_db)) -> LoggedInSuccess
 
     return LoggedInSuccessfullyDTO(success=True, message="Login successful")
 
+
+@router.get("/health", response_class=PlainTextResponse)
+def healthcheck():
+    return "200"
 
 app = FastAPI()
 app.include_router(router)
