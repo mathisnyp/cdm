@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 neo4j:
   host: geoservice-neo4j-geo-service-neo4j.cdm.svc.cluster.local
