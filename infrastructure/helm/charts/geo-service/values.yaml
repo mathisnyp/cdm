@@ -45,7 +45,7 @@ service:
 
 neo4j:
   host: geoservice-neo4j-geo-service-neo4j
-  port: 7474
+  port: 7687
   username: neo4j
 
 ingress:
