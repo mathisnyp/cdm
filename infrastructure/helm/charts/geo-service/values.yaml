@@ -83,7 +83,7 @@ livenessProbe:
     port: http
 #  tcpSocket:
 #    port: http
-  initialDelaySeconds: 60
+  initialDelaySeconds: 20
   periodSeconds: 10
 readinessProbe:
   failureThreshold: 10
@@ -92,7 +92,7 @@ readinessProbe:
     port: http
 #  tcpSocket:
 #    port: http
-  initialDelaySeconds: 60
+  initialDelaySeconds: 20
   periodSeconds: 10
 
 autoscaling:
