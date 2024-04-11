@@ -59,8 +59,8 @@ spec:
             - name: database-username
               valueFrom:
                 configMapKeyRef:
-                  key: database-url
-                  name: communication-configmap
+                  key: postgres
+                  name: comms-postgres-config
             - name: database-password
               valueFrom:
                 secretKeyRef:
