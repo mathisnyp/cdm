@@ -78,20 +78,20 @@ resources: {}
 
 livenessProbe:
   failureThreshold: 20
-#  httpGet:
-#    path: /geo-service/actuator/health
-#    port: http
-  tcdSocket:
+  httpGet:
+    path: /geo-service/actuator/health
     port: http
-  initialDelaySeconds: 15
-  periodSeconds: 60
+#  tcpSocket:
+#    port: http
+  initialDelaySeconds: 60
+  periodSeconds: 10
 readinessProbe:
   failureThreshold: 10
-#  httpGet:
-#    path: /geo-service/actuator/health
-#    port: http
-  tcdSocket:
+  httpGet:
+    path: /geo-service/actuator/health
     port: http
+#  tcpSocket:
+#    port: http
   initialDelaySeconds: 60
   periodSeconds: 10
 
