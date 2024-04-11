@@ -59,7 +59,7 @@ spec:
             - name: database-username
               valueFrom:
                 configMapKeyRef:
-                  key: postgres
+                  key: POSTGRES_USER
                   name: comms-postgres-config
             - name: database-password
               valueFrom:
