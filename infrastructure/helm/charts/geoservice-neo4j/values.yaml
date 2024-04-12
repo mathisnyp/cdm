@@ -1,0 +1,15 @@
+# Default values for geoservice-neo4j.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+dependencies:
+  - name: neo4j/neo4j
+    version: 4.4.30
+    repository: https://helm.neo4j.com/neo4j
+
+neo4j:
+  passwordFromSecret: neo4j-password
+
+image:
+  customImage: "mathisntcd/cdm-neo4j:latest"
+  pullPolicy: "Always"
