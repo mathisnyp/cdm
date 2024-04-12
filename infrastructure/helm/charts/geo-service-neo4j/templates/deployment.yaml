@@ -40,7 +40,7 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-            - name bolt
+            - name: bolt
               containerPort: {{ .Values.service.boltPort }}
               protocol: TCP
           env:
