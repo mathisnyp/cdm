@@ -4,4 +4,4 @@ kind: ConfigMap
 metadata:
   name: neo4j-config
 data:
-  NEO4J_USERNAME: neo4j
+  NEO4J_USERNAME: "neo4j"

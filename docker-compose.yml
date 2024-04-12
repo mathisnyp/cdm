@@ -19,7 +19,7 @@ services:
       - "8090:8080"
     environment:
       kafka-bootstrap-servers: kafka:29092
-#      auth-service-endpoint: http://host.docker.internal:8080
+      #      auth-service-endpoint: http://host.docker.internal:8080
       otlp-metrics-url: http://otel-collector:4318/v1/metrics
       otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
       otlp-collector-endpoint: http://otel-collector:4317
@@ -96,14 +96,12 @@ services:
       - geoservice-neo4j
       - local-db
     environment:
-      database-url: jdbc:postgresql://local-db:5432/postgres
-      database-username: postgres
-      database-password: password
-      kafka-bootstrap-servers: kafka:29092
-      neo4j-uri: neo4j://geoservice-neo4j:7687
-      neo4j-username: neo4j
-      neo4j-password: password
-
+      NEO4J-URI: neo4j://geoservice-neo4j:7687
+      NEO4J-USERNAME: neo4j
+      NEO4J-PASSWORD: password
+      otlp-metrics-url: http://otel-collector:4318/v1/metrics
+      otlp-tracing-endpoint: http://otel-collector:4318/v1/traces
+      otlp-collector-endpoint: http://otel-collector:4317
     ports:
       - "8095:8080"
     extra_hosts:

@@ -6,10 +6,10 @@ spring:
   application:
     name: "geo-service"
   neo4j:
-    uri: ${NEO4J_URI:neo4j://${NEO4J_HOST}:${NEO4J_PORT}}
+    uri: ${NEO4J-URI}
     authentication:
-      username: ${NEO4J_USERNAME:neo4j}  # Default to 'neo4j' if the environment variable is not set
-      password: ${NEO4J_PASSWORD:password}  # Default to 'password' if the environment variable is not set
+      username: ${NEO4J-USERNAME}
+      password: ${NEO4J-PASSWORD}
 
 management:
   endpoints:
