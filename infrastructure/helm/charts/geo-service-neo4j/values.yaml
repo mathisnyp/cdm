@@ -28,8 +28,12 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 7474  # Default Neo4j HTTP port
-  boltPort: 7687  # Default Neo4j Bolt port
+  http:
+    enabled: true
+    port: 7474
+  bolt:
+    enabled: true
+    port: 7687
 
 ingress:
   enabled: false
@@ -66,7 +70,7 @@ persistence:
   storageClass: "-"
   accessModes:
     - ReadWriteOnce
-  size: 20Gi  # Adjust size as needed
+  size: 20Gi # Adjust size as needed
 
 volumes: []
 # Define any additional volumes
