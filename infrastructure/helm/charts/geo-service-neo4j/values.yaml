@@ -28,7 +28,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 7474
+  port: 7687
   boltPort: 7687
 
 ingress:
