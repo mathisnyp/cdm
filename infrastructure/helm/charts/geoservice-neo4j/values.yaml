@@ -7,8 +7,14 @@ dependencies:
     version: 4.4.30
     repository: https://helm.neo4j.com/neo4j
 
+service:
+  type: ClusterIP
+  port: 7687
+  targetPort: 7687
+
 neo4j:
   passwordFromSecret: neo4j-password
+  password: ""
 
 image:
   customImage: "mathisntcd/cdm-neo4j:latest"
