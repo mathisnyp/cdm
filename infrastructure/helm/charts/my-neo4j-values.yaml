@@ -12,10 +12,10 @@ disableLookups: false
 
 neo4j:
   # Name of your cluster
-  name: ""
+  name: "neo4j-off"
   # If password is not set or empty a random password will be generated during installation.
   # Ignored if `neo4j.passwordFromSecret` is provided
-  password: ""
+  password: "password"
 
   # Existing secret to use for initial database password
   passwordFromSecret: ""
