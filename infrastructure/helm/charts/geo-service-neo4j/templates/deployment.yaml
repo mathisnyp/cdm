@@ -40,6 +40,9 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+            - name bolt
+              containerPort: {{ .Values.service.boltPort }}
+              protocol: TCP
           env:
             - name: NEO4J_USERNAME
               valueFrom:
