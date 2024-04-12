@@ -1,9 +1,36 @@
-1. Get the application URL by running these commands:
-{{- if .Values.ingress.enabled }}
-{{- range $host := .Values.ingress.hosts }}
-  {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
-  {{- end }}
+{{- define "neo4j.namespaceParameter" -}}
+{{ if ne "default" .Release.Namespace }} --namespace "{{.Release.Namespace}}"{{ end }}
+{{- end -}}
+
+{{- define "neo4j.logPassword" -}}
+{{ if .Values.logInitialPassword }}{{ template "neo4j.password" . }}{{ else }}**********{{ end }}
+{{- end -}}
+
+{{- $clusterEnabled := eq (include "neo4j.isClusterEnabled" .) "true" }}
+{{- $authDisabled := index .Values.config "dbms.security.auth_enabled" | default "" | regexMatch "(?i)no|false" -}}
+{{- $offlineMaintenanceModeEnabled := .Values.neo4j.offlineMaintenanceModeEnabled }}
+
+{{- if $offlineMaintenanceModeEnabled -}}
+Your "{{ .Release.Name }}" has been placed in offline maintenance mode.
+
+The Neo4j pod is running with a 'dummy' process (it is not running Neo4j).
+In this state the Neo4j pod will never become "READY" in Kubernetes but you can use kubectl exec to execute commands in the Neo4j pod. To get a shell try:
+ $ kubectl exec "{{ .Release.Name }}-0" -it -- bash
+
+To run a long-running command use nohup to ensure that the job keeps running if kubectl exec is disconnected. E.g.
+ $ nohup neo4j-admin check-consistency --database=neo4j &> job.out < /dev/null &
+ $ tail -f job.out
+{{- else -}}
+{{- if .Release.IsInstall -}}
+Thank you for installing {{ .Chart.Name }}.
+
+Your release "{{ .Release.Name }}" has been installed {{ if ne "default" .Release.Namespace }} in namespace "{{ .Release.Namespace }}"{{ end }}.
+
+{{- if $authDisabled -}}
+Neo4j user authentication has been disabled, you do not need a username or password to connect to Neo4j in this configuration.
+{{- else }}
+
+The neo4j user's password has been set to "{{ template "neo4j.logPassword" . }}".
 {{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "auth-postgres.fullname" . }})
@@ -20,3 +47,32 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
+
+Graphs are everywhere!
+
+{{- else if .Release.IsUpgrade -}}
+Thank you for using {{ .Chart.Name }}.
+
+{{ if $authDisabled }}
+Neo4j user authentication has been disabled, you do not need a username or password to connect to Neo4j in this configuration.
+{{- end }}
+
+{{- if not $clusterEnabled }}
+To view the status of changes to your release "{{ .Release.Name }}" {{ if ne "default" .Release.Namespace }} in namespace "{{ .Release.Namespace }}"{{ end }}, try:
+
+  $ kubectl{{ template "neo4j.namespaceParameter" . }} rollout status --watch --timeout=600s statefulset/{{ .Release.Name }}
+
+Once rollout is complete you can log in to Neo4j at "neo4j://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}". Try:
+
+  $ kubectl run --rm -it{{ template "neo4j.namespaceParameter" . }} --image "{{ template "neo4j.image" . }}" cypher-shell \
+     -- cypher-shell -a "neo4j://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}:7687"
+{{- end }}
+
+Graphs are everywhere!
+{{ else }}
+Thank you for using {{ .Chart.Name }}.
+
+{{- end }}
+{{- end }}
+{{ "" }}
+{{ template "neo4j.passwordWarning" . }}
