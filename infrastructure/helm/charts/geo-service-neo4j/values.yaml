@@ -28,12 +28,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  http:
-    enabled: true
-    port: 7474
-  bolt:
-    enabled: true
-    port: 7687
+  port: 7474
+  boltPort: 7687
 
 ingress:
   enabled: false
