@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "incident-service.fullname" . }}
+  name: {{ include "dod-service.fullname" . }}
   labels:
-    {{- include "incident-service.labels" . | nindent 4 }}
+    {{- include "dod-service.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "incident-service.fullname" . }}
+    name: {{ include "dod-service.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

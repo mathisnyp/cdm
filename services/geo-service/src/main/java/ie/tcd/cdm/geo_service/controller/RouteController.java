@@ -1,5 +1,7 @@
 package ie.tcd.cdm.geo_service.controller;
 
+import ie.tcd.cdm.geo_service.dto.DangerRequestDTO;
+import ie.tcd.cdm.geo_service.dto.EmergencyRouteRequestDTO;
 import ie.tcd.cdm.geo_service.dto.RouteRequestDTO;
 import ie.tcd.cdm.geo_service.model.CdmPoint;
 import ie.tcd.cdm.geo_service.services.GeoService;
@@ -24,16 +26,20 @@ public class RouteController {
     public RouteController(GeoService geoService){
         this.geoService = geoService;
     }
-    
-    @PostMapping
+
+    @PostMapping("/user")
     public List<CdmPoint> getRoute(@RequestBody RouteRequestDTO routeRequestDTO) throws IOException {
 
         return geoService.getRoute(routeRequestDTO.location(), routeRequestDTO.destination());
     }
 
-    @GetMapping()
-    public String getMethodName() {
-        return new String("bryg");
+    @PostMapping("/emergency")
+    public List<CdmPoint> getEmergencyRoute(@RequestBody EmergencyRouteRequestDTO emergencyRouteRequestDTO) {
+        return geoService.getEmergencyRoute(emergencyRouteRequestDTO.location(), emergencyRouteRequestDTO.destination());
     }
-    
+
+    @PostMapping("/danger")
+    public List<CdmPoint> getDangerRoute(@RequestBody DangerRequestDTO dangerRequestDTO) throws IOException {
+        return geoService.getDangerRoute(dangerRequestDTO.location());
+    }
 }

@@ -8,9 +8,7 @@ import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
 
-//TODO Route data class is not used anywhere, we should figure out where to put this instead
-public interface RouteRepository extends Neo4jRepository<Route, Long> {
-
+public interface EmergencyRouteRepository extends Neo4jRepository<Route, Long> {
     @Query("MATCH (to:Address)-[:NEAREST_INTERSECTION]->(source:Intersection) WHERE distance(to.location, $destinationLocation) < $threshold " +
             "MATCH (from:Address)-[:NEAREST_INTERSECTION]->(origin:Intersection) WHERE distance(from.location, $originLocation) < $threshold " +
             "CALL apoc.algo.dijkstra(origin, source, 'ROAD_SEGMENT', 'length') " +
