@@ -66,6 +66,10 @@ async def analyze_sentiment(report: IncidentReport):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/health", response_class=PlainTextResponse)
+def healthcheck():
+    return "200"
+
 app = FastAPI()
 app.include_router(router)
 
