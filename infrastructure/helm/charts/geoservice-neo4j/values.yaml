@@ -6,11 +6,71 @@ service:
   type: ClusterIP
   port: 7687
   targetPort: 7687
+  # Optionally, specify a service name if needed
+  # name: neo4j-service
 
 neo4j:
-  passwordFromSecret: neo4j-password
+  # Set to use password from Kubernetes Secret
+  # Ensure the secret 'neo4j-password' exists and has a key 'neo4j-password'
+  passwordFromSecret: "neo4j-password"
+  # Since password is from a secret, leave this empty
   password: ""
 
+  # If you're using Neo4j Community edition, acceptLicenseAgreement is not needed
+  # For Enterprise edition, you must accept the license agreement
+  # edition: "community"
+  # acceptLicenseAgreement: "yes"
+
+  # Configure resources requests and limits
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1000m"
+      memory: "2Gi"
+
+  # Persistent storage configuration
+  volumes:
+    data:
+      mode: "defaultStorageClass"
+      defaultStorageClass:
+        accessModes:
+          - ReadWriteOnce
+        requests:
+          storage: "10Gi"
+
+  # Example of adding additional environment variables
+  # Additional environment variables can be configured here
+  env: []
+    # - name: NEO4J_dbms_memory_heap_max__size
+  #   value: "512M"
+
 image:
+  # Specify the custom image to be used for deployment
   customImage: "mathisntcd/cdm-neo4j:latest"
   pullPolicy: "Always"
+
+  # Optional: Specify image pull secrets if the image is in a private registry
+  # imagePullSecrets:
+  # - name: my-registry-secret
+
+# Optional: Configure the security context for Neo4j pod
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 7474
+  runAsGroup: 7474
+  fsGroup: 7474
+
+# Example readiness and liveness probes (adjust as necessary)
+readinessProbe:
+  tcpSocket:
+    port: 7687
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+livenessProbe:
+  tcpSocket:
+    port: 7687
+  initialDelaySeconds: 45
+  periodSeconds: 20
