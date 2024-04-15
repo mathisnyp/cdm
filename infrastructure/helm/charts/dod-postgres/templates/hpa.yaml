@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "incident-postgres.fullname" . }}
+  name: {{ include "dod-postgres.fullname" . }}
   labels:
-    {{- include "incident-postgres.labels" . | nindent 4 }}
+    {{- include "dod-postgres.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "incident-postgres.fullname" . }}
+    name: {{ include "dod-postgres.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

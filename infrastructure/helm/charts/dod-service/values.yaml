@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: mathisntcd/cdm-incident-service
+  repository: mathisntcd/cdm-dublin-open-data-service
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -72,14 +72,16 @@ resources: { }
 #   memory: 128Mi
 
 livenessProbe:
+  failureThreshold: 20
   httpGet:
-    path: /incident-service/actuator/health
+    path: /dod/api/actuator/health
     port: http
   initialDelaySeconds: 15
   periodSeconds: 20
 readinessProbe:
+  failureThreshold: 20
   httpGet:
-    path: /incident-service/actuator/health
+    path: /dod/api/actuator/health
     port: http
   initialDelaySeconds: 15
   periodSeconds: 20
