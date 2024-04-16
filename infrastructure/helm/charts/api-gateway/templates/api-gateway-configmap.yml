@@ -4,8 +4,8 @@ metadata:
   name: api-gateway-config
   namespace: cdm
 data:
-  incident-service-endpoint: "incident-service:8080"
-  auth-service-endpoint: "auth-service:80"
-  communication-service-endpoint: "communication-service:8080"
-  geo-service-endpoint: "geo-service:8080"
-  gen-ai-service-endpoint: "gen-ai-service:80"
+  incident-service-endpoint: "incident-service.cdm.svc.cluster.local:8080"
+  auth-service-endpoint: "auth-service.cdm.svc.cluster.local:80"
+  communication-service-endpoint: "communication-service.cdm.svc.cluster.local:8080"
+  geo-service-endpoint: "geo-service.cdm.svc.cluster.local:8080"
+  gen-ai-service-endpoint: "gen-ai-service.cdm.svc.cluster.local:80"
