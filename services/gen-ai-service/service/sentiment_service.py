@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, APIRouter
 from pydantic import BaseModel, Field
 from datetime import datetime
 from textblob import TextBlob
+from fastapi.responses import PlainTextResponse
+
 
 router = APIRouter(prefix="/gen-ai-service")
 
