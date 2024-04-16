@@ -4,5 +4,5 @@ metadata:
   name: geo-service-config
   namespace: cdm
 data:
-  neo4j-uri: "neo4j://geoservice-neo4j.cdm.svc.cluster.local:7474"
+  neo4j-uri: "neo4j://geoservice-neo4j.cdm.svc.cluster.local:7687"
   neo4j-username: "neo4j"
