@@ -2,6 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+  nameOverride: geoservice-neo4j
+
+  fullnameOverride: geoservice-neo4j
+
 service:
   type: ClusterIP
   port: 7687
@@ -16,61 +20,14 @@ neo4j:
   # Since password is from a secret, leave this empty
   password: ""
 
+  edition: "community"
   # If you're using Neo4j Community edition, acceptLicenseAgreement is not needed
   # For Enterprise edition, you must accept the license agreement
   # edition: "community"
   # acceptLicenseAgreement: "yes"
 
-  # Configure resources requests and limits
-  resources:
-    requests:
-      cpu: "500m"
-      memory: "1Gi"
-    limits:
-      cpu: "1000m"
-      memory: "2Gi"
-
-  # Persistent storage configuration
-  volumes:
-    data:
-      mode: "defaultStorageClass"
-      defaultStorageClass:
-        accessModes:
-          - ReadWriteOnce
-        requests:
-          storage: "10Gi"
-
-  # Example of adding additional environment variables
-  # Additional environment variables can be configured here
-  env: []
-    # - name: NEO4J_dbms_memory_heap_max__size
-  #   value: "512M"
 
 image:
-  # Specify the custom image to be used for deployment
-  customImage: "mathisntcd/cdm-neo4j:latest"
-  pullPolicy: "Always"
-
-  # Optional: Specify image pull secrets if the image is in a private registry
-  # imagePullSecrets:
-  # - name: my-registry-secret
-
-# Optional: Configure the security context for Neo4j pod
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 7474
-  runAsGroup: 7474
-  fsGroup: 7474
-
-# Example readiness and liveness probes (adjust as necessary)
-readinessProbe:
-  tcpSocket:
-    port: 7687
-  initialDelaySeconds: 30
-  periodSeconds: 10
-
-livenessProbe:
-  tcpSocket:
-    port: 7687
-  initialDelaySeconds: 45
-  periodSeconds: 20
+  imagePullPolicy: Always
+  # set a customImage if you want to use your own docker image
+  customImage: mathisntcd/cdm-neo4j:latest

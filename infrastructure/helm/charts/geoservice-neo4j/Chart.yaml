@@ -3,9 +3,9 @@ name: geoservice-neo4j
 description: A Helm chart for Kubernetes
 
 dependencies:
-  - name: neo4j
-    version: 4.4.1
-    repository: https://charts.kubegems.io/kubegemsapp
+  - name: neo4j-standalone
+    version: 4.4.30
+    repository: https://neo4j.github.io/helm-charts/
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
