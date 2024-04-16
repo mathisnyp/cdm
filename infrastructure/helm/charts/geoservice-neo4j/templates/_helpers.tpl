@@ -202,22 +202,6 @@ E.g. by adding `--set podSpec.loadbalancer=include`
     {{- end -}}
 
 
-    {{- if not $isCPUSet }}
-        {{- if kindIs "invalid" .Values.neo4j.resources.cpu -}}
-            {{- fail (printf "Empty or Missing neo4j.resources.cpu value \n %s" (include "neo4j.resources.minCPUMessage" .)) -}}
-        {{- end -}}
-        {{- dict "val" .Values.neo4j.resources.cpu "errMsg" "neo4j.resources.cpu cannot be set to \"\"" | include "neo4j.resources.checkForEmptyString" -}}
-        {{- $cpu = .Values.neo4j.resources.cpu | toString }}
-    {{- end -}}
-
-    {{- if not $isMemorySet }}
-         {{- if kindIs "invalid" .Values.neo4j.resources.memory -}}
-            {{- fail (printf "Empty or Missing neo4j.resources.memory value \n %s" (include "neo4j.resources.minMemoryMessage" .)) -}}
-        {{- end -}}
-        {{- dict "val" .Values.neo4j.resources.memory "errMsg" "neo4j.resources.memory cannot be set to \"\"" | include "neo4j.resources.checkForEmptyString" -}}
-        {{- $memory = .Values.neo4j.resources.memory | toString }}
-    {{- end -}}
-
     {{- $requests := dict "cpu" $cpu "memory" $memory -}}
     {{- $ignored := set .Values.neo4j.resources "requests" $requests -}}
 
