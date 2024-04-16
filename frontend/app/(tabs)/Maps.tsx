@@ -31,22 +31,10 @@ export default function Maps() {
             }
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
-            const k = await fetch("http://localhost:8090/geo/api/route",{
-                method: "GET", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                // headers: {
-                //     "Content-Type": "application/json",
-                //     // 'Content-Type': 'application/x-www-form-urlencoded',
-                // },
-                // body: JSON.stringify({location: startpoint, destination: "GPO"})
-            })
 
-            const c = k.text()
-            console.log(c)
-
+            
             RouteControllerService.getRoute({location: startpoint, destination: "GPO"}).then(cdmPoints => {
                 const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lon!!, eachPoint.lat!!]})
-                console.log(mappedPoints)
                 setCoordinates(mappedPoints)
             })
         })();
@@ -67,9 +55,7 @@ export default function Maps() {
         { "type": "Feature",
             "geometry": {
             "type": "LineString",
-            "coordinates": [
-                coordinates[0],coordinates[1]
-            ]
+            "coordinates": coordinates
             },
             },
         ]
@@ -79,12 +65,6 @@ export default function Maps() {
 
     return (
         <View style={styles.container}>
-            {/* {errorMsg && <Text>{errorMsg}</Text>} Render the error message if it exists */}
-            {/* <Text style = {{color:'white'}}>Location is : {location.coords.latitude}</Text> */}
-            
-            {location && (
-                <Text style={{color:'white'}}>{location.coords.latitude}, {location.coords.longitude}</Text>
-            )}
             {Platform.OS !== 'web' &&
             
             
@@ -102,38 +82,16 @@ export default function Maps() {
                     fillColor="green"
                     strokeWidth={5}
                     />
-                {location && (
-                    <>
-                    {/* <Marker
-                        key={0}
-                        Coordinate={{
-                            latitude: 53.350140,
-                            longitude: -6.266155,
-                        }}
-                        title={"Your Location"}
-                    /> */}
-                    </>
-                )}
             </MapView>
-            // <Map height={300} defaultCenter={[53.350140,-6.256155]}>
-            //     <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/>
-            // </Map>
             }
             { Platform.OS == 'web' && 
                 <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>
-                    {/* <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/> */}
                     <GeoJson
                         data={geoJsonSample}
                         styleCallback={(feature, hover) => {
                             if (feature.geometry.type === "LineString") {
                               return { strokeWidth: "5", stroke: "blue"  };
                             }
-                            // return {
-                            //   fill: "#d4e6ec99",
-                            //   strokeWidth: "1",
-                            //   stroke: "white",
-                            //   r: "20",
-                            // };
                         }}
                     ></GeoJson>
                     <Marker
