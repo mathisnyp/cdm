@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-gateway-config
+  namespace: cdm
+data:
+  incident-service-endpoint: "incident-service:8080"
+  auth-service-endpoint: "auth-service:80"
+  communication-service-endpoint: "communication-service:8080"
+  geo-service-endpoint: "geo-service:8080"
+  gen-ai-service-endpoint: "gen-ai-service:80"
