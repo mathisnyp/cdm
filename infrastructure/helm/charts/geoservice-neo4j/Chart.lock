@@ -1,6 +1,6 @@
 dependencies:
-- name: neo4j
-  repository: https://charts.kubegems.io/kubegemsapp
-  version: 4.4.1
-digest: sha256:ff48d8068c1c04f62109e315352180d014b6547d0d78bcba6845cdee2dd47ac9
-generated: "2024-04-12T18:21:50.8084085+01:00"
+- name: neo4j-standalone
+  repository: https://neo4j.github.io/helm-charts/
+  version: 4.4.30
+digest: sha256:9053501e9df3761f7ca3a42b142f5348f1994dd38d54dcad8ededb23074f83c6
+generated: "2024-04-16T01:45:51.709386992+01:00"
