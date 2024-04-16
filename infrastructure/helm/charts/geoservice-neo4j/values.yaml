@@ -36,9 +36,6 @@ neo4j:
   offlineMaintenanceModeEnabled: false
   #
   # set resources for the Neo4j Container. The values set will be used for both "requests" and "limit".
-  resources:
-    cpu: "500m"
-    memory: "2Gi"
 
   #add labels if required
   labels:
