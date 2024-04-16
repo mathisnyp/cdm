@@ -44,13 +44,13 @@ spec:
             - name: NEO4J_URI
               valueFrom:
                 configMapKeyRef:
-                  name: geo-service-configmap
+                  name: geo-service-config
                   key: neo4j-uri
             - name: NEO4J_USERNAME
               valueFrom:
                 configMapKeyRef:
-                  name: neo4j-config
-                  key: NEO4J_USERNAME
+                  name: geo-service-config
+                  key: neo4j-username
             - name: NEO4J_PASSWORD
               valueFrom:
                 secretKeyRef:
