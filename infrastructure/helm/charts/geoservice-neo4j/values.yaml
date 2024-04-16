@@ -14,10 +14,10 @@ neo4j:
   name: "geoservice-neo4j"
 
   # If password is not set or empty a random password will be generated during installation
-  password: ""
+  password: "password"
 
   # Existing secret to use for initial database password
-  passwordFromSecret: "neo4j-secret"
+  passwordFromSecret: ""
 
   # Neo4j Edition to use (community|enterprise)
   edition: "community"
