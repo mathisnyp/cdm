@@ -40,4 +40,4 @@ volumes:
     disableSubPathExpr: false
     # REQUIRED: specify a volume mode to use for data
     # Valid values are share|selector|defaultStorageClass|volume|volumeClaimTemplate|dynamic
-    mode: "defaultStorageClass"
+    mode: defaultStorageClass
