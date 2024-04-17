@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080/geo/api",
+      "url": "http://localhost:8080/geo-service",
       "description": "Generated server url"
     }
   ],

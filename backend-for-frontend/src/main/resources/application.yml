@@ -5,6 +5,14 @@ server:
 spring:
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 'http://localhost:3000'
+            allowedHeaders: '*'
+            allowedMethods:
+              - GET
+              - POST
       routes:
         - id: incident_service
           uri: http://${incident-service-endpoint}/incident-service

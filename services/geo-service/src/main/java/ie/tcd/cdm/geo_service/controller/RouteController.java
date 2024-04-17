@@ -5,6 +5,8 @@ import ie.tcd.cdm.geo_service.dto.EmergencyRouteRequestDTO;
 import ie.tcd.cdm.geo_service.dto.RouteRequestDTO;
 import ie.tcd.cdm.geo_service.model.CdmPoint;
 import ie.tcd.cdm.geo_service.services.GeoService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/route")

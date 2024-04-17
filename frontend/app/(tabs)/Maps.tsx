@@ -3,6 +3,7 @@ import { Button, StyleSheet, View, Alert, Text,Platform } from "react-native";
 import MapView, {Geojson} from "react-native-maps";
 import {Map, Marker, GeoJson} from 'pigeon-maps'
 import * as Location from "expo-location";
+import { CdmPoint, PointDTO, RouteControllerService } from "../lib/geoservice";
 //import MapView from '@teovilla/react-native-web-maps'
 // If you have a specific type for location, use that instead of any.
 interface LocationState {
@@ -13,9 +14,14 @@ interface LocationState {
 }
 
 export default function Maps() {
-    const [location, setLocation] = useState<LocationState | null>(null);
+    const [location, setLocation] = useState<LocationState>({'coords':
+        {latitude : 0,longitude : 0}
+});
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
+    const [coordinates, setCoordinates] = useState<number[][]>([
+        [-6.2532384, 53.3415142],[-6.252328,53.341952]
+        //[0,0], [0,5]
+    ]) 
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -25,8 +31,23 @@ export default function Maps() {
             }
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
+
+            
+            RouteControllerService.getRoute({location: startpoint, destination: "GPO"}).then(cdmPoints => {
+                const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lon!!, eachPoint.lat!!]})
+                setCoordinates(mappedPoints)
+            })
         })();
     }, []);
+
+    const startpoint:PointDTO = {
+        longitude : 53.341514,
+        latitude : -6.253238
+    }
+    
+    
+
+    
 
     const geoJsonSample = { 
         "type": "FeatureCollection",
@@ -34,9 +55,7 @@ export default function Maps() {
         { "type": "Feature",
             "geometry": {
             "type": "LineString",
-            "coordinates": [
-                [-6.2532384, 53.3415142],[-6.252328,53.341952]
-            ]
+            "coordinates": coordinates
             },
             },
         ]
@@ -46,12 +65,6 @@ export default function Maps() {
 
     return (
         <View style={styles.container}>
-            {/* {errorMsg && <Text>{errorMsg}</Text>} Render the error message if it exists */}
-            {/* <Text style = {{color:'white'}}>Location is : {location.coords.latitude}</Text> */}
-            
-            {location && (
-                <Text style={{color:'white'}}>{location.coords.latitude}, {location.coords.longitude}</Text>
-            )}
             {Platform.OS !== 'web' &&
             
             
@@ -69,46 +82,26 @@ export default function Maps() {
                     fillColor="green"
                     strokeWidth={5}
                     />
-                {location && (
-                    <>
-                    {/* <Marker
-                        key={0}
-                        Coordinate={{
-                            latitude: 53.350140,
-                            longitude: -6.266155,
-                        }}
-                        title={"Your Location"}
-                    /> */}
-                    </>
-                )}
             </MapView>
-            // <Map height={300} defaultCenter={[53.350140,-6.256155]}>
-            //     <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/>
-            // </Map>
             }
             { Platform.OS == 'web' && 
                 <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>
-                    {/* <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/> */}
                     <GeoJson
                         data={geoJsonSample}
                         styleCallback={(feature, hover) => {
                             if (feature.geometry.type === "LineString") {
                               return { strokeWidth: "5", stroke: "blue"  };
                             }
-                            // return {
-                            //   fill: "#d4e6ec99",
-                            //   strokeWidth: "1",
-                            //   stroke: "white",
-                            //   r: "20",
-                            // };
                         }}
                     ></GeoJson>
-                    {location !== null && (
-                    <>
                     <Marker
                         width={50}
-                        anchor={[location.coords.latitude,location.coords.longitude]}
+                        anchor={[location.coords.latitude, location.coords.longitude]}
                     />
+                    
+                    {location !== null && (
+                    <>
+                        
                     </>
                 )}
                 </Map>

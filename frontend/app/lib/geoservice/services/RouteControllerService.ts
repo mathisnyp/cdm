@@ -21,7 +21,7 @@ export class RouteControllerService {
     ): CancelablePromise<Array<CdmPoint>> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/route',
+            url: '/route/user',
             body: requestBody,
             mediaType: 'application/json',
         });

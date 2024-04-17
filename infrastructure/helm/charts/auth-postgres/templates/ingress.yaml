@@ -1,5 +1,9 @@
 {{- if .Values.ingress.enabled -}}
+<<<<<<<< HEAD:infrastructure/helm/charts/auth-postgres/templates/ingress.yaml
 {{- $fullName := include "auth-postgres.fullname" . -}}
+========
+{{- $fullName := include "auth-service.fullname" . -}}
+>>>>>>>> cdm-52-integrate-api-gateway:infrastructure/helm/charts/auth-service/templates/ingress.yaml
 {{- $svcPort := .Values.service.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
@@ -17,7 +21,11 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
+<<<<<<<< HEAD:infrastructure/helm/charts/auth-postgres/templates/ingress.yaml
     {{- include "auth-postgres.labels" . | nindent 4 }}
+========
+    {{- include "auth-service.labels" . | nindent 4 }}
+>>>>>>>> cdm-52-integrate-api-gateway:infrastructure/helm/charts/auth-service/templates/ingress.yaml
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

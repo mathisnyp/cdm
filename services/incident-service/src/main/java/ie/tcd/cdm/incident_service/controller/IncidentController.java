@@ -16,7 +16,7 @@ public class IncidentController {
     public IncidentController(IncidentService incidentService) {
         this.incidentService = incidentService;
     }
-
+    
     @GetMapping("/{id}")
     public Incident getIncident(@PathVariable long id) {
         return incidentService.getIncidentById(id);

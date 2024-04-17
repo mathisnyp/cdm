@@ -2,14 +2,24 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
+<<<<<<<< HEAD:infrastructure/helm/charts/auth-postgres/templates/hpa.yaml
   name: {{ include "auth-postgres.fullname" . }}
   labels:
     {{- include "auth-postgres.labels" . | nindent 4 }}
+========
+  name: {{ include "auth-service.fullname" . }}
+  labels:
+    {{- include "auth-service.labels" . | nindent 4 }}
+>>>>>>>> cdm-52-integrate-api-gateway:infrastructure/helm/charts/auth-service/templates/hpa.yaml
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
+<<<<<<<< HEAD:infrastructure/helm/charts/auth-postgres/templates/hpa.yaml
     name: {{ include "auth-postgres.fullname" . }}
+========
+    name: {{ include "auth-service.fullname" . }}
+>>>>>>>> cdm-52-integrate-api-gateway:infrastructure/helm/charts/auth-service/templates/hpa.yaml
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
