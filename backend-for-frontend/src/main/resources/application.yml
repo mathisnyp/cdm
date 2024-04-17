@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: "/bff/api"
+    context-path: "/"
 
 spring:
   cloud:
