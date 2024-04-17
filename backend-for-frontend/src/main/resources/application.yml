@@ -15,23 +15,23 @@ spring:
               - POST
       routes:
         - id: incident_service
-          uri: ${incident-service-endpoint}/incident-service
+          uri: http://${incident-service-endpoint}/incident-service
           predicates:
             - Path=/incident-service/**
         - id: auth_service
-          uri: ${auth-service-endpoint}/auth-service
+          uri: http://${auth-service-endpoint}/auth-service
           predicates:
             - Path=/auth-service/**
         - id: communication_service
-          uri: ${communication-service-endpoint}/communication-service
+          uri: http://${communication-service-endpoint}/communication-service
           predicates:
             - Path=/communication-service/**
         - id: geo_service
-          uri: ${geo-service-endpoint}/geo-service
+          uri: http://${geo-service-endpoint}/geo-service
           predicates:
             - Path=/geo-service/**
         - id: gen_ai_service
-          uri: ${gen-ai-service-endpoint}/gen-ai-service
+          uri: http://${gen-ai-service-endpoint}/gen-ai-service
           predicates:
             - Path=/gen-ai-service/**
 
