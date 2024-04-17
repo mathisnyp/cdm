@@ -168,19 +168,4 @@ class NodeTest {
         assertFalse(incidentRouteAfterIncident.contains(true));
     }
 
-    @Test
-    public void blockingAreaTest() {
-        Point incidentLocation = Values.point(4326, -6.25857, 53.34586).asPoint();
-        String expectedIncidentStreet = "Fleet Street";
-        int threshold = 10;
-        String incidentStreet = blockingRepository.getIncidentStreet(new PointValue(incidentLocation), threshold);
-        while (threshold <= 60 && incidentStreet == null) {
-            threshold += 10;
-            incidentStreet = blockingRepository.getIncidentStreet(new PointValue(incidentLocation), threshold);
-        }
-        assertEquals(expectedIncidentStreet, incidentStreet);
-
-
-    }
-
 }

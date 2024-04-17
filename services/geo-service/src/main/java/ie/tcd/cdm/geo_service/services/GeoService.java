@@ -92,18 +92,6 @@ public class GeoService {
         weightRepository.removeWeight(addressStreet);
     }
 
-    public String getIncidentArea(PointDTO location){
-        org.neo4j.driver.types.Point origin = Values.point(4326, location.latitude(), location.longitude()).asPoint();
-        int threshold = 10;
-        String street = blockingRepository.getIncidentStreet(new PointValue(origin), threshold);
-        while(threshold<=60 && street==null){
-            threshold +=10;
-            street = blockingRepository.getIncidentStreet(new PointValue(origin), threshold);
-        }
-        return street;
-
-    }
-
     public Set<Point> getBlockingArea(String street){
         List<Point> intersections = blockingRepository.getAllStreetsNearIncident(street);
         return new HashSet<>(intersections);
