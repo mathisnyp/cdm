@@ -40,32 +40,6 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          env:
-            - name: incident-service-endpoint
-              valueFrom:
-                configMapKeyRef:
-                  name: api-gateway-config
-                  key: incident-service-endpoint
-            - name: auth-service-endpoint
-              valueFrom:
-                configMapKeyRef:
-                  name: api-gateway-config
-                  key: auth-service-endpoint
-            - name: communication-service-endpoint
-              valueFrom:
-                configMapKeyRef:
-                  name: api-gateway-config
-                  key: communication-service-endpoint
-            - name: geo-service-endpoint
-              valueFrom:
-                configMapKeyRef:
-                  name: api-gateway-config
-                  key: geo-service-endpoint
-            - name: gen-ai-service-endpoint
-              valueFrom:
-                configMapKeyRef:
-                  name: api-gateway-config
-                  key: gen-ai-service-endpoint
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
