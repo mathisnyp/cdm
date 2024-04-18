@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, StyleSheet, View, Alert, Text,Platform } from "react-native";
+import {Button, StyleSheet, View, Alert, Text, Platform, TextInput} from "react-native";
 import MapView, {Geojson} from "react-native-maps";
 import {Map, Marker, GeoJson} from 'pigeon-maps'
 import * as Location from "expo-location";
@@ -17,8 +17,13 @@ interface LocationState {
 export default function Maps() {
     const [location, setLocation] = useState<LocationState | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [busMark, setBusMark] = useState<number[][]>([[0,0],[5,5]])
-    const [incidentMark, setIncidentMark] = useState<number[][]>([[0,0],[5,5]])
+    const [street, setStreet] = useState<string>("GPO");
+    const [busMark, setBusMark] = useState<number[][]>([[0, 0], [5, 5]])
+    const [incidentMark, setIncidentMark] = useState<number[][]>([[0, 0], [5, 5]])
+    const [coordinates, setCoordinates] = useState<number[][]>([
+        [-6.2532384, 53.3415142], [-6.252328, 53.341952]
+        //[0,0], [0,5]
+    ])
 
     // useEffect(() => {
     //     (async () => {
@@ -46,7 +51,7 @@ export default function Maps() {
     //
     //     })();
     // }, []);
-    //
+
     // useEffect(() => {
     //     (async () => {
     //         // let { status } = await Location.requestForegroundPermissionsAsync();
@@ -74,8 +79,19 @@ export default function Maps() {
     //                 console.error("Error fetching data:", error);
     //                 // Handle error
     //             });
+    //         RouteControllerService.getRoute({location: startpoint, destination: street}).then(cdmPoints => {
+    //             const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lon!!, eachPoint.lat!!]})
+    //             setCoordinates(mappedPoints)
+    //         })
     //     })();
     // }, []); // Empty dependency array to ensure this effect runs only once
+    const handleSubmit = () => {
+        // Only update the street state when the submit button is pressed
+        // You can perform any validation here if needed
+        // For simplicity, let's assume the input is always valid
+        // Update the street state with the entered value
+        setStreet(inputStreet);
+    };
 
     useEffect(() => {
         (async () => {
@@ -106,41 +122,58 @@ export default function Maps() {
                     console.error("Error fetching data:", error);
                     // Handle error
                 });
+
+            // Fetch route data using the updated street name
+            RouteControllerService.getRoute({location: startpoint, destination: street}).then(cdmPoints => {
+                const mappedPoints = cdmPoints.map(eachPoint => {
+                    return [eachPoint.lon!!, eachPoint.lat!!]
+                });
+                setCoordinates(mappedPoints);
+            });
         })();
-    }, []);
+    }, [street]); // Add street to the dependency array to run the effect when street changes
 
 
-    const startpoint:PointDTO = {
-        longitude : 53.341514,
-        latitude : -6.253238
+    const startpoint: PointDTO = {
+        longitude: 53.341514,
+        latitude: -6.253238
     }
-    
-    
 
-    
 
     const geoJsonSample: FeatureCollection<Geometry, GeoJsonProperties> = {
         "type": "FeatureCollection",
         "features": [
-        { "type": "Feature",
-            "geometry": {
-            "type": "LineString",
-            "coordinates": []
-            },
-            properties: {}
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": coordinates
+                },
+                properties: {}
             },
         ]
-     }
-    
-    
+    }
+
 
     return (
         <View style={styles.container}>
             {/* {errorMsg && <Text>{errorMsg}</Text>} Render the error message if it exists */}
             {/* <Text style = {{color:'white'}}>Location is : {location.coords.latitude}</Text> */}
 
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <TextInput
+                    style={{ flex: 1, backgroundColor: 'white', padding: 10 }}
+                    placeholder="Enter Street Name"
+                    value={street}
+                    onChangeText={text => setStreet(text)}
+                />
+                <Button
+                    title="Submit"
+                    onPress={handleSubmit}
+                />
+            </View>
             {location && (
-                <Text style={{color:'white'}}>{location.coords.latitude}, {location.coords.longitude}</Text>
+                <Text style={{color: 'white'}}>{location.coords.latitude}, {location.coords.longitude}</Text>
             )}
             {Platform.OS !== 'web' &&
 
@@ -149,8 +182,8 @@ export default function Maps() {
                          initialRegion={{
                              latitude: 53.350140,
                              longitude: -6.266155,
-                             latitudeDelta:1,
-                             longitudeDelta:1,
+                             latitudeDelta: 1,
+                             longitudeDelta: 1,
                          }}
                 >
                     <Geojson
@@ -251,11 +284,67 @@ export default function Maps() {
                 title={"Send hello message to GeoService"}
                 onPress={() => {
                     Alert.alert("Hello GeoService!");
+                    setStreet(street)
                 }}
             />
         </View>
     );
 }
+//     return (
+//         <View style={styles.container}>
+//             {/* Add your error message rendering here if needed */}
+//             <Text style={{color:'white'}}>Location is : {location ? `${location.coords.latitude}, ${location.coords.longitude}` : ''}</Text>
+//             {/* Form for submitting street name */}
+//             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+//                 <TextInput
+//                     style={{ flex: 1, backgroundColor: 'white', padding: 10 }}
+//                     placeholder="Enter Street Name"
+//                     value={street}
+//                     onChangeText={text => setStreet(text)}
+//                 />
+//                 <Button
+//                     title="Submit"
+//                     onPress={handleSubmit}
+//                 />
+//             </View>
+//
+//             {/* Render Map based on platform */}
+//             {Platform.OS !== 'web' && (
+//                 <MapView
+//                     style={styles.map}
+//                     showsUserLocation={true}
+//                     initialRegion={{
+//                         latitude: 53.350140,
+//                         longitude: -6.266155,
+//                         latitudeDelta: 1,
+//                         longitudeDelta: 1,
+//                     }}
+//                 >
+//                     {/* Add your GeoJson and Marker components here */}
+//                 </MapView>
+//             )}
+//
+//             {Platform.OS === 'web' && (
+//                 <Map
+//                     height={500}
+//                     width={960}
+//                     defaultCenter={[53.350140,-6.256155]}
+//                 >
+//                     {/* Add your GeoJson and Marker components here */}
+//                 </Map>
+//             )}
+//
+//             {/* Button for sending hello message */}
+//             <Button
+//                 title="Send hello message to GeoService"
+//                 onPress={() => {
+//                     Alert.alert("Hello GeoService!");
+//                     setStreet("GPO"); // Update the street name here if needed
+//                 }}
+//             />
+//         </View>
+//     );
+// }
 
 const styles = StyleSheet.create({
     container: {
