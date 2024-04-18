@@ -24,12 +24,8 @@ public class CommunicationService {
     private final HttpRequest.Builder sendNotificationRequest;
     private final ObjectMapper objectMapper;
 
-    @Value("${endpoints.communication}")
-    private String communicationBaseUrl ;
 
-
-
-    public CommunicationService(){
+    public CommunicationService(@Value("${endpoints.communication}") String communicationBaseUrl){
         httpClient = HttpClient.newHttpClient();
         broadcastNotificationRequest = HttpRequest.newBuilder().uri(URI.create(communicationBaseUrl + "/notification/broadcast")).header("Content-Type", "application/json");
         broadcastNotificationToGroupRequest = HttpRequest.newBuilder().uri(URI.create(communicationBaseUrl + "/notification/broadcast/group")).header("Content-Type", "application/json");

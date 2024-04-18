@@ -7,3 +7,6 @@ spring:
     password:
   liquibase:
     change-log: classpath:liquibase/test-changelog.xml
+endpoints:
+  communication: http://localhost:8080/communication-service
+  geoservice: http://localhost:8080/geo-service
