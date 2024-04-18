@@ -8,9 +8,8 @@ import {useFonts} from "expo-font";
 import {SplashScreen, Stack} from "expo-router";
 import React from "react";
 import {useEffect} from "react";
-import {useColorScheme} from "react-native";
-import * as SecureStore from 'expo-secure-store';
-import {registerForPushNotificationsAsync} from "@/app/lib/pushnotifications/registerForPushNotificationsAsync";
+import {Platform, useColorScheme} from "react-native";
+import {registerForPushNotificationsAsync} from "@/components/registerForPushNotificationsAsync";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {CommunicationService} from "@/app/lib/pushnotifications/CommunicationService";
 
@@ -29,18 +28,20 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-    AsyncStorage.clear().then(() => AsyncStorage.getItem("expo-push-token").then(async token => {
-        if (token == null) {
-            let expoPushToken
-            do {
-                expoPushToken = await registerForPushNotificationsAsync()
-            } while (expoPushToken == undefined)
-            const tokenString = expoPushToken.data
-            console.log(tokenString);
-            await AsyncStorage.setItem("expo-push-token", tokenString)
-            await CommunicationService.registerPushToken({token: tokenString})
-        }
-    }))
+    if (Platform.OS === 'android') {
+        AsyncStorage.clear().then(() => AsyncStorage.getItem("expo-push-token").then(async token => {
+            if (token == null) {
+                let expoPushToken
+                do {
+                    expoPushToken = await registerForPushNotificationsAsync()
+                } while (expoPushToken == undefined)
+                const tokenString = expoPushToken['data']
+                console.log(tokenString);
+                await AsyncStorage.setItem("expo-push-token", tokenString)
+                await CommunicationService.registerPushToken({token: tokenString})
+            }
+        }))
+    }
 
     const [loaded, error] = useFonts({
         SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),

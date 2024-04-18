@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 
 public record CreateReportDTO(
         @NotNull
+        long id,
+        @NotNull
         String name,
         @NotNull
         String location,

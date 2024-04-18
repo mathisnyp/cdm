@@ -18,22 +18,62 @@ spring:
           uri: http://${incident-service-endpoint}/incident-service
           predicates:
             - Path=/incident-service/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
         - id: auth_service
           uri: http://${auth-service-endpoint}/auth-service
           predicates:
             - Path=/auth-service/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
         - id: communication_service
           uri: http://${communication-service-endpoint}/communication-service
           predicates:
             - Path=/communication-service/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
         - id: geo_service
           uri: http://${geo-service-endpoint}/geo-service
           predicates:
             - Path=/geo-service/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
         - id: gen_ai_service
           uri: http://${gen-ai-service-endpoint}/gen-ai-service
           predicates:
             - Path=/gen-ai-service/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
 
 service_endpoints:
   auth: "${auth-service-endpoint}"

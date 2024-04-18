@@ -48,4 +48,8 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         </createTable>
         <addAutoIncrement tableName="incident" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
     </changeSet>
+
+    <changeSet id="23459809" author="Omar, Noel">
+        <addAutoIncrement tableName="report" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
 </databaseChangeLog>

@@ -29,6 +29,7 @@ public class ReportService {
 
     public void createReport(CreateReportDTO reportDTO) {
         reportRepository.save(Report.builder()
+                .id(1)
                 .name(reportDTO.name())
                 .location(reportDTO.location())
                 .emergencyType(reportDTO.emergencyType())

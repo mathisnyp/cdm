@@ -28,7 +28,6 @@ public class IncidentService {
 
     public void createIncident(CreateIncidentDTO incidentDTO) {
         incidentRepository.save(Incident.builder()
-                .id(incidentDTO.id())
                 .reportIds(incidentDTO.reportIds())
                 .incidentName(incidentDTO.incidentName())
                 .build());

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public record CreateIncidentDTO(
         @NotNull
-        Long id,
-        @NotNull
         //ArrayList<Integer> reportIds,
         Integer reportIds,
         @NotNull

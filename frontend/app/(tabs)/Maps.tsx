@@ -15,31 +15,69 @@ interface LocationState {
 }
 
 export default function Maps() {
-    const [location, setLocation] = useState<LocationState>({'coords':
-        {latitude : 0,longitude : 0}
-});
+    const [location, setLocation] = useState<LocationState | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [coordinates, setCoordinates] = useState<number[][]>([
-        [-6.2532384, 53.3415142],[-6.252328,53.341952]
-        //[0,0], [0,5]
-    ]) 
+    const [busMark, setBusMark] = useState<number[][]>([[0,0],[5,5]])
+    const [incidentMark, setIncidentMark] = useState<number[][]>([[0,0],[5,5]])
+
+    // useEffect(() => {
+    //     (async () => {
+    //         // let { status } = await Location.requestForegroundPermissionsAsync();
+    //         // if (status !== 'granted')
+    //         // {
+    //         //     setErrorMsg("Permission to access location was denied");
+    //         // }
+    //         // let location = await Location.getCurrentPositionAsync({});
+    //         // setLocation(location);
+    //
+    //         await fetch("http://localhost:8090/geo-service/weight/updatePlots")
+    //             .then(response => response.json())
+    //             .then(json => {
+    //                     setBusMark([])
+    //                     console.log()
+    //                     for (let i = 0;i< 100;i++) {
+    //
+    //                         // console.pri
+    //                         // setBusMark(bus => [...bus,[json["entity"][i]['vehicle']['position']['latitude'],json["entity"][i]['vehicle']['position']['longitude']]])
+    //                     }
+    //                 }
+    //
+    //
+    //
+    //             )
+    //
+    //     })();
+    // }, []);
+
     useEffect(() => {
         (async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted')
-            {
-                setErrorMsg("Permission to access location was denied");
-            }
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
+            // let { status } = await Location.requestForegroundPermissionsAsync();
+            // if (status !== 'granted') {
+            //     setErrorMsg("Permission to access location was denied");
+            // }
+            // let location = await Location.getCurrentPositionAsync({});
+            // setLocation(location);
 
-            
-            RouteControllerService.getRoute({location: startpoint, destination: "GPO"}).then(cdmPoints => {
-                const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lon!!, eachPoint.lat!!]})
-                setCoordinates(mappedPoints)
-            })
+            await fetch("http://localhost:8090/geo-service/weight/updatePlots")
+                .then(response => response.json())
+                .then(json => {
+                    setBusMark([]); // Clear previous bus markers
+                    json.forEach((plot: any[]) => { // Iterate over each plot
+                        plot.forEach(point => { // Iterate over each point in the plot
+                            // Extract latitude and longitude values for the current point
+                            const latitude = point.y;
+                            const longitude = point.x;
+                            // Add the latitude and longitude to the bus markers
+                            setIncidentMark(bus => [...bus, [latitude, longitude]]);
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                    // Handle error
+                });
         })();
-    }, []);
+    }, []); // Empty dependency array to ensure this effect runs only once
 
     const startpoint:PointDTO = {
         longitude : 53.341514,
@@ -56,7 +94,7 @@ export default function Maps() {
         { "type": "Feature",
             "geometry": {
             "type": "LineString",
-            "coordinates": coordinates
+            "coordinates": []
             },
             properties: {}
             },
@@ -67,45 +105,77 @@ export default function Maps() {
 
     return (
         <View style={styles.container}>
+            {/* {errorMsg && <Text>{errorMsg}</Text>} Render the error message if it exists */}
+            {/* <Text style = {{color:'white'}}>Location is : {location.coords.latitude}</Text> */}
+
+            {location && (
+                <Text style={{color:'white'}}>{location.coords.latitude}, {location.coords.longitude}</Text>
+            )}
             {Platform.OS !== 'web' &&
-            
-            
-            <MapView style={styles.map} showsUserLocation={true} testID="MapView"
-            initialRegion={{
-                latitude: 53.350140,
-                longitude: -6.266155,
-                latitudeDelta:1,
-                longitudeDelta:1,
-              }}
-            >
-                <Geojson
-                    geojson={geoJsonSample}
-                    strokeColor="red"
-                    fillColor="green"
-                    strokeWidth={5}
+
+
+                <MapView style={styles.map} showsUserLocation={true} testID="MapView"
+                         initialRegion={{
+                             latitude: 53.350140,
+                             longitude: -6.266155,
+                             latitudeDelta:1,
+                             longitudeDelta:1,
+                         }}
+                >
+                    <Geojson
+                        geojson={geoJsonSample}
+                        strokeColor="red"
+                        fillColor="green"
+                        strokeWidth={5}
                     />
-            </MapView>
+                    {location && (
+                        <>
+                            {/* <Marker
+                        key={0}
+                        Coordinate={{
+                            latitude: 53.350140,
+                            longitude: -6.266155,
+                        }}
+                        title={"Your Location"}
+                    /> */}
+                        </>
+                    )}
+                </MapView>
+                // <Map height={300} defaultCenter={[53.350140,-6.256155]}>
+                //     <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/>
+                // </Map>
             }
-            { Platform.OS == 'web' && 
+            { Platform.OS == 'web' &&
                 <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>
+                    {/* <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/> */}
                     <GeoJson
                         data={geoJsonSample}
                         styleCallback={(feature: { geometry: { type: string; }; }, hover: any) => {
                             if (feature.geometry.type === "LineString") {
-                              return { strokeWidth: "5", stroke: "blue"  };
+                                return { strokeWidth: "5", stroke: "blue"  };
                             }
+                            // return {
+                            //   fill: "#d4e6ec99",
+                            //   strokeWidth: "1",
+                            //   stroke: "white",
+                            //   r: "20",
+                            // };
                         }}
                     ></GeoJson>
-                    <Marker
-                        width={50}
-                        anchor={[location.coords.latitude, location.coords.longitude]}
-                    />
-                    
-                    {(
-                        <>
 
-                        </>
-                    )}
+                    {incidentMark.map(i => {
+                        return (
+                            <Marker
+                                width={20}
+                                anchor={[i[0],i[1]]}
+                            />
+                        )
+                    })}
+
+                    {/* <Marker
+                        width={50}
+                        anchor={[busMark[0],busMark[1]]}
+                    /> */}
                 </Map>
             }
             <Button

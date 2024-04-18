@@ -96,5 +96,35 @@ public class GeoService {
         List<Point> intersections = blockingRepository.getAllStreetsNearIncident(street);
         return new HashSet<>(intersections);
     }
+
+    public Point[] getPlotPoints(String street) throws IOException {
+        var incidentCoordinates = geoCodingService.searchForPoint(street);
+        Point incidentPoint = Values.point(4326, incidentCoordinates.getLon(), incidentCoordinates.getLat()).asPoint();
+        Set<Point> blockingArea = getBlockingArea(street);
+        Point[] result = new Point[blockingArea.size() + 1];
+
+        result[0] = incidentPoint;
+
+        int i = 1;
+        for (Point point: blockingArea){
+            result[i++] = point;
+        }
+
+        return result;
+    }
+
+    public List<Point[]> createListIncidentsPoints(Set<String> incidentStreet) throws IOException {
+        List<Point[]> listPointArrays = new ArrayList<>();
+        for (String street: incidentStreet){
+            Point[] points = getPlotPoints(street);
+            listPointArrays.add(points);
+        }
+        return listPointArrays;
+    }
+
+    public Set<String> getIncidentStreet(){
+        List<String> listIncidents = weightRepository.getIncidentStreets();
+        return new HashSet<>(listIncidents);
+    }
 }
 

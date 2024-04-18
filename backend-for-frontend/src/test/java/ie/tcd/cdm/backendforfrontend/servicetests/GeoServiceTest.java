@@ -1,11 +1,11 @@
 package ie.tcd.cdm.backendforfrontend.servicetests;
 
-import org.apache.kafka.clients.producer.ProducerRecord;
+//import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.kafka.support.SendResult;
+//import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.SettableListenableFuture;
 
 import java.io.IOException;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @AllArgsConstructor
 @Builder
@@ -22,38 +23,22 @@ public class IncidentN4jController {
     private final GeoCodingService geoCodingService;
 
     @PostMapping("/createIncident")
-    public Point[] createIncident(@RequestBody UpdateWeightDTO updateWeightDTO) throws IOException {
+    public void createIncident(@RequestBody UpdateWeightDTO updateWeightDTO) throws IOException {
         geoService.addWeights(updateWeightDTO.streetName());
-        var incidentCoordinates = geoCodingService.searchForPoint(updateWeightDTO.streetName());
-        Point incidentPoint = Values.point(4326, incidentCoordinates.getLon(), incidentCoordinates.getLat()).asPoint();
-        Set<Point> blockingArea = geoService.getBlockingArea(updateWeightDTO.streetName());
-        Point[] result = new Point[blockingArea.size() + 1];
-
-        result[0] = incidentPoint;
-
-        int i = 1;
-        for (Point point: blockingArea){
-            result[i++] = point;
-        }
-
-        return result;
     }
     @DeleteMapping("/deleteIncident")
-    public Point[] deleteIncident(@RequestBody UpdateWeightDTO updateWeightDTO) throws IOException {
+    public void deleteIncident(@RequestBody UpdateWeightDTO updateWeightDTO) throws IOException {
         geoService.removeWeights(updateWeightDTO.streetName());
-        var incidentCoordinates = geoCodingService.searchForPoint(updateWeightDTO.streetName());
-        Point incidentPoint = Values.point(4326, incidentCoordinates.getLon(), incidentCoordinates.getLat()).asPoint();
-        Set<Point> blockingArea = geoService.getBlockingArea(updateWeightDTO.streetName());
-        Point[] result = new Point[blockingArea.size() + 1];
-
-        result[0] = incidentPoint;
-
-        int i = 1;
-        for (Point point: blockingArea){
-            result[i++] = point;
-        }
-
-        return result;
     }
 
+    @GetMapping("/updatePlots")
+    public List<Point[]> updatePlots() throws IOException {
+        Set<String> incidentStreet = geoService.getIncidentStreet();
+        return geoService.createListIncidentsPoints(incidentStreet);
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
 }

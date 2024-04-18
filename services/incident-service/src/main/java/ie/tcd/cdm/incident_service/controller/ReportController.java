@@ -35,5 +35,8 @@ public class ReportController {
         reportService.deleteReport(id);
     }
 
-
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
 }

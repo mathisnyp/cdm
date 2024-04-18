@@ -39,6 +39,4 @@ public class IncidentController {
     public void deleteIncident(@PathVariable long id) {
         incidentService.deleteIncident(id);
     }
-
-
 }
