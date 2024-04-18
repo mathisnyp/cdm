@@ -1,10 +1,10 @@
 server:
   servlet:
-    context-path: "/dod/api"
+    context-path: "/dublin-open-data-service"
 
 spring:
   application:
-    name: "dod-service"
+    name: "dublin-open-data-service"
 
 management:
   endpoints:

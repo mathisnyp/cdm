@@ -30,15 +30,13 @@ export default function Maps() {
     //         // let location = await Location.getCurrentPositionAsync({});
     //         // setLocation(location);
     //
-    //         await fetch("http://localhost:8090/geo-service/weight/updatePlots")
+    //         await fetch("http://localhost:8090/dublin-open-data-service/bus/")
     //             .then(response => response.json())
     //             .then(json => {
     //                     setBusMark([])
     //                     console.log()
     //                     for (let i = 0;i< 100;i++) {
-    //
-    //                         // console.pri
-    //                         // setBusMark(bus => [...bus,[json["entity"][i]['vehicle']['position']['latitude'],json["entity"][i]['vehicle']['position']['longitude']]])
+    //                         setBusMark(bus => [...bus,[json["entity"][i]['vehicle']['position']['latitude'],json["entity"][i]['vehicle']['position']['longitude']]])
     //                     }
     //                 }
     //
@@ -48,27 +46,59 @@ export default function Maps() {
     //
     //     })();
     // }, []);
+    //
+    // useEffect(() => {
+    //     (async () => {
+    //         // let { status } = await Location.requestForegroundPermissionsAsync();
+    //         // if (status !== 'granted') {
+    //         //     setErrorMsg("Permission to access location was denied");
+    //         // }
+    //         // let location = await Location.getCurrentPositionAsync({});
+    //         // setLocation(location);
+    //
+    //         await fetch("http://localhost:8090/geo-service/weight/updatePlots")
+    //             .then(response => response.json())
+    //             .then(json => {
+    //                 setBusMark([]); // Clear previous bus markers
+    //                 json.forEach((plot: any[]) => { // Iterate over each plot
+    //                     plot.forEach(point => { // Iterate over each point in the plot
+    //                         // Extract latitude and longitude values for the current point
+    //                         const latitude = point.y;
+    //                         const longitude = point.x;
+    //                         // Add the latitude and longitude to the bus markers
+    //                         setIncidentMark(bus => [...bus, [latitude, longitude]]);
+    //                     });
+    //                 });
+    //             })
+    //             .catch(error => {
+    //                 console.error("Error fetching data:", error);
+    //                 // Handle error
+    //             });
+    //     })();
+    // }, []); // Empty dependency array to ensure this effect runs only once
 
     useEffect(() => {
         (async () => {
-            // let { status } = await Location.requestForegroundPermissionsAsync();
-            // if (status !== 'granted') {
-            //     setErrorMsg("Permission to access location was denied");
-            // }
-            // let location = await Location.getCurrentPositionAsync({});
-            // setLocation(location);
+            // Fetch bus data
+            await fetch("http://localhost:8090/dublin-open-data-service/bus/")
+                .then(response => response.json())
+                .then(json => {
+                    setBusMark([]);
+                    for (let i = 0; i < 100; i++) {
+                        setBusMark(bus => [...bus, [json["entity"][i]['vehicle']['position']['latitude'], json["entity"][i]['vehicle']['position']['longitude']]]);
+                    }
+                });
 
+            // Fetch plot data
             await fetch("http://localhost:8090/geo-service/weight/updatePlots")
                 .then(response => response.json())
                 .then(json => {
-                    setBusMark([]); // Clear previous bus markers
-                    json.forEach((plot: any[]) => { // Iterate over each plot
-                        plot.forEach(point => { // Iterate over each point in the plot
-                            // Extract latitude and longitude values for the current point
+                    setIncidentMark([]); // Clear previous incident markers
+                    json.forEach((plot: any[]) => {
+                        plot.forEach(point => {
                             const latitude = point.y;
                             const longitude = point.x;
-                            // Add the latitude and longitude to the bus markers
-                            setIncidentMark(bus => [...bus, [latitude, longitude]]);
+                            setIncidentMark(incident => [...incident, [latitude, longitude]]);
                         });
                     });
                 })
@@ -77,7 +107,8 @@ export default function Maps() {
                     // Handle error
                 });
         })();
-    }, []); // Empty dependency array to ensure this effect runs only once
+    }, []);
+
 
     const startpoint:PointDTO = {
         longitude : 53.341514,
@@ -145,39 +176,77 @@ export default function Maps() {
                 //     <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/>
                 // </Map>
             }
-            { Platform.OS == 'web' &&
+            {/*{ Platform.OS == 'web' &&*/}
+            {/*    <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>*/}
+            {/*        /!* <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/> *!/*/}
+            {/*        <GeoJson*/}
+            {/*            data={geoJsonSample}*/}
+            {/*            styleCallback={(feature: { geometry: { type: string; }; }, hover: any) => {*/}
+            {/*                if (feature.geometry.type === "LineString") {*/}
+            {/*                    return { strokeWidth: "5", stroke: "blue"  };*/}
+            {/*                }*/}
+            {/*                // return {*/}
+            {/*                //   fill: "#d4e6ec99",*/}
+            {/*                //   strokeWidth: "1",*/}
+            {/*                //   stroke: "white",*/}
+            {/*                //   r: "20",*/}
+            {/*                // };*/}
+            {/*            }}*/}
+            {/*        ></GeoJson>*/}
+
+            {/*        {incidentMark.map(i => {*/}
+            {/*            return (*/}
+            {/*                <Marker*/}
+            {/*                    width={20}*/}
+            {/*                    anchor={[i[0],i[1]]}*/}
+            {/*                />*/}
+            {/*            )*/}
+            {/*        })}*/}
+
+            {/*        {busMark.map(i => {*/}
+            {/*            return (*/}
+            {/*                <Marker*/}
+            {/*                    width={20}*/}
+            {/*                    anchor={[i[0],i[1]]}*/}
+            {/*                />*/}
+            {/*            )*/}
+            {/*        })}*/}
+
+            {/*        /!*{ <Marker*!/*/}
+            {/*        /!*    width={50}*!/*/}
+            {/*        /!*    anchor={[busMark[0],busMark[1]]}*!/*/}
+            {/*    </Map>*/}
+            {/*}*/}
+            {Platform.OS == 'web' && (
                 <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>
-                    {/* <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/> */}
                     <GeoJson
                         data={geoJsonSample}
                         styleCallback={(feature: { geometry: { type: string; }; }, hover: any) => {
                             if (feature.geometry.type === "LineString") {
-                                return { strokeWidth: "5", stroke: "blue"  };
+                                return { strokeWidth: "5", stroke: "blue" };
                             }
-                            // return {
-                            //   fill: "#d4e6ec99",
-                            //   strokeWidth: "1",
-                            //   stroke: "white",
-                            //   r: "20",
-                            // };
                         }}
-                    ></GeoJson>
-
-                    {incidentMark.map(i => {
-                        return (
-                            <Marker
-                                width={20}
-                                anchor={[i[0],i[1]]}
-                            />
-                        )
-                    })}
-
-                    {/* <Marker
-                        width={50}
-                        anchor={[busMark[0],busMark[1]]}
-                    /> */}
+                    />
+                    {/* Render incident markers */}
+                    {incidentMark.map((i, index) => (
+                        <Marker
+                            key={`incident-${index}`}
+                            width={20}
+                            color="red" // Set color to red for incident markers
+                            anchor={[i[0], i[1]]}
+                        />
+                    ))}
+                    {/* Render bus markers */}
+                    {busMark.map((i, index) => (
+                        <Marker
+                            key={`bus-${index}`}
+                            width={20}
+                            color="blue" // Set color to blue for bus markers
+                            anchor={[i[0], i[1]]}
+                        />
+                    ))}
                 </Map>
-            }
+            )}
             <Button
                 title={"Send hello message to GeoService"}
                 onPress={() => {

@@ -1,18 +1,10 @@
 server:
   servlet:
-    context-path: "/"
+    context-path: "/bff/api"
 
 spring:
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: 'http://localhost:3000'
-            allowedHeaders: '*'
-            allowedMethods:
-              - GET
-              - POST
       routes:
         - id: incident_service
           uri: http://${incident-service-endpoint}/incident-service
@@ -66,6 +58,18 @@ spring:
           uri: http://${gen-ai-service-endpoint}/gen-ai-service
           predicates:
             - Path=/gen-ai-service/**
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
+        - id: dublin_open_data_service
+          uri: http://${dublin-open-data-service-endpoint}/dublin-open-data-service
+          predicates:
+            - Path=/dublin-open-data-service/**
           metadata:
             cors:
               allowedOrigins: '*'

@@ -28,6 +28,7 @@ services:
       communication-service-endpoint: communication-service:8080
       geo-service-endpoint: geo-service:8080
       gen-ai-service-endpoint: gen-ai-service:80
+      dublin-open-data-service-endpoint: dublin-open-data-service:8080
     depends_on:
       - auth-service
     extra_hosts:
