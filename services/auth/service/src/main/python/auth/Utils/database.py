@@ -1,10 +1,11 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from .models import Base
 from sqlalchemy.orm import sessionmaker
 
 def init():
-    DATABASE_URL = "postgresql://postgres:password@auth-service-db:5432/AuthenticationService"
+    DATABASE_URL = os.getenv("database-url")
 
     engine = create_engine(DATABASE_URL)
 

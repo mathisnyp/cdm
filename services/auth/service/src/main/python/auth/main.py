@@ -4,7 +4,9 @@ from sqlalchemy.orm import Session
 from auth.dto.create_user_dto import CreateUserDTO
 from auth.dto.login_user_dto import LoginDTO
 from auth.dto.user_dto import UserDTO
+from auth.dto.jwt_dto import JWTDTO
 from auth.dto.logged_in_successfully_dto import LoggedInSuccessfullyDTO
+from auth.Utils.jwt_generator import generate_jwt
 from fastapi.responses import PlainTextResponse
 
 # from . import crud, models, database
@@ -53,6 +55,17 @@ def login(login_dto: LoginDTO, db: Session = Depends(get_db)) -> LoggedInSuccess
 @router.get("/health", response_class=PlainTextResponse)
 def healthcheck():
     return "200"
+
+@router.post("/get_jwt")
+def get_jwt(login_dto: LoginDTO, db: Session = Depends(get_db)) -> JWTDTO:
+    user = crud.get_user_by_username(db, login_dto.username)
+    if user is None or not crud.verify_password(login_dto.password, user.password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    token = generate_jwt(user.id, "http://localhost:8000/api")
+
+    return JWTDTO(token=token)
+
 
 app = FastAPI()
 app.include_router(router)

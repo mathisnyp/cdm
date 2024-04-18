@@ -38,6 +38,8 @@ services:
     hostname: auth-service
     ports:
       - "8091:80"
+    environment:
+      database-url: postgresql://postgres:password@local-db:5432/AuthenticationService
     depends_on:
       - local-db
     extra_hosts:

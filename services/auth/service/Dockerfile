@@ -11,6 +11,10 @@ RUN rm -r ./src
 
 COPY ./requirements.txt /app
 
+# Copy private and public keys for JWT tokens
+COPY ./src/main/python/auth/private_key.pem /app/private_key.pem
+COPY ./src/main/python/auth/public_key.pem /app/public_key.pem
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
