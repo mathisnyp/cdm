@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
+import java.util.Map;
+
 @JsonDeserialize(builder = SendNotificationUserToUserDTO.SendNotificationUserToUserDTOBuilder.class)
 @Builder
 public record SendNotificationUserToUserDTO(
@@ -19,6 +21,8 @@ public record SendNotificationUserToUserDTO(
         long from,
         @NotNull
         @JsonProperty
-        long to
+        long to,
+        @JsonProperty
+        Map<String, Object> data
 ) {
 }

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
+import java.util.Map;
+
 @Builder
 @JsonDeserialize(builder = BroadcastNotificationUserToGroupDTO.BroadcastNotificationUserToGroupDTOBuilder.class)
 public record BroadcastNotificationUserToGroupDTO(
@@ -19,6 +21,8 @@ public record BroadcastNotificationUserToGroupDTO(
         long from,
         @NotNull
         @JsonProperty
-        long group
+        long group,
+        @JsonProperty
+        Map<String, Object> data
 ) {
 }

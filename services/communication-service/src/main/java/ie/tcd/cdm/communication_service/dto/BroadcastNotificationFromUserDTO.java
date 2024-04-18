@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Builder
 @JsonDeserialize(builder = BroadcastNotificationFromUserDTO.BroadcastNotificationFromUserDTOBuilder.class)
 public record BroadcastNotificationFromUserDTO(
@@ -19,9 +21,11 @@ public record BroadcastNotificationFromUserDTO(
         String messageHeader,
         @NotNull
         @JsonProperty
-        long from
+        long from,
 
+        @JsonProperty
+        Map<String, Object> data
 
-) {
+        ) {
 
 }

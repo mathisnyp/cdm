@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "804017050182",
+    "project_id": "pushnotification-fde5a",
+    "storage_bucket": "pushnotification-fde5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804017050182:android:7f513ee9a39ffc2d487047",
+        "android_client_info": {
+          "package_name": "com.bellikd.Frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9HK8-OHpgXqqRE4avxrmHgpbzW4XpQCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

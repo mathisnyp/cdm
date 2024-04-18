@@ -33,10 +33,15 @@ public class NotificationService {
         long targetUserId = sendNotificationUserToUserDTO.to();
         UserIdTokenId userIdTokenId = this.userPushNotificationIdRepository.getUserIdTokenIdByUserID(targetUserId);
         String token = userIdTokenId.getPushNotificationToken().getToken();
+        Map<String, Object> data = sendNotificationUserToUserDTO.data();
+        if (data == null) {
+            data = new HashMap<>();
+        }
+
         this.sendPushNotification(token,
                 sendNotificationUserToUserDTO.messageHeader(),
                 sendNotificationUserToUserDTO.messageBody(),
-                new HashMap<>());
+                data);
     }
 
     public void broadcastNotification(BroadcastNotificationFromUserDTO broadcastNotificationFromUserDTO) throws PushClientException {
@@ -45,10 +50,14 @@ public class NotificationService {
                 .map((UserIdTokenId eachUserIdTokenId) -> eachUserIdTokenId.getPushNotificationToken()
                         .getToken())
                 .toList();
+        Map<String, Object> data = broadcastNotificationFromUserDTO.data();
+        if (data == null) {
+            data = new HashMap<>();
+        }
         this.sendPushNotification(allTokens,
                 broadcastNotificationFromUserDTO.messageHeader(),
                 broadcastNotificationFromUserDTO.messageBody(),
-                new HashMap<>());
+                data);
     }
 
     public void broadcastNotificationToGroup(BroadcastNotificationUserToGroupDTO broadcastNotificationUserToGroupDTO) throws PushClientException {
@@ -57,10 +66,14 @@ public class NotificationService {
                 .map((UserIdTokenId eachUserIdTokenId) -> eachUserIdTokenId.getPushNotificationToken()
                         .getToken())
                 .toList();
+        Map<String, Object> data = broadcastNotificationUserToGroupDTO.data();
+        if (data == null) {
+            data = new HashMap<>();
+        }
         this.sendPushNotification(allTokens,
                 broadcastNotificationUserToGroupDTO.messageHeader(),
                 broadcastNotificationUserToGroupDTO.messageBody(),
-                new HashMap<>());
+                data);
     }
 
     //code copied from https://stackoverflow.com/questions/71298367/send-push-notification-using-java-springboot-server-and-expo-react-native-client

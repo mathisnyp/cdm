@@ -3,7 +3,8 @@ import { Button, StyleSheet, View, Alert, Text,Platform } from "react-native";
 import MapView, {Geojson} from "react-native-maps";
 import {Map, Marker, GeoJson} from 'pigeon-maps'
 import * as Location from "expo-location";
-import { CdmPoint, PointDTO, RouteControllerService } from "../lib/geoservice";
+import { PointDTO, RouteControllerService } from "../lib/geoservice";
+import {FeatureCollection, GeoJsonProperties, Geometry} from "geojson";
 //import MapView from '@teovilla/react-native-web-maps'
 // If you have a specific type for location, use that instead of any.
 interface LocationState {
@@ -49,7 +50,7 @@ export default function Maps() {
 
     
 
-    const geoJsonSample = { 
+    const geoJsonSample: FeatureCollection<Geometry, GeoJsonProperties> = {
         "type": "FeatureCollection",
         "features": [
         { "type": "Feature",
@@ -57,6 +58,7 @@ export default function Maps() {
             "type": "LineString",
             "coordinates": coordinates
             },
+            properties: {}
             },
         ]
      }
@@ -88,7 +90,7 @@ export default function Maps() {
                 <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>
                     <GeoJson
                         data={geoJsonSample}
-                        styleCallback={(feature, hover) => {
+                        styleCallback={(feature: { geometry: { type: string; }; }, hover: any) => {
                             if (feature.geometry.type === "LineString") {
                               return { strokeWidth: "5", stroke: "blue"  };
                             }
@@ -99,11 +101,11 @@ export default function Maps() {
                         anchor={[location.coords.latitude, location.coords.longitude]}
                     />
                     
-                    {location !== null && (
-                    <>
-                        
-                    </>
-                )}
+                    {(
+                        <>
+
+                        </>
+                    )}
                 </Map>
             }
             <Button
