@@ -11,7 +11,9 @@ spring:
     password: ${database-password}
   liquibase:
     change-log: classpath:liquibase/main-changelog.xml
-
+endpoints:
+  communication: ${communication-endpoint}
+  geoservice: ${geoservice-endpoint}
 management:
   endpoints:
     web:
