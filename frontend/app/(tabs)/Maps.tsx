@@ -19,6 +19,7 @@ export default function Maps() {
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [street, setStreet] = useState<string>("GPO");
     const [busMark, setBusMark] = useState<number[][]>([[0, 0], [5, 5]])
+    const [inputStreet, setInputStreet] = useState<string>("GPO");
     const [incidentMark, setIncidentMark] = useState<number[][]>([[0, 0], [5, 5]])
     const [coordinates, setCoordinates] = useState<number[][]>([
         [-6.2532384, 53.3415142], [-6.252328, 53.341952]
