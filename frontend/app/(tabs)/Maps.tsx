@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Button, StyleSheet, View, Alert, Text, Platform, TextInput} from "react-native";
-import MapView, {Geojson} from "react-native-maps";
+import MapView, {Geojson, Marker as Mark} from "react-native-maps";
 import {Map, Marker, GeoJson} from 'pigeon-maps'
 import * as Location from "expo-location";
 import { PointDTO, RouteControllerService } from "../lib/geoservice";
@@ -132,6 +132,23 @@ export default function Maps() {
                              longitudeDelta: 1,
                          }}
                 >
+                    {incidentMark.map((i, index) => (
+                        <Mark
+                            key={`incident-${index}`}
+                            coordinate={{latitude: i[0],
+                            longitude: i[1]}}
+                            pinColor="red" 
+                        />
+                    ))}
+                    {/* Render bus markers */}
+                    {busMark.map((i, index) => (
+                        <Mark
+                            key={`bus-${index}`}
+                            coordinate={{latitude: i[0],
+                            longitude: i[1]}} 
+                            pinColor="blue"
+                        />
+                    ))}
                     <Geojson
                         geojson={geoJsonSample}
                         strokeColor="red"
