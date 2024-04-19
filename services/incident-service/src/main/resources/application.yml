@@ -12,8 +12,8 @@ spring:
   liquibase:
     change-log: classpath:liquibase/main-changelog.xml
 endpoints:
-  communication: ${communication-endpoint}
-  geoservice: ${geoservice-endpoint}
+  communication: http://localhost:8090/communication-service #${communication-endpoint}
+  geoservice: http://localhost:8090/geo-service #${geoservice-endpoint}
 management:
   endpoints:
     web:
