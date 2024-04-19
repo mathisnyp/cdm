@@ -66,6 +66,11 @@ spec:
                 configMapKeyRef:
                   name: api-gateway-config
                   key: gen-ai-service-endpoint
+            - name: dublin-open-data-service-endpoint
+              valueFrom:
+                configMapKeyRef:
+                  name: api-gateway-config
+                  key: dublin-open-data-service-endpoint
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:

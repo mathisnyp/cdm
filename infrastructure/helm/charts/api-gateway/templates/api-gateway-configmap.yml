@@ -9,3 +9,4 @@ data:
   communication-service-endpoint: "communication-service.cdm.svc.cluster.local:8080"
   geo-service-endpoint: "geo-service.cdm.svc.cluster.local:8080"
   gen-ai-service-endpoint: "gen-ai-service.cdm.svc.cluster.local:80"
+  dublin-open-data-service-endpoint: "dod-service.cdm.svc.cluster.local:8080"
