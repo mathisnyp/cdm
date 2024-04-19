@@ -24,6 +24,8 @@ export default function Maps() {
         [-6.2532384, 53.3415142], [-6.252328, 53.341952]
         //[0,0], [0,5]
     ])
+    const [tempStreet, setTempStreet] = useState("");
+
 
     // useEffect(() => {
     //     (async () => {
@@ -164,12 +166,19 @@ export default function Maps() {
                 <TextInput
                     style={{ flex: 1, backgroundColor: 'white', padding: 10 }}
                     placeholder="Enter Street Name"
-                    value={street}
-                    onChangeText={text => setStreet(text)}
+                    value={tempStreet} // Use tempStreet instead of street
+                    onChangeText={text => setTempStreet(text)} // Update tempStreet when text changes
                 />
                 <Button
                     title="Submit"
-                    onPress={handleSubmit}
+                    onPress={() => {
+                        // Update the street state with the temporary street value
+                        setStreet(tempStreet);
+                        // Clear the temporary street value
+                        setTempStreet("");
+                        // Call the handleSubmit function if needed
+                        handleSubmit();
+                    }}
                 />
             </View>
             {location && (
