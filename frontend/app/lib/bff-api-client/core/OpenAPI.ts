@@ -20,7 +20,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-  BASE: "http://localhost:6060/bff/api",
+  BASE: "http://api-gateway.project-unified.eu/",
   VERSION: "0",
   WITH_CREDENTIALS: false,
   CREDENTIALS: "include",

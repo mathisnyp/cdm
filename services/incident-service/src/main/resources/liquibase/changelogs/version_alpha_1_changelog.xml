@@ -52,4 +52,13 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
     <changeSet id="23459809" author="Omar, Noel">
         <addAutoIncrement tableName="report" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
     </changeSet>
+
+    <changeSet id="23342323" author="Ricardo">
+        <addColumn tableName="incident">
+            <column name="created_at" type="Datetime()" defaultValueDate="NOW()"/>
+        </addColumn>
+        <addColumn tableName="incident">
+            <column name="updated_at"  type="Datetime()" defaultValueDate="NOW()"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

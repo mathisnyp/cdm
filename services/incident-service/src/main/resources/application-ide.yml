@@ -9,5 +9,5 @@ spring:
   liquibase:
     change-log: classpath:liquibase/local-changelog.xml
 endpoints:
-  communication: localhost:8080/communication-service
-  geoservice: localhost:8080/geo-service
+  communication: http://localhost:8090/communication-service
+  geoservice: http://localhost:8090/geo-service

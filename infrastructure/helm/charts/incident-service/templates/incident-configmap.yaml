@@ -5,5 +5,8 @@ metadata:
   namespace: cdm
 data:
   database-url: "jdbc:postgresql://incident-postgres.cdm.svc.cluster.local:5432/postgres"
+  communication-endpoint: "http://api-gateway.project-unified.eu/communication-service"
+  geoservice-endpoint: "http://api-gateway.project-unified.eu/geo-service"
+
 
 

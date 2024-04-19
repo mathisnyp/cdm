@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.tcd.cdm.incident_service.apis.communication.model.BroadcastNotificationFromUserDTO;
 import ie.tcd.cdm.incident_service.apis.communication.model.BroadcastNotificationUserToGroupDTO;
 import ie.tcd.cdm.incident_service.apis.communication.model.SendNotificationUserToUserDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Service
+@Slf4j
 public class CommunicationService {
 
 
@@ -34,6 +36,7 @@ public class CommunicationService {
     }
 
     public void broadcastNotification(BroadcastNotificationFromUserDTO broadcastNotificationFromUserDTO) throws IOException, InterruptedException {
+        log.info("Broadcasting to all our friends!");
         String body = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(broadcastNotificationFromUserDTO);
         httpClient.send(broadcastNotificationRequest.POST(HttpRequest.BodyPublishers.ofString(body)).build(), HttpResponse.BodyHandlers.ofString());
     }

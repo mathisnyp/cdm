@@ -20,7 +20,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'http://localhost:8090/geo-service',
+    BASE: 'http://api-gateway.project-unified.eu/geo-service',
     VERSION: '0',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

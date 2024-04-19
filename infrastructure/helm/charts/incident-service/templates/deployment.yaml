@@ -66,6 +66,16 @@ spec:
                 secretKeyRef:
                   key: POSTGRES_PASSWORD
                   name: postgres-secret
+            - name: communication-endpoint
+              valueFrom:
+                configMapKeyRef:
+                  key: communication-endpoint
+                  name: incident-configmap
+            - name: geoservice-endpoint
+              valueFrom:
+                configMapKeyRef:
+                  key: geoservice-endpoint
+                  name: incident-configmap
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

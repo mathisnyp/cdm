@@ -6,6 +6,7 @@ import ie.tcd.cdm.incident_service.model.Incident;
 import ie.tcd.cdm.incident_service.services.IncidentService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,10 +24,12 @@ public class IncidentController {
     }
 
     @GetMapping("/")
-    public List<Incident> getIncidents() { return incidentService.getAllIncidents(); }
+    public List<Incident> getIncidents() throws IOException, InterruptedException {
+        return incidentService.getAllIncidents();
+    }
 
     @PostMapping
-    public void createIncident(@RequestBody CreateIncidentDTO incident) {
+    public void createIncident(@RequestBody CreateIncidentDTO incident) throws IOException, InterruptedException {
         incidentService.createIncident(incident);
     }
 

@@ -29,7 +29,7 @@ export default function Maps() {
 
     useEffect(() => {
         (async () => {
-            await fetch("http://localhost:8090/dublin-open-data-service/bus/")
+            await fetch("http://api-gateway.project-unified.eu/dublin-open-data-service/bus/")
                 .then(response => response.json())
                 .then(json => {
                     setBusMark([]);
@@ -45,7 +45,7 @@ export default function Maps() {
 
     useEffect(() => {
         (async () => {
-            await fetch("http://localhost:8090/geo-service/weight/updatePlots")
+            await fetch("http://api-gateway.project-unified.eu/geo-service/weight/updatePlots")
                 .then(response => response.json())
                 .then(json => {
                     setIncidentMark([]); // Clear previous incident markers

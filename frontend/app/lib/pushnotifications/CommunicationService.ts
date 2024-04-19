@@ -1,5 +1,5 @@
 export class CommunicationService {
-    private static url = "localhost:8092/communication-service/device"
+    private static url = "http://api-gateway.project-unified.eu/communication-service/device"
 
     public static async registerPushToken(requestBody: RegisterDeviceDTO) {
         await fetch(this.url + "/register", {

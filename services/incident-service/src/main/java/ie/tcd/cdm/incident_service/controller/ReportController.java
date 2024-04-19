@@ -6,6 +6,8 @@ import ie.tcd.cdm.incident_service.model.Report;
 import ie.tcd.cdm.incident_service.services.ReportService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/report")
 public class ReportController {
@@ -21,7 +23,7 @@ public class ReportController {
     }
 
     @PostMapping
-    public void createReport(@RequestBody CreateReportDTO report) {
+    public void createReport(@RequestBody CreateReportDTO report) throws IOException, InterruptedException {
         reportService.createReport(report);
     }
 

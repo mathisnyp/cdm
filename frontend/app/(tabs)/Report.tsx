@@ -241,7 +241,7 @@ export default function ReportTabScreen() {
     const handleSubmit = async (values: FormValues) => {
         try {
             // First POST request to incident-service/report
-            const response1 = await fetch('http://localhost:8090/incident-service/report', {
+            const response1 = await fetch('http://api-gateway.project-unified.eu/incident-service/report', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -250,7 +250,7 @@ export default function ReportTabScreen() {
             });
 
             // Second POST request to geo-service/weight/createIncident
-            const response2 = await fetch('http://localhost:8090/geo-service/weight/createIncident', {
+            const response2 = await fetch('http://api-gateway.project-unified.eu/geo-service/weight/createIncident', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

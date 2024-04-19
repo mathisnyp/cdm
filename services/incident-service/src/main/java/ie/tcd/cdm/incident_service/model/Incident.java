@@ -4,6 +4,12 @@ package ie.tcd.cdm.incident_service.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 //import java.sql.Timestamp;
 @Data
@@ -12,6 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 
 public class Incident {
     @Id
@@ -29,6 +36,15 @@ public class Incident {
     @Setter
     @Getter
     String incidentName;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    LocalDateTime updatedAt;
+
 
 //    public Incident(ArrayList<Report> report) {
 //        this.reports = report;

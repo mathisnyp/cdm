@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import static org.hamcrest.Matchers.is;
 
@@ -48,6 +50,8 @@ class CreateIncidentTest {
                         .id(1)
                         .reportIds(3)
                         .incidentName("Fire at Dawson St")
+                        .createdAt(LocalDateTime.ofEpochSecond(1713458471L, 0, ZoneOffset.ofHours(0)))
+                        .updatedAt(LocalDateTime.ofEpochSecond(1713458471L, 0, ZoneOffset.ofHours(0)))
                         .build());
     }
 }

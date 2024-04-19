@@ -119,6 +119,8 @@ services:
       database-url: jdbc:postgresql://local-db:5432/postgres
       database-username: postgres
       database-password: password
+      communication-endpoint: http://bff/communication-service
+      geoservice-endpoint: http://bff/geo-service
       kafka-bootstrap-servers: kafka:29092
       auth-service-endpoint: http://host.docker.internal:8080
       otlp-metrics-url: http://otel-collector:4318/v1/metrics
