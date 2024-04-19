@@ -74,14 +74,14 @@ resources: { }
 livenessProbe:
   failureThreshold: 20
   httpGet:
-    path: /dod/api/actuator/health
+    path: /dublin-open-data-service/api/actuator/health
     port: http
   initialDelaySeconds: 15
   periodSeconds: 20
 readinessProbe:
   failureThreshold: 20
   httpGet:
-    path: /dod/api/actuator/health
+    path: /dublin-open-data-service/api/actuator/health
     port: http
   initialDelaySeconds: 15
   periodSeconds: 20
