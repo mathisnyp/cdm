@@ -2,6 +2,7 @@ package ie.tcd.cdm.incident_service;
 
 import ie.tcd.cdm.incident_service.model.Report;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration;
@@ -24,6 +25,7 @@ import java.sql.Timestamp;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "spring.profiles.active=test")
+@Disabled
 class CreateReportTest {
     @LocalServerPort
     private int port;

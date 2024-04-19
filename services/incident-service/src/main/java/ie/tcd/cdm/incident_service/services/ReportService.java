@@ -47,7 +47,7 @@ public class ReportService {
                 .name(reportDTO.name())
                 .location(reportDTO.location())
                 .emergencyType(reportDTO.emergencyType())
-                        .timeReceived(n)
+                .timeReceived(new Timestamp(System.currentTimeMillis()))
                 .emergencySeverity(reportDTO.emergencySeverity())
                 .generalDescription(reportDTO.generalDescription())
                 .build());
