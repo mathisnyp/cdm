@@ -27,88 +27,24 @@ export default function Maps() {
     ])
     const [tempStreet, setTempStreet] = useState("");
 
-
-    // useEffect(() => {
-    //     (async () => {
-    //         // let { status } = await Location.requestForegroundPermissionsAsync();
-    //         // if (status !== 'granted')
-    //         // {
-    //         //     setErrorMsg("Permission to access location was denied");
-    //         // }
-    //         // let location = await Location.getCurrentPositionAsync({});
-    //         // setLocation(location);
-    //
-    //         await fetch("http://localhost:8090/dublin-open-data-service/bus/")
-    //             .then(response => response.json())
-    //             .then(json => {
-    //                     setBusMark([])
-    //                     console.log()
-    //                     for (let i = 0;i< 100;i++) {
-    //                         setBusMark(bus => [...bus,[json["entity"][i]['vehicle']['position']['latitude'],json["entity"][i]['vehicle']['position']['longitude']]])
-    //                     }
-    //                 }
-    //
-    //
-    //
-    //             )
-    //
-    //     })();
-    // }, []);
-
-    // useEffect(() => {
-    //     (async () => {
-    //         // let { status } = await Location.requestForegroundPermissionsAsync();
-    //         // if (status !== 'granted') {
-    //         //     setErrorMsg("Permission to access location was denied");
-    //         // }
-    //         // let location = await Location.getCurrentPositionAsync({});
-    //         // setLocation(location);
-    //
-    //         await fetch("http://localhost:8090/geo-service/weight/updatePlots")
-    //             .then(response => response.json())
-    //             .then(json => {
-    //                 setBusMark([]); // Clear previous bus markers
-    //                 json.forEach((plot: any[]) => { // Iterate over each plot
-    //                     plot.forEach(point => { // Iterate over each point in the plot
-    //                         // Extract latitude and longitude values for the current point
-    //                         const latitude = point.y;
-    //                         const longitude = point.x;
-    //                         // Add the latitude and longitude to the bus markers
-    //                         setIncidentMark(bus => [...bus, [latitude, longitude]]);
-    //                     });
-    //                 });
-    //             })
-    //             .catch(error => {
-    //                 console.error("Error fetching data:", error);
-    //                 // Handle error
-    //             });
-    //         RouteControllerService.getRoute({location: startpoint, destination: street}).then(cdmPoints => {
-    //             const mappedPoints = cdmPoints.map(eachPoint => {return [eachPoint.lon!!, eachPoint.lat!!]})
-    //             setCoordinates(mappedPoints)
-    //         })
-    //     })();
-    // }, []); // Empty dependency array to ensure this effect runs only once
-    const handleSubmit = () => {
-        // Only update the street state when the submit button is pressed
-        // You can perform any validation here if needed
-        // For simplicity, let's assume the input is always valid
-        // Update the street state with the entered value
-        setStreet(inputStreet);
-    };
-
     useEffect(() => {
         (async () => {
-            // Fetch bus data
             await fetch("http://localhost:8090/dublin-open-data-service/bus/")
                 .then(response => response.json())
                 .then(json => {
                     setBusMark([]);
-                    for (let i = 0; i < 100; i++) {
+                    for (let i = 0; i < json["entity"].length / 4; i++) {
                         setBusMark(bus => [...bus, [json["entity"][i]['vehicle']['position']['latitude'], json["entity"][i]['vehicle']['position']['longitude']]]);
                     }
                 });
+        })();
+    }, []); // Empty dependency array to ensure this effect runs only once
+    const handleSubmit = () => {
+        setStreet(tempStreet);
+    };
 
-            // Fetch plot data
+    useEffect(() => {
+        (async () => {
             await fetch("http://localhost:8090/geo-service/weight/updatePlots")
                 .then(response => response.json())
                 .then(json => {
@@ -204,62 +140,11 @@ export default function Maps() {
                     />
                     {location && (
                         <>
-                            {/* <Marker
-                        key={0}
-                        Coordinate={{
-                            latitude: 53.350140,
-                            longitude: -6.266155,
-                        }}
-                        title={"Your Location"}
-                    /> */}
                         </>
                     )}
                 </MapView>
-                // <Map height={300} defaultCenter={[53.350140,-6.256155]}>
-                //     <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/>
-                // </Map>
+
             }
-            {/*{ Platform.OS == 'web' &&*/}
-            {/*    <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>*/}
-            {/*        /!* <Marker width={50} color={"red"} anchor={[53.350140,-6.256155]}/> *!/*/}
-            {/*        <GeoJson*/}
-            {/*            data={geoJsonSample}*/}
-            {/*            styleCallback={(feature: { geometry: { type: string; }; }, hover: any) => {*/}
-            {/*                if (feature.geometry.type === "LineString") {*/}
-            {/*                    return { strokeWidth: "5", stroke: "blue"  };*/}
-            {/*                }*/}
-            {/*                // return {*/}
-            {/*                //   fill: "#d4e6ec99",*/}
-            {/*                //   strokeWidth: "1",*/}
-            {/*                //   stroke: "white",*/}
-            {/*                //   r: "20",*/}
-            {/*                // };*/}
-            {/*            }}*/}
-            {/*        ></GeoJson>*/}
-
-            {/*        {incidentMark.map(i => {*/}
-            {/*            return (*/}
-            {/*                <Marker*/}
-            {/*                    width={20}*/}
-            {/*                    anchor={[i[0],i[1]]}*/}
-            {/*                />*/}
-            {/*            )*/}
-            {/*        })}*/}
-
-            {/*        {busMark.map(i => {*/}
-            {/*            return (*/}
-            {/*                <Marker*/}
-            {/*                    width={20}*/}
-            {/*                    anchor={[i[0],i[1]]}*/}
-            {/*                />*/}
-            {/*            )*/}
-            {/*        })}*/}
-
-            {/*        /!*{ <Marker*!/*/}
-            {/*        /!*    width={50}*!/*/}
-            {/*        /!*    anchor={[busMark[0],busMark[1]]}*!/*/}
-            {/*    </Map>*/}
-            {/*}*/}
             {Platform.OS == 'web' && (
                 <Map height={500} width={960} defaultCenter={[53.350140,-6.256155]}>
                     <GeoJson
@@ -300,61 +185,6 @@ export default function Maps() {
         </View>
     );
 }
-//     return (
-//         <View style={styles.container}>
-//             {/* Add your error message rendering here if needed */}
-//             <Text style={{color:'white'}}>Location is : {location ? `${location.coords.latitude}, ${location.coords.longitude}` : ''}</Text>
-//             {/* Form for submitting street name */}
-//             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//                 <TextInput
-//                     style={{ flex: 1, backgroundColor: 'white', padding: 10 }}
-//                     placeholder="Enter Street Name"
-//                     value={street}
-//                     onChangeText={text => setStreet(text)}
-//                 />
-//                 <Button
-//                     title="Submit"
-//                     onPress={handleSubmit}
-//                 />
-//             </View>
-//
-//             {/* Render Map based on platform */}
-//             {Platform.OS !== 'web' && (
-//                 <MapView
-//                     style={styles.map}
-//                     showsUserLocation={true}
-//                     initialRegion={{
-//                         latitude: 53.350140,
-//                         longitude: -6.266155,
-//                         latitudeDelta: 1,
-//                         longitudeDelta: 1,
-//                     }}
-//                 >
-//                     {/* Add your GeoJson and Marker components here */}
-//                 </MapView>
-//             )}
-//
-//             {Platform.OS === 'web' && (
-//                 <Map
-//                     height={500}
-//                     width={960}
-//                     defaultCenter={[53.350140,-6.256155]}
-//                 >
-//                     {/* Add your GeoJson and Marker components here */}
-//                 </Map>
-//             )}
-//
-//             {/* Button for sending hello message */}
-//             <Button
-//                 title="Send hello message to GeoService"
-//                 onPress={() => {
-//                     Alert.alert("Hello GeoService!");
-//                     setStreet("GPO"); // Update the street name here if needed
-//                 }}
-//             />
-//         </View>
-//     );
-// }
 
 const styles = StyleSheet.create({
     container: {
