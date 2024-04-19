@@ -5,6 +5,15 @@ server:
 spring:
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://frontend.project-unified.eu"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - UPDATE
       routes:
         - id: incident_service
           uri: http://${incident-service-endpoint}/incident-service

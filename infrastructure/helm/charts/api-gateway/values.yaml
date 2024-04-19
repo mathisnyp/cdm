@@ -72,13 +72,19 @@ resources: {}
   #   memory: 128Mi
 
 livenessProbe:
+  failureThreshold: 20
   httpGet:
     path: /actuator/health
     port: http
+  initialDelaySeconds: 15
+  periodSeconds: 20
 readinessProbe:
+  failureThreshold: 20
   httpGet:
     path: /actuator/health
     port: http
+  initialDelaySeconds: 15
+  periodSeconds: 20
 
 autoscaling:
   enabled: false
