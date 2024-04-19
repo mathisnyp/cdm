@@ -67,10 +67,7 @@ spec:
                   name: api-gateway-config
                   key: gen-ai-service-endpoint
             - name: dublin-open-data-service-endpoint
-              valueFrom:
-                configMapKeyRef:
-                  name: api-gateway-config
-                  key: dublin-open-data-service-endpoint
+              value: "dod-service.cdm.svc.cluster.local:8080"
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
